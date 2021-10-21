@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
 <classDiagram>
   <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="Matrices binaires">
+    <inheritance id="17509">
+      <child>17503</child>
+      <parent>17502</parent>
+    </inheritance>
+    <inheritance id="17508">
+      <child>17504</child>
+      <parent>17502</parent>
+    </inheritance>
+    <inheritance id="17506">
+      <child>17505</child>
+      <parent>17502</parent>
+    </inheritance>
+    <entity entityType="CLASS" id="17505" isAbstract="false" name="Multiply" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="apply" returnType="int" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="a" type="int"/>
+        <variable const="false" name="b" type="int"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="17504" isAbstract="false" name="Substract" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="apply" returnType="int" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="a" type="int"/>
+        <variable const="false" name="b" type="int"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="17503" isAbstract="false" name="Add" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="apply" returnType="int" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="a" type="int"/>
+        <variable const="false" name="b" type="int"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="17502" isAbstract="true" name="Operator" visibility="PUBLIC">
+      <method isAbstract="true" isStatic="false" name="apply" returnType="int" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="a" type="int"/>
+        <variable const="false" name="b" type="int"/>
+      </method>
+    </entity>
     <entity entityType="CLASS" id="16691" isAbstract="false" name="Matrix" visibility="PUBLIC">
       <attribute const="false" defaultValue="" isStatic="false" name="M" type="int" visibility="PRIVATE"/>
       <attribute const="false" defaultValue="" isStatic="false" name="N" type="int" visibility="PRIVATE"/>
@@ -29,12 +65,100 @@
     </entity>
   </diagramElements>
   <umlView grid="10" name="Main view" open="true">
+    <relationView color="-12566464" relationId="17506">
+      <line>
+        <point>
+          <x>451</x>
+          <y>241</y>
+        </point>
+        <point>
+          <x>451</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>261</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>281</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>281</x>
+          <y>131</y>
+        </point>
+      </line>
+    </relationView>
+    <relationView color="-12566464" relationId="17508">
+      <line>
+        <point>
+          <x>281</x>
+          <y>241</y>
+        </point>
+        <point>
+          <x>281</x>
+          <y>131</y>
+        </point>
+      </line>
+    </relationView>
+    <relationView color="-12566464" relationId="17509">
+      <line>
+        <point>
+          <x>101</x>
+          <y>241</y>
+        </point>
+        <point>
+          <x>101</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>281</x>
+          <y>191</y>
+        </point>
+        <point>
+          <x>281</x>
+          <y>131</y>
+        </point>
+      </line>
+    </relationView>
     <componentView color="-2079" componentID="16691" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
-        <x>410</x>
-        <y>60</y>
+        <x>640</x>
+        <y>50</y>
         <w>260</w>
         <h>205</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="17502" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>200</x>
+        <y>60</y>
+        <w>160</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="17503" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>20</x>
+        <y>240</y>
+        <w>170</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="17504" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>200</x>
+        <y>240</y>
+        <w>160</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="17505" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>370</x>
+        <y>240</y>
+        <w>170</w>
+        <h>70</h>
       </geometry>
     </componentView>
   </umlView>
