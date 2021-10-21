@@ -4,8 +4,8 @@
     <entity entityType="CLASS" id="16691" isAbstract="false" name="Matrix" visibility="PUBLIC">
       <attribute const="false" defaultValue="" isStatic="false" name="M" type="int" visibility="PRIVATE"/>
       <attribute const="false" defaultValue="" isStatic="false" name="N" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="modulo" type="int" visibility="PRIVATE"/>
       <attribute const="false" defaultValue="" isStatic="false" name="data" type="int[][]" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="true" name="modulo" type="int" visibility="PRIVATE"/>
       <method is-constructor="true" isAbstract="false" isStatic="false" name="Matrix" returnType="" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m" type="int"/>
         <variable const="false" name="n" type="int"/>
@@ -32,7 +32,7 @@
     <componentView color="-2079" componentID="16691" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
         <x>410</x>
-        <y>80</y>
+        <y>60</y>
         <w>260</w>
         <h>205</h>
       </geometry>
