@@ -15,14 +15,27 @@ public class Matrix {
     }
     
     public static Matrix add(Matrix m1, Matrix m2) {
-        return null;
+        Operator op = new Add();
+        return applyOperator(m1, m2, op);
     }
     
     public static Matrix substract(Matrix m1, Matrix m2) {
-        return null;
+        Operator op = new Substract();
+        return applyOperator(m1, m2, op);
     }
     
     public static Matrix multiply(Matrix m1, Matrix m2) {
+        Operator op = new Multiply();
+        return applyOperator(m1, m2, op);
+    }
+    
+    private static Matrix applyOperator(Matrix m1, Matrix m2, Operator op) {
+        // TODO
+        // Check que les modulos soient les mêmes
+        // Créer la matrice avec max N et max M
+        
+        // Appliquer l'operator recu en param
+        
         return null;
     }
     
