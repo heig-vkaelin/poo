@@ -28,9 +28,15 @@ public class Matrix {
     
     @Override
     public String toString() {
-        // TODO
-        return "Matrix{" +
-                "data=" + Arrays.toString(data) +
-                '}';
+        StringBuilder sb = new StringBuilder();
+    
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                sb.append(data[i][j]);
+            }
+            sb.append("\n");
+        }
+        
+        return sb.toString();
     }
 }
