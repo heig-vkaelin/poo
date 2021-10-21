@@ -24,6 +24,10 @@ public class Matrix {
         modulo = mod;
         data = Arrays.copyOf(values,values.length);
     }
+
+    public int getModulo() {
+        return modulo;
+    }
     
     public static Matrix add(Matrix m1, Matrix m2) {
         Operator op = new Add();
