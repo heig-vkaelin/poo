@@ -21,6 +21,7 @@ public class Matrix {
     }
     
     Matrix(int[][] values, int mod) {
+        modulo = mod;
         data = Arrays.copyOf(values,values.length);
     }
     
