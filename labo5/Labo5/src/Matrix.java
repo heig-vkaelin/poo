@@ -7,11 +7,21 @@ public class Matrix {
     private int[][] data;
     
     Matrix(int m, int n, int mod) {
-    
+        N = n;
+        M = m;
+        modulo = mod;
+        data = new int[M][N];
+        java.util.Random random = new java.util.Random();
+        for (int i = 0;i < data.length;++i){
+            for (int j = 0;j < data[0].length;++j){
+                data[i][j] = random.nextInt(modulo);
+            }
+        }
+
     }
     
     Matrix(int[][] values, int mod) {
-    
+        data = Arrays.copyOf(values,values.length);
     }
     
     public static Matrix add(Matrix m1, Matrix m2) {
