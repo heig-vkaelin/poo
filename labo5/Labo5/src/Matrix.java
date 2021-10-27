@@ -22,7 +22,11 @@ public class Matrix {
     
     Matrix(int[][] values, int mod) {
         modulo = mod;
-        data = Arrays.copyOf(values, values.length);
+        if (values.length >0 && values.length >0){
+            rows = values.length;
+            columns = values[0].length;
+            data = Arrays.copyOf(values, values.length);
+        }
     }
     
     public static Matrix add(Matrix m1, Matrix m2) {
