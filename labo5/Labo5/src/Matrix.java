@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Matrix {
     private int rows;
@@ -11,7 +12,7 @@ public class Matrix {
         this.columns = columns;
         modulo = mod;
         data = new int[rows][columns];
-        java.util.Random random = new java.util.Random();
+        Random random = new Random();
         
         for (int row = 0; row < data.length; ++row) {
             for (int col = 0; col < data[0].length; ++col) {
