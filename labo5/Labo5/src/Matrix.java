@@ -12,6 +12,7 @@ public class Matrix {
         modulo = mod;
         data = new int[rows][columns];
         java.util.Random random = new java.util.Random();
+        
         for (int row = 0; row < data.length; ++row) {
             for (int col = 0; col < data[0].length; ++col) {
                 data[row][col] = random.nextInt(modulo);
@@ -22,7 +23,7 @@ public class Matrix {
     
     Matrix(int[][] values, int mod) {
         modulo = mod;
-        if (values.length >0 && values.length >0){
+        if (values.length > 0 && values[0].length > 0) {
             rows = values.length;
             columns = values[0].length;
             data = Arrays.copyOf(values, values.length);
@@ -30,18 +31,15 @@ public class Matrix {
     }
     
     public static Matrix add(Matrix m1, Matrix m2) {
-        Operator op = new Add();
-        return applyOperator(m1, m2, op);
+        return applyOperator(m1, m2, new Add());
     }
     
-    public static Matrix substract(Matrix m1, Matrix m2) {
-        Operator op = new Substract();
-        return applyOperator(m1, m2, op);
+    public static Matrix subtract(Matrix m1, Matrix m2) {
+        return applyOperator(m1, m2, new Substract());
     }
     
     public static Matrix multiply(Matrix m1, Matrix m2) {
-        Operator op = new Multiply();
-        return applyOperator(m1, m2, op);
+        return applyOperator(m1, m2, new Multiply());
     }
     
     private static Matrix applyOperator(Matrix m1, Matrix m2, Operator op) {

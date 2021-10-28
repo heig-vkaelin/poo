@@ -1,25 +1,35 @@
 
 public class Main {
-
+    
     public static void main(String[] args) {
-        int[][] data = new int[][]{
-                {1,1,1,1},
-                {2,2,2,2},
-                {3,3,3,3},
-                {4,4,4,4}
+        int modulus = 5;
+        System.out.println("The modulus is " + modulus);
+        
+        int[][] data1 = new int[][]{
+                {1, 3, 1, 1},
+                {3, 2, 4, 2},
+                {1, 0, 1, 0},
         };
+        Matrix m1 = new Matrix(data1, modulus);
+        System.out.println("one");
+        System.out.println(m1);
+        
         int[][] data2 = new int[][]{
-                {0,0,0,0},
-                {1,1,1,1},
-                {3,3,3,3},
-                {4,4,4,4}
+                {1, 4, 2, 3, 2},
+                {0, 1, 0, 4, 2},
+                {0, 0, 2, 0, 2},
         };
-        Matrix m1 = new Matrix(data,16);
-        Matrix m2 = new Matrix(data2,16);
-        System.out.println("Matrice 1\n" + m1);
-        System.out.println("Matrice 2\n" + m2);
-        System.out.println("addition\n" + Matrix.add(m1,m2));
-        System.out.println("soustraction\n" + Matrix.substract(m1,m2));
-        System.out.println("multiplication\n" + Matrix.multiply(m1,m2));
+        Matrix m2 = new Matrix(data2, modulus);
+        System.out.println("two");
+        System.out.println(m2);
+        
+        System.out.println("one + two");
+        System.out.println(Matrix.add(m1, m2));
+        
+        System.out.println("one - two");
+        System.out.println(Matrix.subtract(m1, m2));
+        
+        System.out.println("one x two");
+        System.out.println(Matrix.multiply(m1, m2));
     }
 }
