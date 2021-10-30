@@ -1,6 +1,17 @@
+/*
+ * Fichier     : Main.java
+ * Auteurs     : Alexandre Jaquier, Valentin Kaelin
+ * Description : Classe principale du programme permettant de tester l'implémentation
+ *               des Matrices et des diverses opérations arithmétiques.
+ * Date        : 30.10.2021
+ */
 
 public class Main {
-    
+    /**
+     * Méthode appelée au lancement du programme
+     *
+     * @param args arguments du programme (non utilisés ici)
+     */
     public static void main(String[] args) {
         int modulus = 5;
         System.out.println("The modulus is " + modulus);
