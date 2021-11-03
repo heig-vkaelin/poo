@@ -9,8 +9,8 @@ package matrix;
  */
 public class Main {
     /**
-     * Teste qu'une exception est levée en cas d'opération entre deux matrices avec des
-     * modules différents
+     * Teste qu'une exception est levée en cas d'opération entre deux matrices avec
+     * des modules différents
      */
     private static void testDifferentModulus() {
         System.out.println("TEST : Opération avec modulos différents");
@@ -30,14 +30,16 @@ public class Main {
             Matrix.add(m1, m2);
             
         } catch (RuntimeException e) {
-            System.out.println("Erreur levée lorsque les modulos ne correspondent pas: ");
+            System.out.println("Erreur levée lorsque les modulos ne correspondent " +
+                    "pas: ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
     }
     
     /**
-     * Teste que la création et les opérations avec une matrice vide se passent sans soucis
+     * Teste que la création et les opérations avec une matrice vide se passent
+     * sans soucis
      */
     private static void testEmptyMatrix() {
         System.out.println("TEST : Matrice vide");
@@ -54,13 +56,14 @@ public class Main {
             System.out.print(Matrix.multiply(m3, m4));
             System.out.println("TEST PASSÉ\n");
         } catch (RuntimeException e) {
-            System.out.println("ERREUR: une addition avec une matrice vide ne devrait pas lever " +
-                    "d'exception\n");
+            System.out.println("ERREUR: une addition avec une matrice vide ne " +
+                    "devrait pas lever d'exception\n");
         }
     }
     
     /**
-     * Teste qu'une exception est levée à la création d'une matrice avec un modulo négatif
+     * Teste qu'une exception est levée à la création d'une matrice avec un modulo
+     * négatif
      */
     private static void testNegativeModulus() {
         System.out.println("TEST : Modulo négatif");
@@ -72,8 +75,8 @@ public class Main {
         try {
             new Matrix(data1, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur levée lors d'une création d'une matrice avec un modulo " +
-                    "négatif: ");
+            System.out.println("Erreur levée lors d'une création d'une matrice " +
+                    "avec un modulo négatif: ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
@@ -91,8 +94,8 @@ public class Main {
         try {
             new Matrix(col, row, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur levée lors de la création d'une matrice d'une taille " +
-                    "négative:");
+            System.out.println("Erreur levée lors de la création d'une matrice " +
+                    "d'une taille négative:");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
@@ -114,16 +117,16 @@ public class Main {
         try {
             new Matrix(data1, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur levée lors de la création d'une matrice avec des lignes de" +
-                    "tailles différentes: ");
+            System.out.println("Erreur levée lors de la création d'une matrice " +
+                    "avec des lignes de tailles différentes: ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
     }
     
     /**
-     * Teste qu'une exception est levée à la création d'une matrice des valeurs en dehors de
-     * l'intervalle autorisé.
+     * Teste qu'une exception est levée à la création d'une matrice des valeurs
+     * en dehors de l'intervalle autorisé.
      */
     private static void testIllegalValues() {
         System.out.println("TEST : Valeurs illégales");
@@ -135,8 +138,8 @@ public class Main {
         try {
             new Matrix(data1, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur levée lors de la création d'une matrice avec des valeurs " +
-                    "plus grandes que le modulo - 1 : ");
+            System.out.println("Erreur levée lors de la création d'une matrice " +
+                    "avec des valeurs plus grandes que le modulo - 1 : ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
@@ -155,8 +158,9 @@ public class Main {
     }
     
     /**
-     * Méthode appelée au lancement du programme, teste les différentes opérations sur des matrices
-     * de valeurs aléatoires créées en fonction des arguments entrés par l'utilisateur.
+     * Méthode appelée au lancement du programme, teste les différentes opérations
+     * sur des matrices de valeurs aléatoires créées en fonction des arguments
+     * entrés par l'utilisateur.
      *
      * @param args 5 arguments du programme:
      *             - modulo
@@ -193,8 +197,8 @@ public class Main {
             rows2 = Integer.parseInt(args[3]);
             cols2 = Integer.parseInt(args[4]);
         } catch (NumberFormatException e) {
-            // On relance une exception afin de stopper le programme tout en affichant un message
-            // d'erreur explicite à l'utilisateur.
+            // On relance une exception afin de stopper le programme tout en affichant
+            // un message d'erreur explicite à l'utilisateur.
             throw new Exception("Les arguments entrés ne sont pas valides.", e);
         }
         

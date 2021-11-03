@@ -23,7 +23,8 @@ public class Matrix {
      */
     private Matrix(int mod) throws RuntimeException {
         if (mod <= 0) {
-            throw new RuntimeException("Les modulos négatifs ou égaux à 0 sont interdits.");
+            throw new RuntimeException("Les modulos négatifs ou égaux à 0 sont " +
+                    "interdits.");
         }
         modulus = mod;
     }
@@ -35,14 +36,15 @@ public class Matrix {
      * @param columns nombre de colonnes de la Matrice
      * @param mod     modulo de la matrice
      * @throws RuntimeException si le modulo n'est pas strictement positif
-     * @throws RuntimeException si la ou les dimension(s) de la matrice est/sont négative(s)
+     * @throws RuntimeException si la ou les dimension(s) de la matrice est/sont
+     *                          négative(s)
      */
     Matrix(int rows, int columns, int mod) throws RuntimeException {
         this(mod);
         
         if (rows < 0 || columns < 0) {
-            throw new RuntimeException("Le nombre de lignes et de colonnes de la matrice doivent " +
-                    "être > 0.");
+            throw new RuntimeException("Le nombre de lignes et de colonnes de la " +
+                    "matrice doivent être > 0.");
         }
         
         this.rows = rows;
@@ -60,11 +62,13 @@ public class Matrix {
     /**
      * Constructeur de Matrice via des valeurs déjà définies
      *
-     * @param values tableau à deux dimensions contenant les futures valeurs de la Matrice
+     * @param values tableau à deux dimensions contenant les futures valeurs
+     *               de la Matrice
      * @param mod    modulo de la Matrice
      * @throws RuntimeException si le modulo n'est pas strictement positif
      * @throws RuntimeException si les lignes ne font pas toutes la même taille
-     * @throws RuntimeException si une valeur n'est pas dans l'intervalle [0, modulo - 1]
+     * @throws RuntimeException si une valeur n'est pas dans
+     *                          l'intervalle [0, modulo - 1]
      */
     Matrix(int[][] values, int mod) throws RuntimeException {
         this(mod);
@@ -85,15 +89,15 @@ public class Matrix {
         for (int row = 0; row < rows; ++row) {
             // Vérification que toutes les lignes font la même taille
             if (values[row].length != columns) {
-                throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la " +
-                        "même taille.");
+                throw new RuntimeException("Toutes les lignes de la matrice" +
+                        "doivent avoir la même taille.");
             }
             for (int col = 0; col < columns; ++col) {
                 // Vérification que toutes les valeurs soient bien dans le bon intervalle
                 int val = values[row][col];
                 if (val < 0 || val > (modulus - 1)) {
-                    throw new RuntimeException("Les valeurs de la matrice doivent être entre 0 " +
-                            "et modulo - 1.");
+                    throw new RuntimeException("Les valeurs de la matrice doivent " +
+                            "être entre 0 et modulo - 1.");
                 } else {
                     data[row][col] = val;
                 }
@@ -102,9 +106,9 @@ public class Matrix {
     }
     
     /**
-     * Applique l'opération passée en paramètre entre les deux Matrices. L'opération sera faite
-     * composante par composante et un modulo sera appliqué au résultat selon les modulos des
-     * Matrices.
+     * Applique l'opération passée en paramètre entre les deux Matrices. L'opération
+     * sera faite composante par composante et un modulo sera appliqué au résultat
+     * selon les modulos des Matrices.
      *
      * @param m1 première Matrice
      * @param m2 deuxième Matrice
@@ -112,9 +116,11 @@ public class Matrix {
      * @return une nouvelle instance de Matrice après l'opération effectuée
      * @throws RuntimeException si les modulos ne sont pas compatibles
      */
-    private static Matrix applyOperator(Matrix m1, Matrix m2, Operator op) throws RuntimeException {
+    private static Matrix applyOperator(Matrix m1, Matrix m2, Operator op)
+            throws RuntimeException {
         if (m1.modulus != m2.modulus) {
-            throw new RuntimeException("Les modulos des deux matrices ne correspondent pas.");
+            throw new RuntimeException("Les modulos des deux matrices ne " +
+                    "correspondent pas.");
         }
         
         int maxRows = Math.max(m1.rows, m2.rows);
@@ -133,8 +139,8 @@ public class Matrix {
     }
     
     /**
-     * Addition entre deux Matrices. L'addition sera faite composante par composante et
-     * un modulo sera appliqué au résultat selon les modulos des Matrices.
+     * Addition entre deux Matrices. L'addition sera faite composante par composante
+     * et un modulo sera appliqué au résultat selon les modulos des Matrices.
      *
      * @param m1 première Matrice
      * @param m2 deuxième Matrice
@@ -146,8 +152,9 @@ public class Matrix {
     }
     
     /**
-     * Soustraction entre deux Matrices. La soustraction sera faite composante par composante et
-     * un modulo sera appliqué au résultat selon les modulos des Matrices.
+     * Soustraction entre deux Matrices. La soustraction sera faite composante par
+     * composante et un modulo sera appliqué au résultat selon les modulos des
+     * Matrices.
      *
      * @param m1 première Matrice
      * @param m2 deuxième Matrice
@@ -159,8 +166,9 @@ public class Matrix {
     }
     
     /**
-     * Multiplication entre deux Matrices. La multiplication sera faite composante par composante et
-     * un modulo sera appliqué au résultat selon les modulos des Matrices.
+     * Multiplication entre deux Matrices. La multiplication sera faite composante
+     * par composante et un modulo sera appliqué au résultat selon les modulos des
+     * Matrices.
      *
      * @param m1 première Matrice
      * @param m2 deuxième Matrice

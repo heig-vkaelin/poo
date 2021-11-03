@@ -9,8 +9,8 @@ package matrix;
  */
 public abstract class Operator {
     /**
-     * Méthode abstraite à redéfinir pour spécifier le résultat de l'opération arithmétique
-     * entre les deux opérandes.
+     * Méthode abstraite à redéfinir pour spécifier le résultat de l'opération
+     * arithmétique entre les deux opérandes.
      *
      * @param a premier opérande
      * @param b second opérande
