@@ -113,7 +113,7 @@ public class Main {
             Matrix m1 = new Matrix(data1, modulus);
         } catch (RuntimeException e){
             System.out.println("Erreur lors d'une création d'une matrice avec des valeures plus " +
-                    "grandes que le modulo-1 : ");
+                    "grandes que le modulo - 1 : ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉS\n");
         }
