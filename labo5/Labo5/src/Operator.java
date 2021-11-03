@@ -2,7 +2,8 @@
  * Classe abstraite permettant de modéliser une opération arithmétique
  * entre deux entiers.
  *
- * @author Alexandre Jaquier, Valentin Kaelin
+ * @author Alexandre Jaquier
+ * @author Valentin Kaelin
  */
 public abstract class Operator {
     /**

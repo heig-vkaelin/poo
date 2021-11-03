@@ -5,7 +5,8 @@ import java.util.Random;
  * Classe permettant de modéliser une Matrice. Il est également possible de réaliser
  * diverses opérations arithmétiques sur deux Matrices.
  *
- * @author Alexandre Jaquier, Valentin Kaelin
+ * @author Alexandre Jaquier
+ * @author Valentin Kaelin
  */
 public class Matrix {
     private int rows;

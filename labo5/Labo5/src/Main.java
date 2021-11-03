@@ -2,7 +2,8 @@
  * Classe principale du programme permettant de tester l'implémentation
  * des Matrices et des diverses opérations arithmétiques.
  *
- * @author Alexandre Jaquier, Valentin Kaelin
+ * @author Alexandre Jaquier
+ * @author Valentin Kaelin
  */
 public class Main {
     /**

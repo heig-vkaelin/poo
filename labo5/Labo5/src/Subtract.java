@@ -1,7 +1,8 @@
 /**
  * Classe représentant l'opération arithmétique de soustraction
  *
- * @author Alexandre Jaquier, Valentin Kaelin
+ * @author Alexandre Jaquier
+ * @author Valentin Kaelin
  */
 public class Subtract extends Operator {
     /**

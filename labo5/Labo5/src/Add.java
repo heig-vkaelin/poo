@@ -1,7 +1,8 @@
 /**
  * Classe représentant l'opération arithmétique d'addition
  *
- * @author Alexandre Jaquier, Valentin Kaelin
+ * @author Alexandre Jaquier
+ * @author Valentin Kaelin
  */
 public class Add extends Operator {
     /**

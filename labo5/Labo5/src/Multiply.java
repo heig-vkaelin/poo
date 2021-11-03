@@ -1,7 +1,8 @@
 /**
  * Classe représentant l'opération arithmétique de multiplication
  *
- * @author Alexandre Jaquier, Valentin Kaelin
+ * @author Alexandre Jaquier
+ * @author Valentin Kaelin
  */
 public class Multiply extends Operator {
     /**
