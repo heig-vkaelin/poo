@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -15,16 +14,36 @@ public class Matrix {
     private int[][] data;
     
     /**
+     * Constructeur privé utilisé pour factoriser la vérification du modulo
+     *
+     * @param mod modulo de la matrice
+     * @throws RuntimeException si le modulo n'est pas strictement positif
+     */
+    private Matrix(int mod) throws RuntimeException {
+        if (mod <= 0) {
+            throw new RuntimeException("Les modulos négatifs ou égaux à 0 sont interdits.");
+        }
+        modulus = mod;
+    }
+    
+    /**
      * Constructeur de Matrice remplie de valeurs aléatoires selon le modulo choisi.
      *
      * @param rows    nombre de lignes de la Matrice
      * @param columns nombre de colonnes de la Matrice
      * @param mod     modulo de la matrice
+     * @throws RuntimeException si le modulo n'est pas strictement positif
+     * @throws RuntimeException si les dimensions de la matrice sont négatives
      */
-    Matrix(int rows, int columns, int mod) {
+    Matrix(int rows, int columns, int mod) throws RuntimeException {
+        this(mod);
+        
+        if (rows < 0 || columns < 0) {
+            throw new RuntimeException("Le nombre de lignes et de colonnes de la matrice doivent être > 0.");
+        }
+        
         this.rows = rows;
         this.columns = columns;
-        modulus = mod;
         data = new int[rows][columns];
         Random random = new Random();
         
@@ -40,13 +59,42 @@ public class Matrix {
      *
      * @param values tableau à deux dimensions contenant les futures valeurs de la Matrice
      * @param mod    modulo de la Matrice
+     * @throws RuntimeException si le modulo n'est pas strictement positif
+     * @throws RuntimeException si les lignes ne font pas toutes la même taille
+     * @throws RuntimeException si une valeur n'est pas dans l'intervalle [0, modulo - 1]
      */
-    Matrix(int[][] values, int mod) {
-        modulus = mod;
-        if (values.length > 0 && values[0].length > 0) {
-            rows = values.length;
-            columns = values[0].length;
-            data = Arrays.copyOf(values, values.length);
+    Matrix(int[][] values, int mod) throws RuntimeException {
+        this(mod);
+        
+        // Matrice vide
+        if (values.length == 0) {
+            rows = 0;
+            columns = 0;
+            data = new int[0][0];
+            return;
+        }
+        
+        rows = values.length;
+        columns = values[0].length;
+        data = new int[rows][columns];
+        
+        // Vérification que toutes les lignes fassent la même taille
+        int length = values[0].length;
+        for (int[] row : values) {
+            if (row.length != length) {
+                throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la même taille.");
+            }
+        }
+        
+        // Copie du tableau de valeurs
+        for (int row = 0; row < rows; ++row) {
+            for (int col = 0; col < columns; ++col) {
+                if (values[row][col] < 0 || values[row][col] > (modulus - 1)) {
+                    throw new RuntimeException("Les valeurs de la matrice doivent être entre 0 et modulo - 1.");
+                } else {
+                    data[row][col] = values[row][col];
+                }
+            }
         }
     }
     
