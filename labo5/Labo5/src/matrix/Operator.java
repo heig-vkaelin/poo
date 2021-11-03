@@ -1,3 +1,5 @@
+package matrix;
+
 /**
  * Classe abstraite permettant de modéliser une opération arithmétique
  * entre deux entiers.

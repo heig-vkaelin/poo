@@ -19,7 +19,7 @@
         <variable const="false" name="b" type="int"/>
       </method>
     </entity>
-    <entity entityType="CLASS" id="17504" isAbstract="false" name="Substract" visibility="PUBLIC">
+    <entity entityType="CLASS" id="17504" isAbstract="false" name="Subtract" visibility="PUBLIC">
       <method isAbstract="false" isStatic="false" name="apply" returnType="int" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="a" type="int"/>
         <variable const="false" name="b" type="int"/>
@@ -132,7 +132,7 @@
     </relationView>
     <componentView color="-2079" componentID="16691" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
-        <x>640</x>
+        <x>630</x>
         <y>70</y>
         <w>300</w>
         <h>235</h>

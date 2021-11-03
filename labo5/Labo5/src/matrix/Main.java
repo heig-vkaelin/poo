@@ -1,3 +1,5 @@
+package matrix;
+
 /**
  * Classe principale du programme permettant de tester l'implémentation
  * des Matrices et des diverses opérations arithmétiques.
@@ -7,7 +9,7 @@
  */
 public class Main {
     /**
-     * Test qu'une exception est levée en cas d'opération entre deux matrices avec des
+     * Teste qu'une exception est levée en cas d'opération entre deux matrices avec des
      * modules différents
      */
     private static void testDifferentModulus() {
@@ -36,7 +38,7 @@ public class Main {
     }
     
     /**
-     * Test que la création et les opérations avec une matrice vide se passent sans soucis
+     * Teste que la création et les opérations avec une matrice vide se passent sans soucis
      */
     private static void testEmptyMatrix() {
         System.out.println("TEST : Matrice vide");
@@ -60,7 +62,7 @@ public class Main {
     }
     
     /**
-     * Test qu'une exception est levée à la création d'une matrice avec un modulo négatif
+     * Teste qu'une exception est levée à la création d'une matrice avec un modulo négatif
      */
     private static void testNegativeModulus() {
         System.out.println("TEST : Modulo négatif");
@@ -79,7 +81,7 @@ public class Main {
     }
     
     /**
-     * Test qu'une exception est levée à la création d'une matrice avec un nombre
+     * Teste qu'une exception est levée à la création d'une matrice avec un nombre
      * de lignes négatif
      */
     private static void testNegativeRow() {
@@ -98,7 +100,7 @@ public class Main {
     }
     
     /**
-     * Test qu'une exception est levée à la création d'une matrice avec des lignes
+     * Teste qu'une exception est levée à la création d'une matrice avec des lignes
      * de taille différentes
      */
     private static void testRowsNotSameLength() {
@@ -121,7 +123,7 @@ public class Main {
     }
     
     /**
-     * Test qu'une exception est levée à la création d'une matrice des valeurs en dehors de
+     * Teste qu'une exception est levée à la création d'une matrice des valeurs en dehors de
      * l'intervalle autorisé.
      */
     private static void testIllegalValues() {
@@ -163,6 +165,7 @@ public class Main {
      *             - nbColonnesMatrice1
      *             - nbLignesMatrice2
      *             - nbColonnesMatrice2
+     * @throws Exception si l'entrée utilisateur est invalide
      */
     public static void main(String[] args) throws Exception {
         // Enlever le commentaire si l'on souhaite tester les cas limites

@@ -1,3 +1,5 @@
+package matrix;
+
 /**
  * Classe représentant l'opération arithmétique d'addition
  *

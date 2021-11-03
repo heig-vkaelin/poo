@@ -1,3 +1,5 @@
+package matrix;
+
 import java.util.Random;
 
 /**
@@ -178,6 +180,7 @@ public class Matrix {
         for (int row = 0; row < rows; ++row) {
             for (int col = 0; col < columns; ++col) {
                 sb.append(data[row][col]);
+                sb.append(" ");
             }
             sb.append("\n");
         }
