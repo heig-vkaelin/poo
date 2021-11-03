@@ -39,7 +39,8 @@ public class Matrix {
         this(mod);
         
         if (rows < 0 || columns < 0) {
-            throw new RuntimeException("Le nombre de lignes et de colonnes de la matrice doivent être > 0.");
+            throw new RuntimeException("Le nombre de lignes et de colonnes de la matrice doivent " +
+                    "être > 0.");
         }
         
         this.rows = rows;
@@ -81,11 +82,13 @@ public class Matrix {
         // Copie du tableau de valeurs
         for (int row = 0; row < rows; ++row) {
             if (values[row].length != columns) {
-                throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la même taille.");
+                throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la " +
+                        "même taille.");
             }
             for (int col = 0; col < columns; ++col) {
                 if (values[row][col] < 0 || values[row][col] > (modulus - 1)) {
-                    throw new RuntimeException("Les valeurs de la matrice doivent être entre 0 et modulo - 1.");
+                    throw new RuntimeException("Les valeurs de la matrice doivent être entre 0 " +
+                            "et modulo - 1.");
                 } else {
                     data[row][col] = values[row][col];
                 }
@@ -94,8 +97,9 @@ public class Matrix {
     }
     
     /**
-     * Applique l'opération passée en paramètre entre les deux Matrices. L'opération sera faite composante
-     * par composante et un modulo sera appliqué au résultat selon les modulos des Matrices.
+     * Applique l'opération passée en paramètre entre les deux Matrices. L'opération sera faite
+     * composante par composante et un modulo sera appliqué au résultat selon les modulos des
+     * Matrices.
      *
      * @param m1 première Matrice
      * @param m2 deuxième Matrice
