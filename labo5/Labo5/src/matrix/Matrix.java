@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Classe permettant de modéliser une Matrice. Il est également possible de réaliser
- * diverses opérations arithmétiques sur deux Matrices.
+ * diverses opérations arithmétiques sur deux Matrices via des méthodes static.
  *
  * @author Alexandre Jaquier
  * @author Valentin Kaelin
@@ -35,7 +35,7 @@ public class Matrix {
      * @param columns nombre de colonnes de la Matrice
      * @param mod     modulo de la matrice
      * @throws RuntimeException si le modulo n'est pas strictement positif
-     * @throws RuntimeException si les dimensions de la matrice sont négatives
+     * @throws RuntimeException si la ou les dimension(s) de la matrice est/sont négative(s)
      */
     Matrix(int rows, int columns, int mod) throws RuntimeException {
         this(mod);
@@ -83,16 +83,19 @@ public class Matrix {
         
         // Copie du tableau de valeurs
         for (int row = 0; row < rows; ++row) {
+            // Vérification que toutes les lignes font la même taille
             if (values[row].length != columns) {
                 throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la " +
                         "même taille.");
             }
             for (int col = 0; col < columns; ++col) {
-                if (values[row][col] < 0 || values[row][col] > (modulus - 1)) {
+                // Vérification que toutes les valeurs soient bien dans le bon intervalle
+                int val = values[row][col];
+                if (val < 0 || val > (modulus - 1)) {
                     throw new RuntimeException("Les valeurs de la matrice doivent être entre 0 " +
                             "et modulo - 1.");
                 } else {
-                    data[row][col] = values[row][col];
+                    data[row][col] = val;
                 }
             }
         }

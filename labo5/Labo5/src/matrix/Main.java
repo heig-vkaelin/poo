@@ -30,8 +30,7 @@ public class Main {
             Matrix.add(m1, m2);
             
         } catch (RuntimeException e) {
-            System.out.println("Erreur sortie lorsque les modulos durant une opération ne " +
-                    "correspondent pas: ");
+            System.out.println("Erreur levée lorsque les modulos ne correspondent pas: ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
@@ -46,8 +45,7 @@ public class Main {
         int[][] data3 = new int[][]{
                 {2, 2, 2}
         };
-        int[][] data4 = new int[][]{
-        };
+        int[][] data4 = new int[][]{};
         
         Matrix m3 = new Matrix(data3, modulus);
         System.out.println("Matrice vide multiplie une autre matrice :");
@@ -56,7 +54,7 @@ public class Main {
             System.out.print(Matrix.multiply(m3, m4));
             System.out.println("TEST PASSÉ\n");
         } catch (RuntimeException e) {
-            System.out.println("Erreur une addition avec une matrice vide ne devrait pas lever " +
+            System.out.println("ERREUR: une addition avec une matrice vide ne devrait pas lever " +
                     "d'exception\n");
         }
     }
@@ -74,7 +72,8 @@ public class Main {
         try {
             new Matrix(data1, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur lors d'une création d'une matrice avec un modulo négatif: ");
+            System.out.println("Erreur levée lors d'une création d'une matrice avec un modulo " +
+                    "négatif: ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
@@ -92,7 +91,7 @@ public class Main {
         try {
             new Matrix(col, row, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur lors d'une création d'une matrice avec une taille " +
+            System.out.println("Erreur levée lors de la création d'une matrice d'une taille " +
                     "négative:");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
@@ -115,7 +114,7 @@ public class Main {
         try {
             new Matrix(data1, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur lors d'une création d'une matrice avec des lignes de " +
+            System.out.println("Erreur levée lors de la création d'une matrice avec des lignes de" +
                     "tailles différentes: ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
@@ -136,8 +135,8 @@ public class Main {
         try {
             new Matrix(data1, modulus);
         } catch (RuntimeException e) {
-            System.out.println("Erreur lors d'une création d'une matrice avec des valeurs plus " +
-                    "grandes que le modulo - 1 : ");
+            System.out.println("Erreur levée lors de la création d'une matrice avec des valeurs " +
+                    "plus grandes que le modulo - 1 : ");
             System.out.println(e.getMessage());
             System.out.println("TEST PASSÉ\n");
         }
@@ -168,7 +167,7 @@ public class Main {
      * @throws Exception si l'entrée utilisateur est invalide
      */
     public static void main(String[] args) throws Exception {
-        // Enlever le commentaire si l'on souhaite tester les cas limites
+        // Enlever le commentaire si l'on souhaite tester les différents cas limites
         // testEverything();
         
         if (args.length != 5) {
@@ -194,6 +193,8 @@ public class Main {
             rows2 = Integer.parseInt(args[3]);
             cols2 = Integer.parseInt(args[4]);
         } catch (NumberFormatException e) {
+            // On relance une exception afin de stopper le programme tout en affichant un message
+            // d'erreur explicite à l'utilisateur.
             throw new Exception("Les arguments entrés ne sont pas valides.", e);
         }
         
