@@ -78,16 +78,11 @@ public class Matrix {
         columns = values[0].length;
         data = new int[rows][columns];
         
-        // Vérification que toutes les lignes fassent la même taille
-        int length = values[0].length;
-        for (int[] row : values) {
-            if (row.length != length) {
-                throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la même taille.");
-            }
-        }
-        
         // Copie du tableau de valeurs
         for (int row = 0; row < rows; ++row) {
+            if (values[row].length != columns) {
+                throw new RuntimeException("Toutes les lignes de la matrice doivent avoir la même taille.");
+            }
             for (int col = 0; col < columns; ++col) {
                 if (values[row][col] < 0 || values[row][col] > (modulus - 1)) {
                     throw new RuntimeException("Les valeurs de la matrice doivent être entre 0 et modulo - 1.");
