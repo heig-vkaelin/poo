@@ -1,10 +1,8 @@
-/*
- * Fichier     : Multiply.java
- * Auteurs     : Alexandre Jaquier, Valentin Kaelin
- * Description : Classe représentant l'opération arithmétique de multiplication
- * Date        : 30.10.2021
+/**
+ * Classe représentant l'opération arithmétique de multiplication
+ *
+ * @author Alexandre Jaquier, Valentin Kaelin
  */
-
 public class Multiply extends Operator {
     /**
      * Multiplie les deux opérandes

@@ -1,11 +1,9 @@
-/*
- * Fichier     : Main.java
- * Auteurs     : Alexandre Jaquier, Valentin Kaelin
- * Description : Classe principale du programme permettant de tester l'implémentation
- *               des Matrices et des diverses opérations arithmétiques.
- * Date        : 30.10.2021
+/**
+ * Classe principale du programme permettant de tester l'implémentation
+ * des Matrices et des diverses opérations arithmétiques.
+ *
+ * @author Alexandre Jaquier, Valentin Kaelin
  */
-
 public class Main {
     /**
      * Méthode appelée au lancement du programme

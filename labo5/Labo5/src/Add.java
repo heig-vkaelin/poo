@@ -1,10 +1,8 @@
-/*
- * Fichier     : Add.java
- * Auteurs     : Alexandre Jaquier, Valentin Kaelin
- * Description : Classe représentant l'opération arithmétique d'addition
- * Date        : 30.10.2021
+/**
+ * Classe représentant l'opération arithmétique d'addition
+ *
+ * @author Alexandre Jaquier, Valentin Kaelin
  */
-
 public class Add extends Operator {
     /**
      * Additionne les deux opérandes

@@ -1,10 +1,8 @@
-/*
- * Fichier     : Subtract.java
- * Auteurs     : Alexandre Jaquier, Valentin Kaelin
- * Description : Classe représentant l'opération arithmétique de soustraction
- * Date        : 30.10.2021
+/**
+ * Classe représentant l'opération arithmétique de soustraction
+ *
+ * @author Alexandre Jaquier, Valentin Kaelin
  */
-
 public class Subtract extends Operator {
     /**
      * Soustrais la deuxième opérande à la première

@@ -1,11 +1,9 @@
-/*
- * Fichier     : Operator.java
- * Auteurs     : Alexandre Jaquier, Valentin Kaelin
- * Description : Classe abstraite permettant de modéliser une opération arithmétique
- *               entre deux entiers.
- * Date        : 30.10.2021
+/**
+ * Classe abstraite permettant de modéliser une opération arithmétique
+ * entre deux entiers.
+ *
+ * @author Alexandre Jaquier, Valentin Kaelin
  */
-
 public abstract class Operator {
     /**
      * Méthode abstraite à redéfinir pour spécifier le résultat de l'opération arithmétique

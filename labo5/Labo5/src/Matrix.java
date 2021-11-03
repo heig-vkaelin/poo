@@ -1,16 +1,9 @@
-/*
- * Fichier     : Matrix.java
- * Auteurs     : Alexandre Jaquier, Valentin Kaelin
- * Description : Classe permettant de modéliser une Matrice. Il est également possible de réaliser
- *               diverses opérations arithmétiques sur deux Matrices.
- * Date        : 30.10.2021
- */
-
 import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Classe représentant une Matrice d'entiers
+ * Classe permettant de modéliser une Matrice. Il est également possible de réaliser
+ * diverses opérations arithmétiques sur deux Matrices.
  *
  * @author Alexandre Jaquier, Valentin Kaelin
  */
