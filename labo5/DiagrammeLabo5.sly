@@ -38,23 +38,31 @@
       </method>
     </entity>
     <entity entityType="CLASS" id="16691" isAbstract="false" name="Matrix" visibility="PUBLIC">
-      <attribute const="false" defaultValue="" isStatic="false" name="M" type="int" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="N" type="int" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="modulo" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="rows" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="columns" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="modulus" type="int" visibility="PRIVATE"/>
       <attribute const="false" defaultValue="" isStatic="false" name="data" type="int[][]" visibility="PRIVATE"/>
+      <method is-constructor="true" isAbstract="false" isStatic="false" name="Matrix" returnType="" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="mod" type="int"/>
+      </method>
       <method is-constructor="true" isAbstract="false" isStatic="false" name="Matrix" returnType="" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="m" type="int"/>
-        <variable const="false" name="n" type="int"/>
+        <variable const="false" name="rows" type="int"/>
+        <variable const="false" name="columns" type="int"/>
+        <variable const="false" name="mod" type="int"/>
       </method>
       <method is-constructor="true" isAbstract="false" isStatic="false" name="Matrix" returnType="" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="values" type="int[][]"/>
+        <variable const="false" name="mod" type="int"/>
       </method>
-      <method isAbstract="false" isStatic="false" name="toString" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="true" name="applyOperator" returnType="Matrix" view="DEFAULT" visibility="PRIVATE">
+        <variable const="false" name="m1" type="Matrix"/>
+        <variable const="false" name="m2" type="Matrix"/>
+      </method>
       <method isAbstract="false" isStatic="true" name="add" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m1" type="Matrix"/>
         <variable const="false" name="m2" type="Matrix"/>
       </method>
-      <method isAbstract="false" isStatic="true" name="substract" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="true" name="subtract" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m1" type="Matrix"/>
         <variable const="false" name="m2" type="Matrix"/>
       </method>
@@ -62,6 +70,7 @@
         <variable const="false" name="m1" type="Matrix"/>
         <variable const="false" name="m2" type="Matrix"/>
       </method>
+      <method isAbstract="false" isStatic="false" name="toString" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
     </entity>
   </diagramElements>
   <umlView grid="10" name="Main view" open="true">
@@ -124,9 +133,9 @@
     <componentView color="-2079" componentID="16691" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
         <x>640</x>
-        <y>50</y>
-        <w>260</w>
-        <h>205</h>
+        <y>70</y>
+        <w>300</w>
+        <h>235</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="17502" displayAttributes="true" displayDefault="true" displayMethods="true">
