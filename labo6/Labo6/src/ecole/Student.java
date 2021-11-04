@@ -20,6 +20,7 @@ public class Student extends Person {
     
     @Override
     public String toString() {
-        return "Etud. " + super.toString() + " (#"+ number +") - " + group.name();
+        return "Etud. " + super.toString() + " (#"+ number +")" + (group == null ? "" :
+                " - " + group.name());
     }
 }
