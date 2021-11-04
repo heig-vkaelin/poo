@@ -1,11 +1,13 @@
 package ecole;
 
+import java.util.Arrays;
+
 public class Group {
     private final int number;
     private final String orientation;
     private final int trimester;
     private final Student[] students;
-//    private final Lesson[] lessons;
+    private Lesson[] lessons;
     
     public Group(int number, String orientation, int trimester, Student[] students) {
         this.number = number;
@@ -21,7 +23,7 @@ public class Group {
     }
     
     public String schedule() {
-        return "TODO";
+        return "-- Horaire du groupe " + name() + " (" + nbStudents() + " etudiants)";
     }
     
     public String name() {
@@ -33,7 +35,7 @@ public class Group {
         return students.length;
     }
     
-    public void defineLessons(String... args) {
-    
+    public void defineLessons(Lesson[] lessons) {
+        this.lessons = Arrays.copyOf(lessons, lessons.length);
     }
 }
