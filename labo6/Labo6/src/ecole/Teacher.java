@@ -1,5 +1,7 @@
 package ecole;
 
+import java.util.Arrays;
+
 public class Teacher extends Person {
     
     private final String abbreviation;
@@ -12,21 +14,19 @@ public class Teacher extends Person {
     
     public Teacher(String firstname, String lastname, String abbreviation, Lesson[] lessons) {
         this(firstname, lastname, abbreviation);
-        this.lessons = lessons;
+        this.lessons = Arrays.copyOf(lessons, lessons.length);
     }
     
     public String getAbbreviation() {
         return abbreviation;
     }
     
-    public String horaire() {
+    public String schedule() {
         return "";
     }
     
     @Override
     public String toString() {
-        return "Teacher{" +
-                "abbreviation='" + abbreviation + '\'' +
-                '}';
+        return "Prof. " +super.toString() + " ("+ abbreviation +")";
     }
 }
