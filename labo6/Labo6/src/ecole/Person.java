@@ -1,27 +1,27 @@
 package ecole;
 
 public class Person {
-    private final String name;
-    private final String surName;
+    private final String firstname;
+    private final String lastname;
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public String getSurName() {
+//        return surName;
+//    }
 
-    public String getSurName() {
-        return surName;
-    }
-
-    public Person(String name, String surName) {
-        this.name = name;
-        this.surName = surName;
+    public Person(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
-                ", surName'" + surName+ '\'' +
+                "name='" + firstname + '\'' +
+                ", surName'" + lastname+ '\'' +
                 '}';
     }
 }

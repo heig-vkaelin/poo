@@ -2,22 +2,22 @@ package ecole;
 
 public class Student extends Person {
     private final int number;
-    private Group goup;
-
-    public Student(String name,String surName,int number){
-        super(name,surName);
+    private Group group;
+    
+    public Student(String firstname, String lastname, int number) {
+        super(firstname, lastname);
         this.number = number;
     }
-
-    public Student(String name,String surName,int number,Group group) {
-        this(name,surName,number);
-        this.goup = group;
+    
+    public Student(String firstname, String lastname, int number, Group group) {
+        this(firstname, lastname, number);
+        this.group = group;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
+//    public int getNumber() {
+//        return number;
+//    }
+    
     @Override
     public String toString() {
         return "Student{" +
