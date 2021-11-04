@@ -13,14 +13,17 @@ public class Student extends Person {
         this(firstname, lastname, number);
         this.group = group;
     }
-
-//    public int getNumber() {
+    
+    //    public int getNumber() {
 //        return number;
 //    }
+    public void setGroup(Group group) {
+        this.group = group;
+    }
     
     @Override
     public String toString() {
-        return "Etud. " + super.toString() + " (#"+ number +")" + (group == null ? "" :
+        return "Etud. " + super.toString() + " (#" + number + ")" + (group == null ? "" :
                 " - " + group.name());
     }
 }

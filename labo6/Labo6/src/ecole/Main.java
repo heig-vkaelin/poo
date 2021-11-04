@@ -32,6 +32,7 @@ public class Main {
         Person[] people = new Person[]{
                 pdo, dre, john, paul, ringo, george, roger, david
         };
+        System.out.println("-- Membres de l'ecole");
         for (Person p : people) {
             System.out.println(p);
         }
