@@ -22,11 +22,11 @@ public class Teacher extends Person {
     }
     
     public String schedule() {
-        return "";
+        return "-- Horaire " + toString() + "\n\n" + Lesson.schedule(this.lessons);
     }
     
     @Override
     public String toString() {
-        return "Prof. " +super.toString() + " ("+ abbreviation +")";
+        return "Prof. " + super.toString() + " (" + abbreviation + ")";
     }
 }

@@ -23,7 +23,8 @@ public class Group {
     }
     
     public String schedule() {
-        return "-- Horaire du groupe " + name() + " (" + nbStudents() + " etudiants)";
+        return "-- Horaire du groupe " + name() + " (" + nbStudents() + " " +
+                "etudiants)\n\n" + Lesson.schedule(this.lessons);
     }
     
     public String name() {

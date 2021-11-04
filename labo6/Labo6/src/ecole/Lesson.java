@@ -23,7 +23,20 @@ public class Lesson {
         this(subject, dayOfTheWeek, startPeriod, duration, room, null);
     }
     
-    public static String schedule(String... args) {
-        return "TODO";
+    public static String schedule(Lesson[] lessons) {
+        String[] days = new String[]{"Lun", "Mar", "Mer", "Jeu", "Ven"};
+        String[] schedules = new String[]{
+                "8:30", "9:15", "10:25", "11:15", "12:00", "13:15", "14:00",
+                "14:55", "15:45", "16:35", "17:20"
+        };
+        StringBuilder[] rows = new StringBuilder[(schedules.length + 1) * 2];
+        
+        // TODO: this
+//        for (int i = 0; i < schedules.length; i++) {
+//            rows[i].append(schedules)
+//        }
+        
+        String result = "";
+        return result;
     }
 }
