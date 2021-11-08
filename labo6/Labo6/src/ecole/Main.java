@@ -41,12 +41,10 @@ public class Main {
         }
         System.out.println();
         
-        /* 7. Afficher les informations relatives au groupe IL6-1 (nom, nombre
-        d’étudiants, horaire).*/
-        
         // 7. Infos du groupe IL6-1
         System.out.println(il6.schedule());
         
         /*8. Afficher l’horaire du professeur PDO.*/
+        System.out.println(pdo.schedule());
     }
 }

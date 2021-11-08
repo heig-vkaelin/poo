@@ -20,6 +20,9 @@ public class Group {
             students[i].setGroup(this);
             this.students[i] = students[i];
         }
+        
+        // Pour éviter les crashs si lessons vaut null
+        this.lessons = new Lesson[0];
     }
     
     public String schedule() {

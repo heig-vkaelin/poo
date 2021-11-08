@@ -14,9 +14,6 @@ public class Student extends Person {
         this.group = group;
     }
     
-    //    public int getNumber() {
-//        return number;
-//    }
     public void setGroup(Group group) {
         this.group = group;
     }

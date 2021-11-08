@@ -10,6 +10,7 @@ public class Teacher extends Person {
     public Teacher(String firstname, String lastname, String abbreviation) {
         super(firstname, lastname);
         this.abbreviation = abbreviation;
+        this.lessons = new Lesson[0];
     }
     
     public Teacher(String firstname, String lastname, String abbreviation, Lesson[] lessons) {
@@ -22,7 +23,12 @@ public class Teacher extends Person {
     }
     
     public String schedule() {
-        return "-- Horaire " + toString() + "\n\n" + Lesson.schedule(this.lessons);
+        return "-- Horaire " + this + "\n\n" + Lesson.schedule(this.lessons);
+    }
+    
+    public void addLesson(Lesson lesson) {
+        this.lessons = Arrays.copyOf(this.lessons, this.lessons.length + 1);
+        this.lessons[this.lessons.length - 1] = lesson;
     }
     
     @Override

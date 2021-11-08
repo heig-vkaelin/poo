@@ -18,7 +18,6 @@ public class Lesson {
             "14:55", "15:45", "16:35", "17:20"
     };
     
-    
     public Lesson(String subject, int dayOfTheWeek, int startPeriod, int duration,
                   String room, Teacher teacher) {
         this.subject = subject;
@@ -27,6 +26,10 @@ public class Lesson {
         this.duration = duration;
         this.room = room;
         this.teacher = teacher;
+        
+        // Ajout de la leçon au professeur pour avoir la liaison dans les 2 sens
+        if (teacher != null)
+            this.teacher.addLesson(this);
     }
     
     public Lesson(String subject, int dayOfTheWeek, int startPeriod, int duration,
@@ -35,8 +38,6 @@ public class Lesson {
     }
     
     public static String schedule(Lesson[] lessons) {
-        
-        
         int[][] stateLessons = new int[PERIOD_PER_DAY][DAY_PER_WEEK];
         String[][] titleLessons = new String[PERIOD_PER_DAY][DAY_PER_WEEK];
         
@@ -55,33 +56,29 @@ public class Lesson {
         for (String day : DAYS) {
             schedule.append(String.format("| %-12s", day));
         }
-        schedule.append("|\n");
-        schedule.append(" ".repeat(5));
-        schedule.append(
-                "|-------------|-------------|-------------|-------------|-------------|\n");
+        schedule.append("|\n").append(" ".repeat(5))
+                .append("|-------------".repeat(DAY_PER_WEEK)).append("|\n");
+        
+        // Boucle sur chaque ligne
         for (int period = 0; period < PERIOD_PER_DAY; period++) {
             schedule.append(String.format("%5s|", SCHEDULE_NAMES[period]));
             StringBuilder separator = new StringBuilder();
             separator.append("\n").append(" ".repeat(5)).append("|");
+            
+            // Boucle sur chaque colonne
             for (int day = 0; day < DAY_PER_WEEK; day++) {
-                if (titleLessons[period][day] != null) {
-                    schedule.append(titleLessons[period][day]);
-                } else {
-                    schedule.append(" ".repeat(13));
-                }
+                schedule.append(titleLessons[period][day] != null ?
+                        titleLessons[period][day] : " ".repeat(13)
+                );
                 
-                if (stateLessons[period][day] <= 1) {
-                    separator.append("-".repeat(13));
-                } else {
-                    separator.append(" ".repeat(13));
-                }
+                separator.append(
+                        (stateLessons[period][day] <= 1 ? "-" : " ").repeat(13)
+                );
                 
                 separator.append("|");
                 schedule.append("|");
             }
-            schedule.append(separator);
-            
-            schedule.append("\n");
+            schedule.append(separator).append("\n");
         }
         
         return schedule.toString();
