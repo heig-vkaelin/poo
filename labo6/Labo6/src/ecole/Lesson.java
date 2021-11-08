@@ -8,6 +8,17 @@ public class Lesson {
     private final String room;
     private final Teacher teacher;
     
+    private static final int PERIOD_PER_DAY = 11;
+    private static final int DAY_PER_WEEK = 5;
+    
+    private static final String[] DAYS = new String[]{
+            "Lun", "Mar", "Mer", "Jeu", "Ven"};
+    private static final String[] SCHEDULE_NAMES = new String[]{
+            "8:30", "9:15", "10:25", "11:15", "12:00", "13:15", "14:00",
+            "14:55", "15:45", "16:35", "17:20"
+    };
+    
+    
     public Lesson(String subject, int dayOfTheWeek, int startPeriod, int duration,
                   String room, Teacher teacher) {
         this.subject = subject;
@@ -24,19 +35,55 @@ public class Lesson {
     }
     
     public static String schedule(Lesson[] lessons) {
-        String[] days = new String[]{"Lun", "Mar", "Mer", "Jeu", "Ven"};
-        String[] schedules = new String[]{
-                "8:30", "9:15", "10:25", "11:15", "12:00", "13:15", "14:00",
-                "14:55", "15:45", "16:35", "17:20"
-        };
-        StringBuilder[] rows = new StringBuilder[(schedules.length + 1) * 2];
         
-        // TODO: this
-//        for (int i = 0; i < schedules.length; i++) {
-//            rows[i].append(schedules)
-//        }
         
-        String result = "";
-        return result;
+        int[][] stateLessons = new int[PERIOD_PER_DAY][DAY_PER_WEEK];
+        String[][] titleLessons = new String[PERIOD_PER_DAY][DAY_PER_WEEK];
+        
+        for (Lesson lesson : lessons) {
+            titleLessons[lesson.startPeriod][lesson.dayOfTheWeek]
+                    = String.format("%-5s %3s %3s", lesson.subject, lesson.room,
+                    lesson.teacher != null ? lesson.teacher.getAbbreviation() : "");
+            for (int i = 0; i < lesson.duration; i++) {
+                stateLessons[lesson.startPeriod + i][lesson.dayOfTheWeek] =
+                        lesson.duration - i;
+            }
+        }
+        
+        StringBuilder schedule = new StringBuilder();
+        schedule.append(" ".repeat(5));
+        for (String day : DAYS) {
+            schedule.append(String.format("| %-12s", day));
+        }
+        schedule.append("|\n");
+        schedule.append(" ".repeat(5));
+        schedule.append(
+                "|-------------|-------------|-------------|-------------|-------------|\n");
+        for (int period = 0; period < PERIOD_PER_DAY; period++) {
+            schedule.append(String.format("%5s|", SCHEDULE_NAMES[period]));
+            StringBuilder separator = new StringBuilder();
+            separator.append("\n").append(" ".repeat(5)).append("|");
+            for (int day = 0; day < DAY_PER_WEEK; day++) {
+                if (titleLessons[period][day] != null) {
+                    schedule.append(titleLessons[period][day]);
+                } else {
+                    schedule.append(" ".repeat(13));
+                }
+                
+                if (stateLessons[period][day] <= 1) {
+                    separator.append("-".repeat(13));
+                } else {
+                    separator.append(" ".repeat(13));
+                }
+                
+                separator.append("|");
+                schedule.append("|");
+            }
+            schedule.append(separator);
+            
+            schedule.append("\n");
+        }
+        
+        return schedule.toString();
     }
 }

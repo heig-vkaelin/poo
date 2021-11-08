@@ -8,11 +8,12 @@ public class Main {
         Teacher dre = new Teacher("Daniel", "Rossier", "DRE");
         
         // 2. Leçons
-        Lesson poo1 = new Lesson("POO", 3, 6, 2, "H02", pdo);
-        Lesson poo2 = new Lesson("POO", 4, 6, 2, "H02", pdo);
-        Lesson poo3 = new Lesson("POO", 4, 8, 2, "H02", pdo);
-        Lesson sye = new Lesson("SYE", 1, 1, 2, "G01", dre);
-        Lesson tic = new Lesson("SYE", 2, 10, 1, "F06");
+        Lesson poo1 = new Lesson("POO", 2, 5, 2, "H02", pdo);
+        Lesson poo2 = new Lesson("POO", 3, 5, 2, "H02", pdo);
+        Lesson poo3 = new Lesson("POO", 3, 7, 2, "H02", pdo);
+        Lesson sye1 = new Lesson("SYE", 0, 0, 2, "G01", dre);
+        Lesson sye2 = new Lesson("SYE", 3, 2, 2, "A09", dre);
+        Lesson tic = new Lesson("TIC", 1, 9, 1, "F06");
         
         // 3. Élèves
         Student john = new Student("John", "Lennon", 1234);
@@ -27,7 +28,7 @@ public class Main {
         Group si6 = new Group(1, "SI", 6, new Student[]{roger, david});
         
         // 5. Affecter les leçons aux groupes
-        il6.defineLessons(new Lesson[]{poo1, poo2, poo3, sye, tic});
+        il6.defineLessons(new Lesson[]{poo1, poo2, poo3, sye1, sye2, tic});
         si6.defineLessons(new Lesson[]{poo1, poo2, poo3});
         
         // 6. Personnes
