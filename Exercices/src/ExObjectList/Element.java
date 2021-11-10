@@ -3,13 +3,13 @@ package ExObjectList;
 public class Element {
     private Object data;
     private Element next;
-    
-    Element(Object o, Element n) {
+
+    public Element(Object o, Element n) {
         data = o;
         next = n;
     }
-    
-    Element(Object o) {
+
+    public Element(Object o) {
         this(o, null);
     }
     

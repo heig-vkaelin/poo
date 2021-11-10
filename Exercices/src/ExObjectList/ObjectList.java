@@ -4,7 +4,7 @@ public class ObjectList {
     private Element head;
     private int size;
     
-    ObjectList(Object o) {
+    public ObjectList(Object o) {
         head = new Element(o);
         size = 1;
     }
