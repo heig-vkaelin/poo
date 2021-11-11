@@ -32,7 +32,7 @@ public class ObjectList {
         ++size;
         Examinator ex = examinator();
         Element last = null;
-        if (head == null){
+        if (head == null) {
             insert(o);
             return;
         }
