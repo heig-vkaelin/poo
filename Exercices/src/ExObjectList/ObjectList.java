@@ -54,17 +54,18 @@ public class ObjectList {
     }
     
     public Object get(int index) throws RuntimeException {
-        if (index >= size) {
+        if (index >= size || index < 0) {
             throw new RuntimeException("Index invalide.");
         }
+        
         int i = 0;
         Examinator ex = examinator();
-        Element o = null;
-        while (i != index) {
-            o = (Element) ex.next();
+        Element e = null;
+        while (ex.hasNext() && i != index + 1) {
+            e = (Element) ex.next();
             i++;
         }
-        return o;
+        return e;
     }
     
     @Override

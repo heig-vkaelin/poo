@@ -39,6 +39,14 @@ public class Main {
         System.out.println(list);
         list.remove(o2);
         System.out.println(list);
+    
+        list.insert(o3);
+        list.insert(o2);
+        list.insert(o1);
+        System.out.println(list);
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
 
         /*
         list.insert(o3);
