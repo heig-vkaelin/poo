@@ -17,6 +17,8 @@ public class Lesson {
             "8:30", "9:15", "10:25", "11:15", "12:00", "13:15", "14:00",
             "14:55", "15:45", "16:35", "17:20"
     };
+    private static final int CASE_WIDTH = 13;
+    private static final int PADDING_LEFT = 5;
     
     public Lesson(String subject, int dayOfTheWeek, int startPeriod, int duration,
                   String room, Teacher teacher) {
@@ -52,27 +54,28 @@ public class Lesson {
         }
         
         StringBuilder schedule = new StringBuilder();
-        schedule.append(" ".repeat(5));
+        schedule.append(" ".repeat(PADDING_LEFT));
         for (String day : DAYS) {
-            schedule.append(String.format("| %-12s", day));
+            schedule.append(String.format("| %-" + (CASE_WIDTH - 1) + "s", day));
         }
-        schedule.append("|\n").append(" ".repeat(5))
-                .append("|-------------".repeat(DAY_PER_WEEK)).append("|\n");
+        String line = "|" + "-".repeat(CASE_WIDTH);
+        schedule.append("|\n").append(" ".repeat(PADDING_LEFT))
+                .append(line.repeat(DAY_PER_WEEK)).append("|\n");
         
         // Boucle sur chaque ligne
         for (int period = 0; period < PERIOD_PER_DAY; period++) {
-            schedule.append(String.format("%5s|", SCHEDULE_NAMES[period]));
+            schedule.append(String.format("%" + PADDING_LEFT + "s|", SCHEDULE_NAMES[period]));
             StringBuilder separator = new StringBuilder();
-            separator.append("\n").append(" ".repeat(5)).append("|");
+            separator.append("\n").append(" ".repeat(PADDING_LEFT)).append("|");
             
             // Boucle sur chaque colonne
             for (int day = 0; day < DAY_PER_WEEK; day++) {
                 schedule.append(titleLessons[period][day] != null ?
-                        titleLessons[period][day] : " ".repeat(13)
+                        titleLessons[period][day] : " ".repeat(CASE_WIDTH)
                 );
                 
                 separator.append(
-                        (stateLessons[period][day] <= 1 ? "-" : " ").repeat(13)
+                        (stateLessons[period][day] <= 1 ? "-" : " ").repeat(CASE_WIDTH)
                 );
                 
                 separator.append("|");
