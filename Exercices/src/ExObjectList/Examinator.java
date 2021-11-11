@@ -13,6 +13,7 @@ public class Examinator {
     
     // Il veut return Object et pas Element ici
     public Object next() {
-        return current.getNext();
+        current = current.getNext();
+        return current;
     }
 }

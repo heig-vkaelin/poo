@@ -41,13 +41,15 @@ public class ObjectList {
     }
     
     public void remove(Object o) {
-        --size;
         Examinator ex = examinator();
         Element e = head;
         while (ex.hasNext() && !e.getData().equals(o)) {
             e = (Element) ex.next();
         }
-        e.setNext(e.getNext().getNext());
+        if (e != null) {
+            e.setNext(e.getNext().getNext());
+            --size;
+        }
     }
     
     public Object get(int index) throws RuntimeException {
@@ -72,9 +74,9 @@ public class ObjectList {
         Element e = head;
         sb.append(e.getData());
         sb.append(" ");
-        while (i.hasNext()) {
-            Element o = (Element) i.next();
-            sb.append(o);
+        while (e != null) {
+            e = (Element) i.next();
+            sb.append(e);
             sb.append(" ");
         }
         sb.append("]");

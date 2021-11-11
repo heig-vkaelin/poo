@@ -3,12 +3,12 @@ package ExObjectList;
 public class Element {
     private Object data;
     private Element next;
-
+    
     public Element(Object o, Element n) {
         data = o;
         next = n;
     }
-
+    
     public Element(Object o) {
         this(o, null);
     }
@@ -23,5 +23,10 @@ public class Element {
     
     public void setNext(Element e) {
         next = e;
+    }
+    
+    @Override
+    public String toString() {
+        return data.toString();
     }
 }
