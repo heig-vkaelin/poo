@@ -1,5 +1,7 @@
 package ExObjectList;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class ObjectList {
     private Element head;
     private int size;
@@ -29,7 +31,11 @@ public class ObjectList {
     public void append(Object o) {
         ++size;
         Examinator ex = examinator();
-        Element last = head;
+        Element last = null;
+        if (head == null){
+            insert(o);
+            return;
+        }
         while (ex.hasNext()) {
             last = (Element) ex.next();
         }

@@ -38,6 +38,11 @@ public class Main {
         list.remove(o1);
         System.out.println(list);
         list.remove(o2);
+        System.out.println(list + "\n APPEND \n");
+        list.append(o1);
+        System.out.println(list);
+
+        list.append(o2);
         System.out.println(list);
     
         list.insert(o3);
