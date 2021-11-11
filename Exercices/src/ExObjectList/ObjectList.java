@@ -72,12 +72,10 @@ public class ObjectList {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         Element e = head;
-        sb.append(e.getData());
-        sb.append(" ");
         while (e != null) {
-            e = (Element) i.next();
             sb.append(e);
-            sb.append(" ");
+            sb.append((e.getNext() == null ? "" : ", "));
+            e = (Element) i.next();
         }
         sb.append("]");
         return sb.toString();
