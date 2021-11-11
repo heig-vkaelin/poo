@@ -33,7 +33,11 @@ public class Main {
         System.out.println(list);
         list.insert(o3);
         System.out.println(list);
+        list.remove(o3);
+        System.out.println(list);
         list.remove(o1);
+        System.out.println(list);
+        list.remove(o2);
         System.out.println(list);
 
         /*

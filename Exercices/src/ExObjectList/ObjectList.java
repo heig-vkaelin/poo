@@ -9,19 +9,15 @@ public class ObjectList {
         size = 1;
     }
     
+    private Element beforeHead() {
+        return new Element(null, head);
+    }
+    
     public boolean isEmpty() {
         return head == null;
     }
     
     public int size() {
-        /*
-        int size = 0;
-        Examinator i = examinator();
-        while (i.hasNext()) {
-            i.next();
-            size++;
-        }
-        */
         return size;
     }
     
@@ -42,12 +38,17 @@ public class ObjectList {
     
     public void remove(Object o) {
         Examinator ex = examinator();
-        Element e = head;
-        while (ex.hasNext() && !e.getData().equals(o)) {
+        Element e = beforeHead();
+        while (ex.hasNext() && !e.getNext().getData().equals(o)) {
             e = (Element) ex.next();
         }
+        
         if (e != null) {
-            e.setNext(e.getNext().getNext());
+            Element next = ex.hasNext() ? e.getNext().getNext() : null;
+            if (ex.hasNext() && e.getNext().equals(head)) {
+                head = next;
+            }
+            e.setNext(next);
             --size;
         }
     }
@@ -81,6 +82,6 @@ public class ObjectList {
     }
     
     public Examinator examinator() {
-        return new Examinator(new Element(null, head));
+        return new Examinator(beforeHead());
     }
 }
