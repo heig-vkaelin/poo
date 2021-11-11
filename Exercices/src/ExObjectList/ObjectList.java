@@ -71,17 +71,16 @@ public class ObjectList {
         Examinator i = examinator();
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        Element e = head;
-        while (e != null) {
+        while (i.hasNext()) {
+            Element e = (Element) i.next();
             sb.append(e);
             sb.append((e.getNext() == null ? "" : ", "));
-            e = (Element) i.next();
         }
         sb.append("]");
         return sb.toString();
     }
     
     public Examinator examinator() {
-        return new Examinator(head);
+        return new Examinator(new Element(null, head));
     }
 }

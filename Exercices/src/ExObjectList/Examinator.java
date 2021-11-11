@@ -11,7 +11,6 @@ public class Examinator {
         return current.getNext() != null;
     }
     
-    // Il veut return Object et pas Element ici
     public Object next() {
         current = current.getNext();
         return current;
