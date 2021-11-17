@@ -1,7 +1,16 @@
 package hanoi;
 
+import util.Stack;
+
 public class Hanoi {
     public static void main(String[] args)throws RuntimeException {
+    
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        System.out.println(stack);
+    
         int numberOfDisk = testArgs(args);
 
         System.out.println("Hello World from Labo7!");
