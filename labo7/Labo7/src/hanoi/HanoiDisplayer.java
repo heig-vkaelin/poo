@@ -8,6 +8,7 @@ public class HanoiDisplayer {
      * @param h
      */
     public void display(Hanoi h) {
-    
+        System.out.println("-- Turn: " + h.turn());
+        
     }
 }
