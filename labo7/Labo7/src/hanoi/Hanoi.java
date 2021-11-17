@@ -4,9 +4,12 @@ import util.Stack;
 
 public class Hanoi {
     private static final int NB_NEEDLES = 3;
-    private Stack<Integer>[] needles;
-    private int nbDisks;
-    private HanoiDisplayer displayer;
+    
+    private final Stack<Integer>[] needles;
+    private final int nbDisks;
+    private final HanoiDisplayer displayer;
+    
+    private int turns;
     
     public static void main(String[] args) throws RuntimeException {
         
@@ -61,11 +64,17 @@ public class Hanoi {
     public Hanoi(int disk, HanoiDisplayer displayer) {
         nbDisks = disk;
         this.displayer = displayer;
-        needles = (Stack<Integer>[]) new Object[NB_NEEDLES];
+        this.turns = 0;
+//        needles = (Stack<Integer>[]) new Object[NB_NEEDLES];
         
-        needles = (Stack<Integer>[])new Object[]{
+        needles = (Stack<Integer>[]) new Object[]{
                 new Stack<Integer>(), new Stack<Integer>(), new Stack<Integer>()
         };
+        
+        // Ajout des disques sur la 1ère aiguille
+        for (int i = nbDisks; i > 0; --i) {
+            needles[0].push(i);
+        }
     }
     
     /**
@@ -83,11 +92,22 @@ public class Hanoi {
      * HanoiDisplayer sélectionnée.
      */
     public void solve() {
-    
+        this.displayer.display(this);
+        this.hanoiAlgorithm(nbDisks, needles[0], needles[1], needles[2]);
     }
     
-    private void towerOfHanoi() {
+    private void hanoiAlgorithm(int nbDisks, Stack<Integer> start, Stack<Integer> finish, Stack<Integer> intermediate) {
+        if (nbDisks != 0) {
+            this.hanoiAlgorithm(nbDisks - 1, start, finish, intermediate);
+            this.move(start, finish);
+            this.hanoiAlgorithm(nbDisks - 1, intermediate, start, finish);
+        }
+    }
     
+    private void move(Stack<Integer> from, Stack<Integer> to) {
+        to.push(from.pop());
+        ++this.turns;
+        this.displayer.display(this);
     }
     
     /**
@@ -107,7 +127,7 @@ public class Hanoi {
      * @return true si la solution du problème a été atteinte, false sinon
      */
     public boolean finished() {
-        return false;
+        return turns == Math.pow(2, nbDisks) - 1;
     }
     
     /**
@@ -116,6 +136,6 @@ public class Hanoi {
      * @return le nombre de disques déplacés
      */
     public int turn() {
-        return 0;
+        return turns;
     }
 }
