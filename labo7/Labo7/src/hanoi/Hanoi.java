@@ -3,6 +3,10 @@ package hanoi;
 import util.Stack;
 
 public class Hanoi {
+    private static final int NUMBER_OF_NEEDLE = 3;
+    private int numberOfDisk;
+    private HanoiDisplayer display;
+
     public static void main(String[] args)throws RuntimeException {
     
         Stack<Integer> stack = new Stack<>();
@@ -42,20 +46,21 @@ public class Hanoi {
     /**
      * Constructeur générique
      *
-     * @param disks
+     * @param disk
      * @param displayer
      */
-    public Hanoi(int disks, HanoiDisplayer displayer) {
-
+    public Hanoi(int disk, HanoiDisplayer displayer) {
+        numberOfDisk = disk;
+        display = displayer;
     }
 
     /**
      * Constructeur pour l'affichage de la console
      *
-     * @param disks
+     * @param disk
      */
-    public Hanoi(int disks) {
-
+    public Hanoi(int disk) {
+        this(disk, null);
     }
 
     /**
