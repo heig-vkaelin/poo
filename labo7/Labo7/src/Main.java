@@ -23,17 +23,19 @@ public class Main {
      */
     private static int testArgs(String[] args) {
         int numberOfDisk;
-        if (args.length != 1)
+        // Si il y a 0 argument passé par l'utilisateur, on utilise l'interface graphique.
+        if (args.length > 1)
             throw new RuntimeException("Il ne faut qu'un seul argument (exemple: java Hanoi 7)");
         
         try {
             numberOfDisk = Integer.parseInt(args[0]);
+
         } catch (Exception e) {
-            throw new RuntimeException("L'argument doit être un entier.");
+            throw new RuntimeException("L'argument doit être un entier positif.");
         }
         
-        if (numberOfDisk < 1)
-            throw new RuntimeException("L'argument doit être un entier > 1");
+        if (numberOfDisk < 0)
+            throw new RuntimeException("L'argument doit être un entier positif");
         
         return numberOfDisk;
     }
