@@ -13,7 +13,9 @@ public class Stack {
     }
     
     /**
-     * @param value
+     * Ajoute un élément au sommet de la pile
+     *
+     * @param value : valeur du nouvel élément
      */
     public void push(Object value) {
         top = new Element(value, top);
@@ -21,8 +23,10 @@ public class Stack {
     }
     
     /**
-     * @return
-     * @throws RuntimeException
+     * Supprime et retourne l'élément au sommet de la pile
+     *
+     * @return l'élément supprimé
+     * @throws RuntimeException si la pile est vide
      */
     public Object pop() {
         if (top == null)
@@ -36,7 +40,9 @@ public class Stack {
     }
     
     /**
-     * @return
+     * Retourne la pile sous forme d'un tableau des valeurs contenues
+     *
+     * @return le tableau de valeurs
      */
     public Object[] state() {
         Object[] result = new Object[size];
@@ -50,14 +56,18 @@ public class Stack {
     }
     
     /**
-     * @return
+     * Itérateur sur la pile
+     *
+     * @return un itérateur commençant au sommet de la pile
      */
     public StackIterator iterator() {
         return new StackIterator(top);
     }
     
     /**
-     * @return
+     * Retourne la représentation du contenu de la pile
+     *
+     * @return la représentation sous forme de chaîne de caractères
      */
     @Override
     public String toString() {
@@ -72,5 +82,4 @@ public class Stack {
         sb.append("]");
         return sb.toString();
     }
-    
 }

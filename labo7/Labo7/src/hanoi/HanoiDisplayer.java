@@ -7,7 +7,7 @@ public class HanoiDisplayer {
      * Affiche l'état des aiguilles de l'instance de la classe Hanoi.
      * Par défaut l'affichage se fait dans la console.
      *
-     * @param h
+     * @param h instance du programme Hanoi en cours
      */
     public void display(Hanoi h) {
         StringBuilder msg = new StringBuilder();

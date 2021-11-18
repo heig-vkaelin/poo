@@ -12,10 +12,12 @@ public class Hanoi {
     private int turns;
     
     /**
-     * Constructeur générique
+     * Constructeur principal. Est appelé dans les deux versions du programme:
+     * - La version graphique
+     * - La version console
      *
-     * @param disk
-     * @param displayer
+     * @param disk      le nombre de disques sur l'aiguille
+     * @param displayer l'affichage choisi (graphique / console)
      */
     public Hanoi(int disk, HanoiDisplayer displayer) {
         nbDisks = disk;
@@ -36,7 +38,7 @@ public class Hanoi {
     /**
      * Constructeur pour l'affichage de la console
      *
-     * @param disk
+     * @param disk le nombre de disques sur l'aiguille
      */
     public Hanoi(int disk) {
         this(disk, new HanoiDisplayer());
@@ -52,6 +54,14 @@ public class Hanoi {
         this.hanoiAlgorithm(nbDisks, needles[0], needles[1], needles[2]);
     }
     
+    /**
+     * Implémentation de l'algorithme d'Hanoi sous forme récursive
+     *
+     * @param nbDisks      nombre de disques
+     * @param start        aiguille de départ
+     * @param intermediate aiguille du centre
+     * @param finish       aiguille d'arrivée
+     */
     private void hanoiAlgorithm(int nbDisks, Stack start, Stack intermediate, Stack finish) {
         if (nbDisks > 0) {
             this.hanoiAlgorithm(nbDisks - 1, start, finish, intermediate);
@@ -60,6 +70,12 @@ public class Hanoi {
         }
     }
     
+    /**
+     * Déplace le disque supérieur de l'aiguille source à l'aiguille de destination
+     *
+     * @param from l'aiguille source
+     * @param to   l'aiguille de destination
+     */
     private void move(Stack from, Stack to) {
         to.push(from.pop());
         ++this.turns;
@@ -71,7 +87,7 @@ public class Hanoi {
      * tableau t, l'élément t[i][j] correspond à la taille du j-ème disque (en
      * partant du haut) de la i-ème aiguille.
      *
-     * @return
+     * @return l'état de chaque aiguille
      */
     public int[][] status() {
         int[][] result = new int[NB_NEEDLES][];
