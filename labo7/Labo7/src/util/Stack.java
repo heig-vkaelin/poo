@@ -16,9 +16,7 @@ public class Stack {
      * @param value
      */
     public void push(Object value) {
-        Element element = new Element(value);
-        element.setNext(this.top);
-        top = element;
+        top = new Element(value, top);
         ++size;
     }
     
@@ -26,13 +24,13 @@ public class Stack {
      * @return
      * @throws RuntimeException
      */
-    public Object pop() throws RuntimeException {
+    public Object pop() {
         if (top == null)
             throw new RuntimeException(
                     "Impossible de récupérer un élément d'une pile vide.");
         
-        Object value = top.getValue();
-        top = top.getNext();
+        Object value = top.value;
+        top = top.next;
         --size;
         return value;
     }
@@ -46,7 +44,7 @@ public class Stack {
         StackIterator i = iterator();
         int index = 0;
         while (i.hasNext()) {
-            result[index++] = i.next().getValue();
+            result[index++] = i.next().value;
         }
         return result;
     }
@@ -68,7 +66,7 @@ public class Stack {
         sb.append("[");
         while (i.hasNext()) {
             sb.append(" <");
-            sb.append(i.next().getValue());
+            sb.append(i.next().value);
             sb.append("> ");
         }
         sb.append("]");

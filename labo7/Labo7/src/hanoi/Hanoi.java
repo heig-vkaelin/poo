@@ -3,7 +3,7 @@ package hanoi;
 import util.Stack;
 
 public class Hanoi {
-    private static final int NB_NEEDLES = 3;
+    public static final int NB_NEEDLES = 3;
     
     private final Stack[] needles;
     private final int nbDisks;
@@ -11,52 +11,12 @@ public class Hanoi {
     
     private int turns;
     
-    public static void main(String[] args) throws RuntimeException {
-        
-        Stack stack = new Stack();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        System.out.println(stack.pop());
-        System.out.println(stack);
-        
-        int numberOfDisk = testArgs(args);
-        
-        Hanoi hanoi = new Hanoi(numberOfDisk);
-        hanoi.solve();
-    }
-    
-    /**
-     * Fonction permettant de tester que le paramètre passé par l'utilisateur est correct (un entier > 0).
-     *
-     * @param args est le tableau d'argument passé par l'utilisateur.
-     * @return La valeur passée par l'utilisateur, castée en int.
-     * @throws RuntimeException
-     */
-    private static int testArgs(String[] args) throws RuntimeException {
-        int numberOfDisk;
-        if (args.length != 1) {
-            throw new RuntimeException("Il ne faut qu'un seul argument (exemple: java Hanoi 7)");
-        }
-        try {
-            numberOfDisk = Integer.parseInt(args[0]);
-        } catch (Exception e) {
-            throw new RuntimeException("L'argument doit être un entier.");
-        }
-        
-        if (numberOfDisk < 1) {
-            throw new RuntimeException("L'argument doit être un entier > 1");
-        }
-        return numberOfDisk;
-    }
-    
     /**
      * Constructeur générique
      *
      * @param disk
      * @param displayer
      */
-    @SuppressWarnings({"unchecked"})
     public Hanoi(int disk, HanoiDisplayer displayer) {
         nbDisks = disk;
         this.displayer = displayer;
@@ -124,7 +84,6 @@ public class Hanoi {
                 result[i][j] = (int) state[j];
             }
         }
-        
         return result;
     }
     
@@ -144,5 +103,18 @@ public class Hanoi {
      */
     public int turn() {
         return turns;
+    }
+    
+    /**
+     * Retourne la représentation de l'aiguille voulue
+     *
+     * @param index de l'aiguille
+     * @return la représentation sous forme de chaîne de caractères
+     */
+    public String needleToString(int index) {
+        if (index >= NB_NEEDLES || index < 0)
+            throw new RuntimeException("Index d'aiguille invalide.");
+        
+        return needles[index].toString();
     }
 }

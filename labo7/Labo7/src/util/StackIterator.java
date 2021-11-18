@@ -12,8 +12,11 @@ public class StackIterator {
     }
     
     public Element next() {
+        if (!hasNext())
+            throw new RuntimeException("Il n'y a pas d'élément suivant!");
+        
         Element current = element;
-        element = element.getNext();
+        element = element.next;
         return current;
     }
 }
