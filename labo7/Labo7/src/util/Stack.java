@@ -1,9 +1,8 @@
 package util;
 
-public class Stack<T> {
-    private Element<T> top;
+public class Stack {
+    private Element top;
     private int size;
-    private T[] test;
     
     /**
      * On initialise explicitement les attributs pour plus de clarté
@@ -16,8 +15,8 @@ public class Stack<T> {
     /**
      * @param value
      */
-    public void push(T value) {
-        Element<T> element = new Element<T>(value);
+    public void push(Object value) {
+        Element element = new Element(value);
         element.setNext(this.top);
         top = element;
         ++size;
@@ -27,12 +26,12 @@ public class Stack<T> {
      * @return
      * @throws RuntimeException
      */
-    public T pop() throws RuntimeException {
+    public Object pop() throws RuntimeException {
         if (top == null)
             throw new RuntimeException(
                     "Impossible de récupérer un élément d'une pile vide.");
         
-        T value = top.getValue();
+        Object value = top.getValue();
         top = top.getNext();
         --size;
         return value;
@@ -41,23 +40,22 @@ public class Stack<T> {
     /**
      * @return
      */
-    @SuppressWarnings({"unchecked"})
-    public T[] state() {
+    public Object[] state() {
         Object[] result = new Object[size];
         
-        StackIterator<T> i = iterator();
+        StackIterator i = iterator();
         int index = 0;
         while (i.hasNext()) {
             result[index++] = i.next().getValue();
         }
-        return (T[]) result;
+        return result;
     }
     
     /**
      * @return
      */
-    public StackIterator<T> iterator() {
-        return new StackIterator<>(top);
+    public StackIterator iterator() {
+        return new StackIterator(top);
     }
     
     /**
@@ -65,7 +63,7 @@ public class Stack<T> {
      */
     @Override
     public String toString() {
-        StackIterator<T> i = iterator();
+        StackIterator i = iterator();
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         while (i.hasNext()) {

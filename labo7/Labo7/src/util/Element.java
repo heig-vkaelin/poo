@@ -1,31 +1,27 @@
 package util;
 
-public class Element<T> {
-    private T value;
-    private Element<T> next;
+public class Element {
+    private final Object value;
+    private Element next;
     
-    public Element(T value, Element<T> next) {
+    public Element(Object value, Element next) {
         this.value = value;
         this.next = next;
     }
     
-    public Element(T value) {
+    public Element(Object value) {
         this(value, null);
     }
     
-    public T getValue() {
+    public Object getValue() {
         return value;
     }
     
-    public void setValue(T value) {
-        this.value = value;
-    }
-    
-    public Element<T> getNext() {
+    public Element getNext() {
         return next;
     }
     
-    public void setNext(Element<T> next) {
+    public void setNext(Element next) {
         this.next = next;
     }
 }

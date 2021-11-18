@@ -5,7 +5,7 @@ import util.Stack;
 public class Hanoi {
     private static final int NB_NEEDLES = 3;
     
-    private final Stack<Integer>[] needles;
+    private final Stack[] needles;
     private final int nbDisks;
     private final HanoiDisplayer displayer;
     
@@ -13,21 +13,17 @@ public class Hanoi {
     
     public static void main(String[] args) throws RuntimeException {
         
-        Stack<Integer> stack = new Stack<>();
+        Stack stack = new Stack();
         stack.push(1);
         stack.push(2);
         stack.push(3);
         System.out.println(stack.pop());
         System.out.println(stack);
-
-//        Integer[] state = (Integer[]) stack.state();
         
         int numberOfDisk = testArgs(args);
         
         Hanoi hanoi = new Hanoi(numberOfDisk);
         hanoi.solve();
-        
-        System.out.println("Hello World from Labo7!");
     }
     
     /**
@@ -65,11 +61,11 @@ public class Hanoi {
         nbDisks = disk;
         this.displayer = displayer;
         this.turns = 0;
-//        needles = (Stack<Integer>[]) new Object[NB_NEEDLES];
         
-        needles = (Stack<Integer>[]) new Object[]{
-                new Stack<Integer>(), new Stack<Integer>(), new Stack<Integer>()
-        };
+        needles = new Stack[NB_NEEDLES];
+        for (int i = 0; i < NB_NEEDLES; i++) {
+            needles[i] = new Stack();
+        }
         
         // Ajout des disques sur la 1ère aiguille
         for (int i = nbDisks; i > 0; --i) {
@@ -83,7 +79,7 @@ public class Hanoi {
      * @param disk
      */
     public Hanoi(int disk) {
-        this(disk, null);
+        this(disk, new HanoiDisplayer());
     }
     
     /**
@@ -96,15 +92,15 @@ public class Hanoi {
         this.hanoiAlgorithm(nbDisks, needles[0], needles[1], needles[2]);
     }
     
-    private void hanoiAlgorithm(int nbDisks, Stack<Integer> start, Stack<Integer> finish, Stack<Integer> intermediate) {
-        if (nbDisks != 0) {
+    private void hanoiAlgorithm(int nbDisks, Stack start, Stack intermediate, Stack finish) {
+        if (nbDisks > 0) {
             this.hanoiAlgorithm(nbDisks - 1, start, finish, intermediate);
             this.move(start, finish);
             this.hanoiAlgorithm(nbDisks - 1, intermediate, start, finish);
         }
     }
     
-    private void move(Stack<Integer> from, Stack<Integer> to) {
+    private void move(Stack from, Stack to) {
         to.push(from.pop());
         ++this.turns;
         this.displayer.display(this);
@@ -118,7 +114,18 @@ public class Hanoi {
      * @return
      */
     public int[][] status() {
-        return null;
+        int[][] result = new int[NB_NEEDLES][];
+        
+        for (int i = 0; i < NB_NEEDLES; i++) {
+            Object[] state = needles[i].state();
+            result[i] = new int[state.length];
+            
+            for (int j = 0; j < state.length; j++) {
+                result[i][j] = (int) state[j];
+            }
+        }
+        
+        return result;
     }
     
     /**

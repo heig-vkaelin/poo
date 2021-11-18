@@ -1,9 +1,9 @@
 package util;
 
-public class StackIterator<T> {
-    private Element<T> element;
+public class StackIterator {
+    private Element element;
     
-    public StackIterator(Element<T> element) {
+    public StackIterator(Element element) {
         this.element = element;
     }
     
@@ -11,8 +11,8 @@ public class StackIterator<T> {
         return element != null;
     }
     
-    public Element<T> next() {
-        Element<T> current = element;
+    public Element next() {
+        Element current = element;
         element = element.getNext();
         return current;
     }
