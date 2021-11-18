@@ -8,11 +8,12 @@ public class StackIterator<T> {
     }
     
     public boolean hasNext() {
-        return element.getNext() != null;
+        return element != null;
     }
     
     public Element<T> next() {
+        Element<T> current = element;
         element = element.getNext();
-        return element;
+        return current;
     }
 }
