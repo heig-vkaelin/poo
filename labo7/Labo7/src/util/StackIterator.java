@@ -1,19 +1,31 @@
 package util;
 
-public class StackIterator<T> {
-    private Element<T> element;
+public class StackIterator {
+    private Element element;
     
-    public StackIterator(Element<T> element) {
+    /**
+     * @param element
+     */
+    public StackIterator(Element element) {
         this.element = element;
     }
     
+    /**
+     * @return
+     */
     public boolean hasNext() {
         return element != null;
     }
     
-    public Element<T> next() {
-        Element<T> current = element;
-        element = element.getNext();
+    /**
+     * @return
+     */
+    public Element next() {
+        if (!hasNext())
+            throw new RuntimeException("Il n'y a pas d'élément suivant!");
+        
+        Element current = element;
+        element = element.next;
         return current;
     }
 }

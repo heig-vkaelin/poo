@@ -1,3 +1,4 @@
+import ExChat.*;
 import ExClassArray.*;
 import ExObjectList.*;
 
@@ -5,7 +6,8 @@ public class Main {
     
     public static void main(String[] args) {
 //        exClassArray();
-        exObjectList();
+//        exObjectList();
+        exChat();
     }
     
     public static void exClassArray() {
@@ -52,10 +54,18 @@ public class Main {
         System.out.println(list.get(0));
         System.out.println(list.get(1));
         System.out.println(list.get(2));
-
-        /*
-        list.insert(o3);
-        System.out.println(list);
-        */
+    }
+    
+    public static void exChat() {
+        Animal[] animals = {
+                new Cat("Zion"),
+                new Cat("Chandler"),
+                new Dog("Doggo", "OUAF", "Bob"),
+                new Dog("Alex", "Grrrrrr", "John")
+        };
+        
+        for (Animal a : animals) {
+            System.out.println(a);
+        }
     }
 }

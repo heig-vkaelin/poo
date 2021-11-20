@@ -1,9 +1,8 @@
 package util;
 
-public class Stack<T> {
-    private Element<T> top;
+public class Stack {
+    private Element top;
     private int size;
-    private T[] test;
     
     /**
      * On initialise explicitement les attributs pour plus de clarté
@@ -14,67 +13,73 @@ public class Stack<T> {
     }
     
     /**
-     * @param value
+     * Ajoute un élément au sommet de la pile
+     *
+     * @param value : valeur du nouvel élément
      */
-    public void push(T value) {
-        Element<T> element = new Element<T>(value);
-        element.setNext(this.top);
-        top = element;
+    public void push(Object value) {
+        top = new Element(value, top);
         ++size;
     }
     
     /**
-     * @return
-     * @throws RuntimeException
+     * Supprime et retourne l'élément au sommet de la pile
+     *
+     * @return l'élément supprimé
+     * @throws RuntimeException si la pile est vide
      */
-    public T pop() throws RuntimeException {
+    public Object pop() {
         if (top == null)
             throw new RuntimeException(
                     "Impossible de récupérer un élément d'une pile vide.");
         
-        T value = top.getValue();
-        top = top.getNext();
+        Object value = top.value;
+        top = top.next;
         --size;
         return value;
     }
     
     /**
-     * @return
+     * Retourne la pile sous forme d'un tableau des valeurs contenues
+     *
+     * @return le tableau de valeurs
      */
-    @SuppressWarnings({"unchecked"})
-    public T[] state() {
+    public Object[] state() {
         Object[] result = new Object[size];
         
-        StackIterator<T> i = iterator();
+        StackIterator i = iterator();
         int index = 0;
         while (i.hasNext()) {
-            result[index++] = i.next().getValue();
+            result[index++] = i.next().value;
         }
-        return (T[]) result;
+        return result;
     }
     
     /**
-     * @return
+     * Itérateur sur la pile
+     *
+     * @return un itérateur commençant au sommet de la pile
      */
-    public StackIterator<T> iterator() {
-        return new StackIterator<>(top);
+    public StackIterator iterator() {
+        return new StackIterator(top);
     }
     
     /**
-     * @return
+     * Retourne la représentation du contenu de la pile
+     *
+     * @return la représentation sous forme de chaîne de caractères
      */
     @Override
     public String toString() {
-        StackIterator<T> i = iterator();
+        StackIterator i = iterator();
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         while (i.hasNext()) {
             sb.append(" <");
-            sb.append(i.next().getValue());
+            sb.append(i.next().value);
             sb.append("> ");
         }
         sb.append("]");
         return sb.toString();
     }
-    
 }

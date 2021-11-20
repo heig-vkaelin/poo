@@ -3,73 +3,31 @@ package hanoi;
 import util.Stack;
 
 public class Hanoi {
-    private static final int NB_NEEDLES = 3;
+    public static final int NB_NEEDLES = 3;
     
-    private final Stack<Integer>[] needles;
+    private final Stack[] needles;
     private final int nbDisks;
     private final HanoiDisplayer displayer;
     
     private int turns;
     
-    public static void main(String[] args) throws RuntimeException {
-        
-        Stack<Integer> stack = new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        System.out.println(stack.pop());
-        System.out.println(stack);
-
-//        Integer[] state = (Integer[]) stack.state();
-        
-        int numberOfDisk = testArgs(args);
-        
-        Hanoi hanoi = new Hanoi(numberOfDisk);
-        hanoi.solve();
-        
-        System.out.println("Hello World from Labo7!");
-    }
-    
     /**
-     * Fonction permettant de tester que le paramètre passé par l'utilisateur est correct (un entier > 0).
+     * Constructeur principal. Est appelé dans les deux versions du programme:
+     * - La version graphique
+     * - La version console
      *
-     * @param args est le tableau d'argument passé par l'utilisateur.
-     * @return La valeur passée par l'utilisateur, castée en int.
-     * @throws RuntimeException
+     * @param disk      le nombre de disques sur l'aiguille
+     * @param displayer l'affichage choisi (graphique / console)
      */
-    private static int testArgs(String[] args) throws RuntimeException {
-        int numberOfDisk;
-        if (args.length != 1) {
-            throw new RuntimeException("Il ne faut qu'un seul argument (exemple: java Hanoi 7)");
-        }
-        try {
-            numberOfDisk = Integer.parseInt(args[0]);
-        } catch (Exception e) {
-            throw new RuntimeException("L'argument doit être un entier.");
-        }
-        
-        if (numberOfDisk < 1) {
-            throw new RuntimeException("L'argument doit être un entier > 1");
-        }
-        return numberOfDisk;
-    }
-    
-    /**
-     * Constructeur générique
-     *
-     * @param disk
-     * @param displayer
-     */
-    @SuppressWarnings({"unchecked"})
     public Hanoi(int disk, HanoiDisplayer displayer) {
         nbDisks = disk;
         this.displayer = displayer;
         this.turns = 0;
-//        needles = (Stack<Integer>[]) new Object[NB_NEEDLES];
         
-        needles = (Stack<Integer>[]) new Object[]{
-                new Stack<Integer>(), new Stack<Integer>(), new Stack<Integer>()
-        };
+        needles = new Stack[NB_NEEDLES];
+        for (int i = 0; i < NB_NEEDLES; i++) {
+            needles[i] = new Stack();
+        }
         
         // Ajout des disques sur la 1ère aiguille
         for (int i = nbDisks; i > 0; --i) {
@@ -80,10 +38,10 @@ public class Hanoi {
     /**
      * Constructeur pour l'affichage de la console
      *
-     * @param disk
+     * @param disk le nombre de disques sur l'aiguille
      */
     public Hanoi(int disk) {
-        this(disk, null);
+        this(disk, new HanoiDisplayer());
     }
     
     /**
@@ -96,15 +54,29 @@ public class Hanoi {
         this.hanoiAlgorithm(nbDisks, needles[0], needles[1], needles[2]);
     }
     
-    private void hanoiAlgorithm(int nbDisks, Stack<Integer> start, Stack<Integer> finish, Stack<Integer> intermediate) {
-        if (nbDisks != 0) {
+    /**
+     * Implémentation de l'algorithme d'Hanoi sous forme récursive
+     *
+     * @param nbDisks      nombre de disques
+     * @param start        aiguille de départ
+     * @param intermediate aiguille du centre
+     * @param finish       aiguille d'arrivée
+     */
+    private void hanoiAlgorithm(int nbDisks, Stack start, Stack intermediate, Stack finish) {
+        if (nbDisks > 0) {
             this.hanoiAlgorithm(nbDisks - 1, start, finish, intermediate);
             this.move(start, finish);
             this.hanoiAlgorithm(nbDisks - 1, intermediate, start, finish);
         }
     }
     
-    private void move(Stack<Integer> from, Stack<Integer> to) {
+    /**
+     * Déplace le disque supérieur de l'aiguille source à l'aiguille de destination
+     *
+     * @param from l'aiguille source
+     * @param to   l'aiguille de destination
+     */
+    private void move(Stack from, Stack to) {
         to.push(from.pop());
         ++this.turns;
         this.displayer.display(this);
@@ -115,10 +87,20 @@ public class Hanoi {
      * tableau t, l'élément t[i][j] correspond à la taille du j-ème disque (en
      * partant du haut) de la i-ème aiguille.
      *
-     * @return
+     * @return l'état de chaque aiguille
      */
     public int[][] status() {
-        return null;
+        int[][] result = new int[NB_NEEDLES][];
+        
+        for (int i = 0; i < NB_NEEDLES; i++) {
+            Object[] state = needles[i].state();
+            result[i] = new int[state.length];
+            
+            for (int j = 0; j < state.length; j++) {
+                result[i][j] = (int) state[j];
+            }
+        }
+        return result;
     }
     
     /**
@@ -137,5 +119,18 @@ public class Hanoi {
      */
     public int turn() {
         return turns;
+    }
+    
+    /**
+     * Retourne la représentation de l'aiguille voulue
+     *
+     * @param index de l'aiguille
+     * @return la représentation sous forme de chaîne de caractères
+     */
+    public String needleToString(int index) {
+        if (index >= NB_NEEDLES || index < 0)
+            throw new RuntimeException("Index d'aiguille invalide.");
+        
+        return needles[index].toString();
     }
 }
