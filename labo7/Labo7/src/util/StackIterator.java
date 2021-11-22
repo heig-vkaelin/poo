@@ -20,12 +20,12 @@ public class StackIterator {
     /**
      * @return
      */
-    public Element next() {
+    public Object next() {
         if (!hasNext())
             throw new RuntimeException("Il n'y a pas d'élément suivant!");
         
         Element current = element;
         element = element.next;
-        return current;
+        return current.value;
     }
 }

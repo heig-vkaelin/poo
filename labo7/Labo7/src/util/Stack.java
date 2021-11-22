@@ -50,7 +50,7 @@ public class Stack {
         StackIterator i = iterator();
         int index = 0;
         while (i.hasNext()) {
-            result[index++] = i.next().value;
+            result[index++] = i.next();
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class Stack {
         sb.append("[");
         while (i.hasNext()) {
             sb.append(" <");
-            sb.append(i.next().value);
+            sb.append(i.next());
             sb.append("> ");
         }
         sb.append("]");
