@@ -1,13 +1,15 @@
 import ExChat.*;
 import ExClassArray.*;
 import ExObjectList.*;
+import ExSeasonEnum.Season;
 
 public class Main {
     
     public static void main(String[] args) {
 //        exClassArray();
 //        exObjectList();
-        exChat();
+//        exChat();
+        exSeasonEnum();
     }
     
     public static void exClassArray() {
@@ -66,6 +68,61 @@ public class Main {
         
         for (Animal a : animals) {
             System.out.println(a);
+        }
+    }
+    
+    public static void exSeasonEnum() {
+        System.out.println("Display all seasons");
+        for (Season s : Season.values()) {
+            System.out.println(s);
+        }
+        System.out.println();
+        
+        System.out.println("Tests previous");
+        System.out.println("Before spring: " + Season.spring.previous());
+        System.out.println("Before summer: " + Season.summer.previous());
+        System.out.println("Before autumn: " + Season.autumn.previous());
+        System.out.println("Before winter: " + Season.winter.previous());
+        System.out.println();
+        
+        System.out.println("Tests next");
+        System.out.println("After spring: " + Season.spring.next());
+        System.out.println("After summer: " + Season.summer.next());
+        System.out.println("After autumn: " + Season.autumn.next());
+        System.out.println("After winter: " + Season.winter.next());
+        System.out.println();
+        
+        System.out.println("Tests valueOf");
+        System.out.println("Value of spring: " + Season.valueOf("Spring"));
+        System.out.println("Value of summer: " + Season.valueOf("Summer"));
+        System.out.println("Value of autumn: " + Season.valueOf("Autumn"));
+        System.out.println("Value of winter: " + Season.valueOf("Winter"));
+        System.out.println("Value of Alex: " + Season.valueOf("Alex"));
+        System.out.println();
+        
+        System.out.println("Tests range");
+        System.out.println("Range Summer to Winter: ");
+        Season[] range1 = Season.range(Season.summer, Season.winter);
+        for (Season s : range1) {
+            System.out.println(s);
+        }
+    
+        System.out.println("Range Summer to Summer: ");
+        Season[] range2 = Season.range(Season.summer, Season.summer);
+        for (Season s : range2) {
+            System.out.println(s);
+        }
+    
+        System.out.println("Range Spring to Winter: ");
+        Season[] range3 = Season.range(Season.spring, Season.winter);
+        for (Season s : range3) {
+            System.out.println(s);
+        }
+    
+        System.out.println("Range Winter to Summer: ");
+        Season[] range4 = Season.range(Season.winter, Season.summer);
+        for (Season s : range4) {
+            System.out.println(s);
         }
     }
 }
