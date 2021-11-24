@@ -54,12 +54,11 @@ public class Season {
     }
     
     public static Season[] range(Season first, Season last) {
-        int size = Math.abs(last.ordinal - first.ordinal);
+        int size = Math.abs(last.ordinal - first.ordinal) + 1;
         
-        Season[] rangeSeasons = new Season[size + 1];
-        for (int i = 0; i < size + 1; i++) {
+        Season[] rangeSeasons = new Season[size];
+        for (int i = 0; i < size; i++)
             rangeSeasons[i] = seasons[(first.ordinal + i) % seasons.length];
-        }
         return rangeSeasons;
     }
 }
