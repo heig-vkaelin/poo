@@ -1,12 +1,26 @@
 package hanoi;
 
 /**
- * Classe
+ * Classe permettant l’affichage des étapes de résolution du problème dans la console
+ *
  * @author Jonathan Friedli
  * @author Valentin Kaelin
  */
 public class HanoiDisplayer {
     private static final String[] NUMBERS = {"One", "Two", "Three"};
+    
+    /**
+     * Transforme un chiffre dans sa représentation en anglais
+     *
+     * @param number chiffre à transformer
+     * @return la représentation du chiffre
+     */
+    public String numberToWord(int number) {
+        if (number >= NUMBERS.length)
+            throw new RuntimeException("Index invalide!");
+        
+        return NUMBERS[number];
+    }
     
     /**
      * Affiche l'état des aiguilles de l'instance de la classe Hanoi.
@@ -15,15 +29,6 @@ public class HanoiDisplayer {
      * @param h instance du programme Hanoi en cours
      */
     public void display(Hanoi h) {
-        StringBuilder msg = new StringBuilder();
-        msg.append("-- Turn: ").append(h.turn()).append("\n");
-        
-        for (int i = 0; i < Hanoi.NB_NEEDLES; i++) {
-            msg.append(String.format("%-5s", NUMBERS[i]))
-                    .append(" : ")
-                    .append(h.getNeedle(i))
-                    .append("\n");
-        }
-        System.out.print(msg);
+        System.out.println(h);
     }
 }

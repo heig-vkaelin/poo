@@ -1,7 +1,9 @@
 package util;
 
 /**
- * Classe
+ * Classe implémentant une pile de manière générique grâce à l’utilisation de la
+ * classe Object
+ *
  * @author Jonathan Friedli
  * @author Valentin Kaelin
  */

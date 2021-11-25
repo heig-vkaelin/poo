@@ -3,12 +3,13 @@ package hanoi;
 import util.Stack;
 
 /**
- * Classe
+ * Classe contenant toute la logique de la résolution du problème des tours d’Hanoi
+ *
  * @author Jonathan Friedli
  * @author Valentin Kaelin
  */
 public class Hanoi {
-    public static final int NB_NEEDLES = 3;
+    private static final int NB_NEEDLES = 3;
     
     private final Stack[] needles;
     private final int nbDisks;
@@ -127,16 +128,24 @@ public class Hanoi {
     }
     
     /**
-     * Retourne l'aiguille à l'index souhaité
+     * Retourne la représentation sous forme de chaîne de caractères des
+     * états actuels des aiguilles
      *
-     * @param index de l'aiguille
-     * @return la pile représentant l'aiguille
-     * @throws RuntimeException si l'index est invalide
+     * @return la représentation de l'état actuel
      */
-    public Stack getNeedle(int index) {
-        if (index >= NB_NEEDLES || index < 0)
-            throw new RuntimeException("Index d'aiguille invalide.");
+    @Override
+    public String toString() {
+        StringBuilder state = new StringBuilder();
+        state.append("-- Turn: ").append(turn()).append("\n");
         
-        return needles[index];
+        for (int i = 0; i < NB_NEEDLES; i++) {
+            state.append(String.format("%-5s", displayer.numberToWord(i)))
+                    .append(" : ")
+                    .append(needles[i]);
+            
+            if (i < NB_NEEDLES - 1)
+                state.append("\n");
+        }
+        return state.toString();
     }
 }
