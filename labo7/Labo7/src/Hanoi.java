@@ -1,7 +1,7 @@
 import hanoi.Hanoi;
 import hanoi.gui.JHanoi;
 
-public class Main {
+public class Hanoi {
     /**
      * @param args
      */
@@ -9,7 +9,7 @@ public class Main {
         if (args.length == 0) {
             new JHanoi();
         } else {
-            Hanoi hanoi = new Hanoi(testArgs(args));
+            hanoi.Hanoi hanoi = new hanoi.Hanoi(testArgs(args));
             hanoi.solve();
         }
     }
