@@ -1,4 +1,6 @@
 import hanoi.gui.JHanoi;
+import util.Stack;
+import util.StackIterator;
 
 /**
  *
@@ -15,12 +17,13 @@ public class Hanoi {
      * @throws Exception en cas d'entrée utilisateur incorrecte.
      */
     public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
+        /*if (args.length == 0) {
             new JHanoi();
         } else {
             hanoi.Hanoi hanoi = new hanoi.Hanoi(testArgs(args));
             hanoi.solve();
-        }
+        }*/
+        testStack();
     }
     
     /**
@@ -53,6 +56,59 @@ public class Hanoi {
      * Teste l'implémentation maison de la Stack
      */
     private static void testStack() {
-    
+        System.out.println("TEST: Création d'une stack vide.");
+        Stack stack = new Stack();
+        System.out.println(stack);
+        System.out.println("\n");
+
+        System.out.println("TEST: Remplissage d'une stack");
+        System.out.println("Insertion de la valeur 4");
+        stack.push(4);
+        System.out.println(stack);
+        System.out.println("Insertion de la valeur 5");
+        stack.push(5);
+        System.out.println(stack);
+        System.out.println("Insertion de la valeur 6");
+        stack.push(6);
+        System.out.println(stack);
+        System.out.println("\n");
+
+        System.out.println("TEST: Itérateur fonctionnel");
+        StackIterator si = stack.iterator();
+        System.out.print("Les valeurs contenue dans la stack sont: ");
+        while(si.hasNext()){
+            System.out.print(si.next() + " ");
+        }
+        System.out.println("\n\n");
+
+        System.out.println("TEST: Récupérer l'état de la stack via state()");
+        Object[] stackValues = stack.state();
+        System.out.print("Les valeurs contenues dans la stack sont: ");
+        for (Object o : stackValues){
+            System.out.print(o + " ");
+        }
+        System.out.println("\n\n");
+
+        System.out.println("TEST: Récupérer l'état de la stack ne brise pas l'encapsulation");
+        stackValues[0] = 10;
+        System.out.println(stack);
+        System.out.println("\n");
+
+
+        System.out.println("TEST: Vidage de la stack");
+        System.out.println("The top value was: " + stack.pop());
+        System.out.println(stack);
+        System.out.println("The top value was: " + stack.pop());
+        System.out.println(stack);
+        System.out.println("The top value was: " + stack.pop());
+        System.out.println(stack);
+        System.out.println("\n");
+
+        System.out.println("TEST: Pop une stack vide");
+        try{
+            System.out.println("The value is: " + stack.pop());
+        } catch (RuntimeException e){
+            System.out.println("Exception bien levée.");
+        }
     }
 }
