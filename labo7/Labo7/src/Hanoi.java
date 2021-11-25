@@ -58,19 +58,19 @@ public class Hanoi {
     private static void testStack() {
         System.out.println("TEST: Création d'une stack vide.");
         Stack stack = new Stack();
-        System.out.println(stack);
+        System.out.println("État de la stack: " + stack);
         System.out.println("\n");
 
         System.out.println("TEST: Remplissage d'une stack");
         System.out.println("Insertion de la valeur 4");
         stack.push(4);
-        System.out.println(stack);
+        System.out.println("État de la stack: " + stack);
         System.out.println("Insertion de la valeur 5");
         stack.push(5);
-        System.out.println(stack);
+        System.out.println("État de la stack: " + stack);
         System.out.println("Insertion de la valeur 6");
         stack.push(6);
-        System.out.println(stack);
+        System.out.println("État de la stack: " + stack);
         System.out.println("\n");
 
         System.out.println("TEST: Itérateur fonctionnel");
@@ -91,17 +91,20 @@ public class Hanoi {
 
         System.out.println("TEST: Récupérer l'état de la stack ne brise pas l'encapsulation");
         stackValues[0] = 10;
-        System.out.println(stack);
+        System.out.println("État de la stack: " + stack);
+        System.out.println("\n");
+
+        System.out.println("TEST: Insertion de String");
+        stack.push("Je suis un string");
+        System.out.println("État de la stack: " + stack);
         System.out.println("\n");
 
 
         System.out.println("TEST: Vidage de la stack");
-        System.out.println("The top value was: " + stack.pop());
-        System.out.println(stack);
-        System.out.println("The top value was: " + stack.pop());
-        System.out.println(stack);
-        System.out.println("The top value was: " + stack.pop());
-        System.out.println(stack);
+        for (int i = 0; i < 4; ++i){
+            System.out.println("The top value was: " + stack.pop());
+            System.out.println("État de la stack: " + stack);
+        }
         System.out.println("\n");
 
         System.out.println("TEST: Pop une stack vide");
