@@ -17,13 +17,14 @@ public class Hanoi {
      * @throws Exception en cas d'entrée utilisateur incorrecte.
      */
     public static void main(String[] args) throws Exception {
-        /*if (args.length == 0) {
+        if (args.length == 0) {
             new JHanoi();
         } else {
             hanoi.Hanoi hanoi = new hanoi.Hanoi(testArgs(args));
             hanoi.solve();
-        }*/
-        testStack();
+        }
+        // Enlever le commentaire si l'on souhaite tester les différents cas limites.
+        // testStack();
     }
     
     /**
