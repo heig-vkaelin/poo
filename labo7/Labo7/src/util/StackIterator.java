@@ -1,5 +1,10 @@
 package util;
 
+/**
+ * Classe
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class StackIterator {
     private Element element;
     

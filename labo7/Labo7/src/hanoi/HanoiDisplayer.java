@@ -1,5 +1,10 @@
 package hanoi;
 
+/**
+ * Classe
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class HanoiDisplayer {
     private static final String[] NUMBERS = {"One", "Two", "Three"};
     

@@ -2,6 +2,11 @@ package hanoi;
 
 import util.Stack;
 
+/**
+ * Classe
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Hanoi {
     public static final int NB_NEEDLES = 3;
     

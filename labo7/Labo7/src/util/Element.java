@@ -1,5 +1,10 @@
 package util;
 
+/**
+ * Classe
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 class Element {
     Object value;
     Element next;
