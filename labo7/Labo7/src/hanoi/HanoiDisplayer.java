@@ -16,7 +16,7 @@ public class HanoiDisplayer {
         for (int i = 0; i < Hanoi.NB_NEEDLES; i++) {
             msg.append(String.format("%-5s", NUMBERS[i]))
                     .append(" : ")
-                    .append(h.needleToString(i))
+                    .append(h.getNeedle(i))
                     .append("\n");
         }
         System.out.print(msg);

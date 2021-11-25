@@ -122,15 +122,16 @@ public class Hanoi {
     }
     
     /**
-     * Retourne la représentation de l'aiguille voulue
+     * Retourne l'aiguille à l'index souhaité
      *
      * @param index de l'aiguille
-     * @return la représentation sous forme de chaîne de caractères
+     * @return la pile représentant l'aiguille
+     * @throws RuntimeException si l'index est invalide
      */
-    public String needleToString(int index) {
+    public Stack getNeedle(int index) {
         if (index >= NB_NEEDLES || index < 0)
             throw new RuntimeException("Index d'aiguille invalide.");
         
-        return needles[index].toString();
+        return needles[index];
     }
 }
