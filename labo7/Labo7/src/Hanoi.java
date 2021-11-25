@@ -1,6 +1,8 @@
-import hanoi.Hanoi;
 import hanoi.gui.JHanoi;
 
+/**
+ *
+ */
 public class Hanoi {
     /**
      * @param args
@@ -29,7 +31,7 @@ public class Hanoi {
         
         try {
             numberOfDisk = Integer.parseInt(args[0]);
-
+            
         } catch (Exception e) {
             throw new RuntimeException("L'argument doit être un entier positif.");
         }
@@ -38,5 +40,12 @@ public class Hanoi {
             throw new RuntimeException("L'argument doit être un entier positif");
         
         return numberOfDisk;
+    }
+    
+    /**
+     * Teste l'implémentation maison de la Stack
+     */
+    private static void testStack() {
+    
     }
 }
