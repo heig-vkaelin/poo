@@ -3,7 +3,11 @@ import util.Stack;
 import util.StackIterator;
 
 /**
+ * Classe principale du programme, s’occupe de lancer le programme de résolution des
+ * tours d’Hanoi. Elle contient également les tests de l’implémentation de la Stack.
  *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
  */
 public class Hanoi {
     /**

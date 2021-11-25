@@ -3,7 +3,9 @@ package hanoi;
 import util.Stack;
 
 /**
- * Classe contenant toute la logique de la résolution du problème des tours d’Hanoi
+ * Classe contenant toute la logique de la résolution du problème des tours d’Hanoi.
+ * Elle s’occupe notamment de contenir les trois aiguilles ainsi que d’appliquer
+ * l’algorithme récursif.
  *
  * @author Jonathan Friedli
  * @author Valentin Kaelin

@@ -1,8 +1,9 @@
 package util;
 
 /**
- * Classe implémentant une pile de manière générique grâce à l’utilisation de la
- * classe Object
+ * Représentation générique d’une pile grâce à l’utilisation de la classe Object.
+ * Il est possible d’ajouter ou de retirer un élément à la fois ainsi que de la
+ * parcourir. La pile possède également une représentation graphique.
  *
  * @author Jonathan Friedli
  * @author Valentin Kaelin
@@ -10,14 +11,6 @@ package util;
 public class Stack {
     private Element top;
     private int size;
-    
-    /**
-     * On initialise explicitement les attributs pour plus de clarté
-     */
-    public Stack() {
-        top = null;
-        size = 0;
-    }
     
     /**
      * Ajoute un élément au sommet de la pile
