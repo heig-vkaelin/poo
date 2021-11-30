@@ -26,8 +26,13 @@ public class Hanoi {
      *
      * @param disk      le nombre de disques sur l'aiguille
      * @param displayer l'affichage choisi (graphique / console)
+     * @throws RuntimeException en cas de nombre de disques invalide
      */
     public Hanoi(int disk, HanoiDisplayer displayer) {
+        if (disk < 0)
+            throw new RuntimeException("Le nombre de disques ne peut pas être " +
+                    "négatif.");
+        
         nbDisks = disk;
         this.displayer = displayer;
         this.turns = 0;
