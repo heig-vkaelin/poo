@@ -32,7 +32,7 @@ public class Hanoi {
         }
         
         // Enlever le commentaire si l'on souhaite tester la Stack.
-        testStack();
+        // testStack();
     }
     
     /**
