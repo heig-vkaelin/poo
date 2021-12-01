@@ -30,12 +30,11 @@ public class Season {
     }
     
     public Season next() {
-        return seasons[(ordinal + 1) % seasons.length];
+        return seasons[(ordinal + 1) % count];
     }
     
     public Season previous() {
-        int i = (ordinal - 1) % seasons.length;
-        return seasons[i < 0 ? seasons.length - 1 : i];
+        return seasons[(ordinal + count - 1) % count];
     }
     
     public int ordinal() {
@@ -58,7 +57,7 @@ public class Season {
         
         Season[] rangeSeasons = new Season[size];
         for (int i = 0; i < size; i++)
-            rangeSeasons[i] = seasons[(first.ordinal + i) % seasons.length];
+            rangeSeasons[i] = seasons[(first.ordinal + i) % count];
         return rangeSeasons;
     }
 }
