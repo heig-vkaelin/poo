@@ -15,13 +15,20 @@ public class GameManager implements ChessController {
     public void start(ChessView view) {
         this.view = view;
         view.startView();
-//        view.putPiece(PieceType.PAWN, PlayerColor.WHITE, 4, 4);
         newGame();
     }
     
     @Override
     public boolean move(int fromX, int fromY, int toX, int toY) {
-        return false;
+        Piece piece = board.getPiece(fromX, fromY);
+        Cell cell = new Cell(toX, toY);
+        piece.setCell(cell);
+        board.removePiece(toX, toY);
+        
+        view.removePiece(toX, toY);
+        view.removePiece(fromX, fromY);
+        view.putPiece(piece.getType(), piece.getColor(), cell.getX(), cell.getY());
+        return true;
     }
     
     @Override

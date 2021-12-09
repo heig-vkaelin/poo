@@ -15,10 +15,6 @@ public class Board {
         setStartingPositions();
     }
     
-    public Piece getPiece(int x, int y) {
-        return pieces[x][y];
-    }
-    
     private void setStartingPositions() {
         pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
         
@@ -55,5 +51,13 @@ public class Board {
             pieces[i][6] = new Pawn(PieceType.PAWN, new Cell(i, 6),
                     PlayerColor.BLACK);
         }
+    }
+    
+    public Piece getPiece(int x, int y) {
+        return pieces[x][y];
+    }
+    
+    public void removePiece(int x, int y) {
+        pieces[x][y] = null;
     }
 }
