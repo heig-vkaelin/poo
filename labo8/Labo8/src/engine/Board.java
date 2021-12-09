@@ -1,0 +1,59 @@
+package engine;
+
+import chess.PieceType;
+import chess.PlayerColor;
+import engine.pieces.*;
+import engine.utils.Cell;
+
+public class Board {
+    public static final int BOARD_SIZE = 8;
+    private int turn;
+    private Piece[][] pieces;
+    
+    public Board() {
+        turn = 0;
+        setStartingPositions();
+    }
+    
+    public Piece getPiece(int x, int y) {
+        return pieces[x][y];
+    }
+    
+    private void setStartingPositions() {
+        pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
+        
+        // Queens
+        pieces[3][0] = new Queen(PieceType.QUEEN, new Cell(3, 0), PlayerColor.WHITE);
+        pieces[3][7] = new Queen(PieceType.QUEEN, new Cell(3, 7), PlayerColor.BLACK);
+        
+        // Kings
+        pieces[4][0] = new King(PieceType.KING, new Cell(4, 0), PlayerColor.WHITE);
+        pieces[4][7] = new King(PieceType.KING, new Cell(4, 7), PlayerColor.BLACK);
+        
+        // Toutes les autres pièces spéciales
+        for (int i = 0; i < 2; i++) {
+            pieces[i * 7][0] = new Rook(PieceType.ROOK, new Cell(i * 7, 0),
+                    PlayerColor.WHITE);
+            pieces[i * 7][7] = new Rook(PieceType.ROOK, new Cell(i * 7, 7),
+                    PlayerColor.BLACK);
+            
+            pieces[1 + i * 5][0] = new Knight(PieceType.KNIGHT, new Cell(1 + i * 5, 0),
+                    PlayerColor.WHITE);
+            pieces[1 + i * 5][7] = new Knight(PieceType.KNIGHT, new Cell(1 + i * 5, 7),
+                    PlayerColor.BLACK);
+            
+            pieces[2 + i * 3][0] = new Bishop(PieceType.BISHOP, new Cell(2 + i * 3, 0),
+                    PlayerColor.WHITE);
+            pieces[2 + i * 3][7] = new Bishop(PieceType.BISHOP, new Cell(2 + i * 3, 7),
+                    PlayerColor.BLACK);
+        }
+        
+        // Pawns
+        for (int i = 0; i < 8; i++) {
+            pieces[i][1] = new Pawn(PieceType.PAWN, new Cell(i, 1),
+                    PlayerColor.WHITE);
+            pieces[i][6] = new Pawn(PieceType.PAWN, new Cell(i, 6),
+                    PlayerColor.BLACK);
+        }
+    }
+}
