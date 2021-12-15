@@ -1,6 +1,7 @@
 import ExChat.*;
 import ExClassArray.*;
 import ExObjectList.*;
+import ExPoulailler.*;
 import ExSeasonEnum.Season;
 
 public class Main {
@@ -9,7 +10,8 @@ public class Main {
 //        exClassArray();
 //        exObjectList();
 //        exChat();
-        exSeasonEnum();
+//        exSeasonEnum();
+        exPoulailler();
     }
     
     public static void exClassArray() {
@@ -124,5 +126,14 @@ public class Main {
         for (Season s : range4) {
             System.out.println(s);
         }
+    }
+    
+    public static void exPoulailler() {
+        Poulailler p = new Poulailler();
+    
+        p.ajouter(new Poule("Cocotte"));
+        p.ajouter(new Poule("Rosette"));
+        for (int i = 0; i < 10; i++)
+            p.tourSuivant();
     }
 }
