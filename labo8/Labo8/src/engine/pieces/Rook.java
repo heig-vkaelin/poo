@@ -5,7 +5,12 @@ import chess.PlayerColor;
 import engine.utils.Cell;
 
 public class Rook extends FirstMoveSpecificPiece {
-    public Rook(PieceType type, Cell cell, PlayerColor color) {
-        super(type, cell, color);
+    public Rook(Cell cell, PlayerColor color) {
+        super(cell, color);
+    }
+    
+    @Override
+    public PieceType getType() {
+        return PieceType.ROOK;
     }
 }

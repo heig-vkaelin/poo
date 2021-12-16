@@ -5,7 +5,12 @@ import chess.PlayerColor;
 import engine.utils.Cell;
 
 public class Knight extends Piece {
-    public Knight(PieceType type, Cell cell, PlayerColor color) {
-        super(type, cell, color);
+    public Knight(Cell cell, PlayerColor color) {
+        super(cell, color);
+    }
+    
+    @Override
+    public PieceType getType() {
+        return PieceType.KNIGHT;
     }
 }

@@ -5,7 +5,7 @@ import chess.PlayerColor;
 import engine.utils.Cell;
 
 public abstract class FirstMoveSpecificPiece extends Piece {
-    public FirstMoveSpecificPiece(PieceType type, Cell cell, PlayerColor color) {
-        super(type, cell, color);
+    public FirstMoveSpecificPiece(Cell cell, PlayerColor color) {
+        super(cell, color);
     }
 }
