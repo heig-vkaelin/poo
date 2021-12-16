@@ -4,6 +4,8 @@ import chess.PlayerColor;
 import engine.pieces.*;
 import engine.utils.Cell;
 
+import javax.swing.*;
+
 public class Board {
     public static final int BOARD_SIZE = 8;
     private int turn;
@@ -16,7 +18,17 @@ public class Board {
     
     private void setStartingPositions() {
         pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
-        
+        PlayerColor color = PlayerColor.WHITE;
+        for (int i = 0; i < 8;){
+            for (int j = 0; j < 8; ++j){
+                pieces[j][i] = new Rook(PieceType.ROOK, new Cell(i, 0), color);
+                pieces[j][i] = new Knight(PieceType.KNIGHT, new Cell(i, 0), color);
+                pieces[j][i] = new Bishop(PieceType.BISHOP, new Cell(i, 0), color);
+            }
+            i += 7;
+        }
+
+        /*
         // Queens
         pieces[3][0] = new Queen(new Cell(3, 0), PlayerColor.WHITE);
         pieces[3][7] = new Queen(new Cell(3, 7), PlayerColor.BLACK);
