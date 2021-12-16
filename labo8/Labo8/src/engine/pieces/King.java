@@ -5,7 +5,12 @@ import chess.PlayerColor;
 import engine.utils.Cell;
 
 public class King extends FirstMoveSpecificPiece {
-    public King(PieceType type, Cell cell, PlayerColor color) {
-        super(type, cell, color);
+    public King(Cell cell, PlayerColor color) {
+        super(cell, color);
+    }
+    
+    @Override
+    public PieceType getType() {
+        return PieceType.KING;
     }
 }

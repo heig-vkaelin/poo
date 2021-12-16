@@ -5,7 +5,12 @@ import chess.PlayerColor;
 import engine.utils.Cell;
 
 public class Pawn extends FirstMoveSpecificPiece {
-    public Pawn(PieceType type, Cell cell, PlayerColor color) {
-        super(type, cell, color);
+    public Pawn(Cell cell, PlayerColor color) {
+        super(cell, color);
+    }
+    
+    @Override
+    public PieceType getType() {
+        return PieceType.PAWN;
     }
 }
