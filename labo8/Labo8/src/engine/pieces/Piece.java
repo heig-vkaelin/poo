@@ -2,6 +2,7 @@ package engine.pieces;
 
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.Board;
 import engine.moves.TypeMove;
 import engine.utils.Cell;
 
@@ -28,7 +29,7 @@ public abstract class Piece {
         this.cell = cell;
     }
     
-    protected TypeMove checkMove(Cell nextPos) {
+    public TypeMove checkMove(Board board, Cell nextPos) {
         return TypeMove.VALID;
     }
     
