@@ -2,6 +2,7 @@ import ExChat.*;
 import ExClassArray.*;
 import ExObjectList.*;
 import ExPoulailler.*;
+import ExRace.Race;
 import ExSeasonEnum.Season;
 
 public class Main {
@@ -11,7 +12,8 @@ public class Main {
 //        exObjectList();
 //        exChat();
 //        exSeasonEnum();
-        exPoulailler();
+//        exPoulailler();
+        exRace();
     }
     
     public static void exClassArray() {
@@ -108,19 +110,19 @@ public class Main {
         for (Season s : range1) {
             System.out.println(s);
         }
-    
+        
         System.out.println("Range Summer to Summer: ");
         Season[] range2 = Season.range(Season.summer, Season.summer);
         for (Season s : range2) {
             System.out.println(s);
         }
-    
+        
         System.out.println("Range Spring to Winter: ");
         Season[] range3 = Season.range(Season.spring, Season.winter);
         for (Season s : range3) {
             System.out.println(s);
         }
-    
+        
         System.out.println("Range Winter to Summer: ");
         Season[] range4 = Season.range(Season.winter, Season.summer);
         for (Season s : range4) {
@@ -130,10 +132,14 @@ public class Main {
     
     public static void exPoulailler() {
         Poulailler p = new Poulailler();
-    
+        
         p.ajouter(new Poule("Cocotte"));
         p.ajouter(new Poule("Rosette"));
         for (int i = 0; i < 10; i++)
             p.tourSuivant();
+    }
+    
+    public static void exRace() {
+        Race.main();
     }
 }

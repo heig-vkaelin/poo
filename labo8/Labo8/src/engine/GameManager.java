@@ -22,12 +22,21 @@ public class GameManager implements ChessController {
     public boolean move(int fromX, int fromY, int toX, int toY) {
         Piece piece = board.getPiece(fromX, fromY);
         Cell cell = new Cell(toX, toY);
+        
+        if (piece == null || piece.getColor() != board.currentPlayer()) {
+            return false;
+        }
+        
         piece.setCell(cell);
         board.removePiece(toX, toY);
+        board.setPiece(piece, toX, toY);
         
         view.removePiece(toX, toY);
         view.removePiece(fromX, fromY);
         view.putPiece(piece.getType(), piece.getColor(), cell.getX(), cell.getY());
+        
+        board.postUpdate();
+        
         return true;
     }
     

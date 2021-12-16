@@ -48,7 +48,19 @@ public class Board {
         return pieces[x][y];
     }
     
+    public void setPiece(Piece p, int x, int y) {
+        pieces[x][y] = p;
+    }
+    
     public void removePiece(int x, int y) {
         pieces[x][y] = null;
+    }
+    
+    public void postUpdate() {
+        turn++;
+    }
+    
+    public PlayerColor currentPlayer() {
+        return turn % 2 == 0 ? PlayerColor.WHITE : PlayerColor.BLACK;
     }
 }
