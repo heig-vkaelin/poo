@@ -41,8 +41,7 @@ class JRace extends JPanel implements ActionListener, MouseListener {
         boolean paused;
         
         void move() {
-            if (!paused && position < 100)
-                position += random.nextDouble();
+            if (!paused && position < 100) position += random.nextDouble();
         }
         
         void togglePause() {
@@ -50,9 +49,9 @@ class JRace extends JPanel implements ActionListener, MouseListener {
         }
     }
     
-    private static Color[] colors = {Color.RED, Color.GREEN, Color.BLUE,
-            Color.BLACK, Color.MAGENTA};
+    private static Color[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.MAGENTA};
     private Runner runners[] = new Runner[10];
+    private Runner pausedRunner;
     private Timer timer;
     private RaceListener raceListener;
     private long startTime;
@@ -76,44 +75,43 @@ class JRace extends JPanel implements ActionListener, MouseListener {
         
         for (int i = 0; i < runners.length; i++) {
             runners[i].move();
-            if (runners[i].position >= 100 &&
-                    (winner == null || runners[i].position > winner.position))
+            if (runners[i].position >= 100 && (winner == null || runners[i].position > winner.position))
                 winner = runners[i];
         }
-        if (raceListener != null)
-            if (winner != null) {
-                raceListener.action(
-                        new RaceEvent(System.currentTimeMillis() - startTime, winner.number));
-                timer.stop();
-            } else
-                raceListener.action(
-                        new RaceEvent(System.currentTimeMillis() - startTime));
+        if (raceListener != null) if (winner != null) {
+            raceListener.action(new RaceEvent(System.currentTimeMillis() - startTime, winner.number));
+            timer.stop();
+        } else
+            raceListener.action(new RaceEvent(System.currentTimeMillis() - startTime));
         repaint();
     }
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Click");
-        
-        double ySize = getHeight() / (runners.length * 2 + 1.0);
-        
-        int i = e.getY() / (int) ySize;
-        i /= 2;
-        
-        System.out.println(i);
-
-//        System.out.println(e.getX());
-//        System.out.println(runners[i].position);
-//        if (e.getX() < runners[i].position)
-        runners[i].togglePause();
     }
     
     @Override
     public void mousePressed(MouseEvent e) {
+        int width = getWidth() - 40;
+        double ySize = getHeight() / (runners.length * 2 + 1.0);
+        
+        for (int i = 0; i < runners.length; i++) {
+            if (runners[i] != null) {
+                Rectangle r = new Rectangle(20,
+                        (int) (ySize * (1 + 2 * i)),
+                        Math.min((int) runners[i].position, 100) * width / 100,
+                        (int) ySize);
+                if (r.contains(e.getPoint())) {
+                    pausedRunner = runners[i];
+                    pausedRunner.togglePause();
+                }
+            }
+        }
     }
     
     @Override
     public void mouseReleased(MouseEvent e) {
+        pausedRunner.togglePause();
     }
     
     @Override
@@ -143,10 +141,8 @@ class JRace extends JPanel implements ActionListener, MouseListener {
         
         for (int i = 0; i < runners.length; i++)
             if (runners[i] != null) {
-                g.setColor(colors[i % colors.length]);
-                g.fillRect(20, (int) (ySize * (1 + 2 * i)),
-                        Math.min((int) runners[i].position, 100) * width / 100,
-                        (int) ySize);
+                g.setColor(runners[i].paused ? Color.gray : colors[i % colors.length]);
+                g.fillRect(20, (int) (ySize * (1 + 2 * i)), Math.min((int) runners[i].position, 100) * width / 100, (int) ySize);
             }
         g.setColor(Color.BLACK);
         g.drawLine(20, 0, 20, getHeight());
