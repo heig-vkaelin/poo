@@ -7,7 +7,7 @@ import java.util.Random;
 
 class RaceEvent {
     private int winner = -1;
-    private long time;
+    private final long time;
     
     public RaceEvent(long time) {
         this.time = time;
@@ -49,8 +49,8 @@ class JRace extends JPanel implements ActionListener, MouseListener {
         }
     }
     
-    private static Color[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.MAGENTA};
-    private Runner runners[] = new Runner[10];
+    private static final Color[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.BLACK, Color.MAGENTA};
+    private final Runner[] runners = new Runner[10];
     private Runner pausedRunner;
     private Timer timer;
     private RaceListener raceListener;
@@ -104,6 +104,7 @@ class JRace extends JPanel implements ActionListener, MouseListener {
                 if (r.contains(e.getPoint())) {
                     pausedRunner = runners[i];
                     pausedRunner.togglePause();
+                    break;
                 }
             }
         }
@@ -111,7 +112,8 @@ class JRace extends JPanel implements ActionListener, MouseListener {
     
     @Override
     public void mouseReleased(MouseEvent e) {
-        pausedRunner.togglePause();
+        if (pausedRunner != null)
+            pausedRunner.togglePause();
     }
     
     @Override
