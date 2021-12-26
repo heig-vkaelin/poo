@@ -74,6 +74,10 @@ public class Board {
             throw new RuntimeException("Coordonnées de la pièce invalides.");
     }
     
+    public int getTurn() {
+        return turn;
+    }
+    
     public Piece getLastPiecePlayed() {
         return lastPiecePlayed;
     }
