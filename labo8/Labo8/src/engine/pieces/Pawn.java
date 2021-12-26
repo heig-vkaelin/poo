@@ -3,7 +3,7 @@ package engine.pieces;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
-import engine.moves.Direction;
+import engine.utils.Direction;
 import engine.moves.OneDirectionMove;
 import engine.moves.TypeMove;
 import engine.utils.Cell;
@@ -25,11 +25,11 @@ public class Pawn extends FirstMoveSpecificPiece {
     }
     
     @Override
-    public TypeMove checkMove(Board board, Cell nextPos) {
-        if (super.checkMove(board, nextPos) == TypeMove.VALID) {
+    public boolean checkMove(Board board, Cell nextPos) {
+        if (super.checkMove(board, nextPos)) {
             if (Math.abs(nextPos.getY() - getCell().getY()) == 2)
                 doubleMoveTurn = board.getTurn();
-            return TypeMove.VALID;
+            return true;
         }
         
         int deltaX = nextPos.getX() - getCell().getX();
@@ -38,18 +38,39 @@ public class Pawn extends FirstMoveSpecificPiece {
         // - Manger en diagonale
         if (Math.abs(deltaX) == 1 && deltaY == direction.intValue()) {
             if (board.getPiece(nextPos) != null)
-                return TypeMove.VALID;
+                return true;
         }
         
         // TODO:
         // - En passant
         if (enPassant(board, new Cell(nextPos.getX(), getCell().getY()))) {
-            return TypeMove.VALID;
+            return true;
         }
         
         // - Promotion
         
-        return TypeMove.INVALID;
+        return false;
+    }
+    
+    @Override
+    public boolean applyMove(Board board, Cell to) {
+        Cell oldCell = getCell();
+        Piece piece = board.getLastPiecePlayed();
+        
+        if (enPassant(board, new Cell(to.getX(), oldCell.getY()))) {
+            board.applyMove(this, to);
+            board.removePiece(piece.getCell());
+            
+            // TODO: check mise en échec: cancel les moves
+            if (false) {
+                board.applyMove(this, oldCell);
+                board.setPiece(piece, piece.getCell());
+                return false;
+            }
+            return true;
+        }
+        
+        return super.applyMove(board, to);
     }
     
     @Override
@@ -65,7 +86,7 @@ public class Pawn extends FirstMoveSpecificPiece {
     public boolean enPassant(Board board, Cell cell) {
         Piece piece = board.getLastPiecePlayed();
         int lastTurn = board.getTurn() - 1;
-        return piece.getClass() == Pawn.class &&
+        return piece != null && piece.getClass() == Pawn.class &&
                 ((Pawn) piece).doubleMoveTurn == lastTurn &&
                 piece.getCell().equals(cell);
     }
