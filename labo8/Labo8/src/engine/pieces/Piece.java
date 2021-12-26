@@ -36,6 +36,15 @@ public abstract class Piece {
     }
     
     public TypeMove checkMove(Board board, Cell nextPos) {
+        // Si ce n'est pas le tour du joueur
+        if (color != board.currentPlayer())
+            return TypeMove.INVALID;
+        
+        // Si la case de destination est occupée par une pièce de même couleur
+        if (board.getPiece(nextPos) != null && board.getPiece(nextPos).getColor() == color) {
+            return TypeMove.INVALID;
+        }
+        
         for (Move move : moves) {
             if (move.canMove(board, cell, nextPos)) {
                 return TypeMove.VALID;

@@ -13,7 +13,7 @@ public class Main {
         
         // 2. Création de la vue en mode GUI ou mode Console
         ChessView view = new GUIView(controller);
-        // ChessView view = new ConsoleView(controller);
+//         ChessView view = new ConsoleView(controller);
         
         // 3. Lancement du programme.
         controller.start(view);

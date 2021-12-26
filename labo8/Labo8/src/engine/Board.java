@@ -1,6 +1,7 @@
 package engine;
 
 import chess.PlayerColor;
+import engine.moves.TypeMove;
 import engine.pieces.*;
 import engine.utils.Cell;
 
@@ -17,8 +18,8 @@ public class Board {
     private void setStartingPositions() {
         pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
         PlayerColor color = PlayerColor.WHITE;
-
-        for(int line = 0; line < 9; line += 7, color = PlayerColor.BLACK){
+        
+        for (int line = 0; line < 9; line += 7, color = PlayerColor.BLACK) {
             // Reine
             pieces[3][line] = new Queen(new Cell(3, line), color);
             // Roi
@@ -30,9 +31,10 @@ public class Board {
                 pieces[2 + i * 3][line] = new Bishop(new Cell(2 + i * 3, line), color);
             }
             // Pions
-            for (int i = 0; i < 8; i++) {
-                pieces[i][(line * 5 / 7) + 1] = new Pawn(new Cell(i, (line * 5 / 7) + 1), color);
-            }
+            // TODO: add back si tu veux les pions
+//            for (int i = 0; i < 8; i++) {
+//                pieces[i][(line * 5 / 7) + 1] = new Pawn(new Cell(i, (line * 5 / 7) + 1), color);
+//            }
         }
         /*// Queens
         pieces[3][0] = new Queen(new Cell(3, 0), PlayerColor.WHITE);
@@ -61,15 +63,33 @@ public class Board {
         }*/
     }
     
+    /**
+     * Vérifie que les coordonnées de la pièce sont valides
+     *
+     * @param x : ligne de la pièce
+     * @param y : colonne de la pièce
+     */
+    public void checkCoordsOnBoard(int x, int y) {
+        if (x >= BOARD_SIZE || x < 0 || y >= BOARD_SIZE || y < 0)
+            throw new RuntimeException("Coordonnées de la pièce invalides.");
+    }
+    
     public Piece getPiece(int x, int y) {
+        checkCoordsOnBoard(x, y);
         return pieces[x][y];
     }
     
+    public Piece getPiece(Cell cell) {
+        return getPiece(cell.getX(), cell.getY());
+    }
+    
     public void setPiece(Piece p, int x, int y) {
+        checkCoordsOnBoard(x, y);
         pieces[x][y] = p;
     }
     
     public void removePiece(int x, int y) {
+        checkCoordsOnBoard(x, y);
         pieces[x][y] = null;
     }
     
@@ -79,5 +99,23 @@ public class Board {
     
     public PlayerColor currentPlayer() {
         return turn % 2 == 0 ? PlayerColor.WHITE : PlayerColor.BLACK;
+    }
+    
+    public TypeMove move(Cell from, Cell to) {
+        Piece p;
+        try {
+            p = getPiece(from);
+            checkCoordsOnBoard(to.getX(), to.getY());
+        } catch (RuntimeException e) {
+            System.out.println("Not valid coords");
+            return TypeMove.INVALID;
+        }
+        
+        if (p == null) {
+            System.out.println("No piece");
+            return TypeMove.INVALID;
+        }
+        
+        return p.checkMove(this, to);
     }
 }
