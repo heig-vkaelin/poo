@@ -1,16 +1,16 @@
 package util;
 
+/**
+ * Représentation générique d’une pile grâce à l’utilisation de la classe Object.
+ * Il est possible d’ajouter ou de retirer un élément à la fois ainsi que de la
+ * parcourir. La pile possède également une représentation graphique.
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Stack {
     private Element top;
     private int size;
-    
-    /**
-     * On initialise explicitement les attributs pour plus de clarté
-     */
-    public Stack() {
-        top = null;
-        size = 0;
-    }
     
     /**
      * Ajoute un élément au sommet de la pile
@@ -50,7 +50,7 @@ public class Stack {
         StackIterator i = iterator();
         int index = 0;
         while (i.hasNext()) {
-            result[index++] = i.next().value;
+            result[index++] = i.next();
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class Stack {
         sb.append("[");
         while (i.hasNext()) {
             sb.append(" <");
-            sb.append(i.next().value);
+            sb.append(i.next());
             sb.append("> ");
         }
         sb.append("]");

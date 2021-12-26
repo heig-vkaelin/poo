@@ -2,8 +2,16 @@ package hanoi;
 
 import util.Stack;
 
+/**
+ * Classe contenant toute la logique de la résolution du problème des tours d’Hanoi.
+ * Elle s’occupe notamment de contenir les trois aiguilles ainsi que d’appliquer
+ * l’algorithme récursif.
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Hanoi {
-    public static final int NB_NEEDLES = 3;
+    private static final int NB_NEEDLES = 3;
     
     private final Stack[] needles;
     private final int nbDisks;
@@ -18,8 +26,13 @@ public class Hanoi {
      *
      * @param disk      le nombre de disques sur l'aiguille
      * @param displayer l'affichage choisi (graphique / console)
+     * @throws RuntimeException en cas de nombre de disques invalide
      */
     public Hanoi(int disk, HanoiDisplayer displayer) {
+        if (disk < 0)
+            throw new RuntimeException("Le nombre de disques ne peut pas être " +
+                    "négatif.");
+        
         nbDisks = disk;
         this.displayer = displayer;
         this.turns = 0;
@@ -122,15 +135,24 @@ public class Hanoi {
     }
     
     /**
-     * Retourne la représentation de l'aiguille voulue
+     * Retourne la représentation sous forme de chaîne de caractères des
+     * états actuels des aiguilles
      *
-     * @param index de l'aiguille
-     * @return la représentation sous forme de chaîne de caractères
+     * @return la représentation de l'état actuel
      */
-    public String needleToString(int index) {
-        if (index >= NB_NEEDLES || index < 0)
-            throw new RuntimeException("Index d'aiguille invalide.");
+    @Override
+    public String toString() {
+        StringBuilder state = new StringBuilder();
+        state.append("-- Turn: ").append(turn()).append("\n");
         
-        return needles[index].toString();
+        for (int i = 0; i < NB_NEEDLES; i++) {
+            state.append(String.format("%-5s", displayer.numberToWord(i)))
+                    .append(" : ")
+                    .append(needles[i]);
+            
+            if (i < NB_NEEDLES - 1)
+                state.append("\n");
+        }
+        return state.toString();
     }
 }
