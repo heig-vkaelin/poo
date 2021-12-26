@@ -51,7 +51,7 @@ public class GameManager implements ChessController {
         view.removePiece(fromX, fromY);
         view.putPiece(piece.getType(), piece.getColor(), to.getX(), to.getY());
         
-        board.postUpdate();
+        board.postUpdate(piece);
         
         // TMP
         view.displayMessage("Aux " + (board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs"));

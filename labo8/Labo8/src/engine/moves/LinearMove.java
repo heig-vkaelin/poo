@@ -1,40 +1,36 @@
 package engine.moves;
 
 import engine.Board;
+import engine.pieces.Piece;
 import engine.utils.Cell;
 
 public class LinearMove extends Move {
-    private final Cell direction;
+    protected final Cell direction;
     private final int maxDistance;
     private final boolean flyOver;
     
-    public LinearMove(Cell direction, int maxDistance, boolean flyOver) {
+    public LinearMove(Piece piece, Cell direction, int maxDistance, boolean flyOver) {
+        super(piece);
         this.direction = direction;
         this.maxDistance = maxDistance;
         this.flyOver = flyOver;
     }
     
-    public LinearMove(Cell direction, int maxDistance) {
-        this(direction, maxDistance, false);
+    public LinearMove(Piece piece, Cell direction, int maxDistance) {
+        this(piece, direction, maxDistance, false);
     }
     
-    public LinearMove(Cell direction) {
-        this(direction, Integer.MAX_VALUE, false);
+    public LinearMove(Piece piece, Cell direction) {
+        this(piece, direction, Integer.MAX_VALUE, false);
     }
     
     private int getDistance(Cell fromTo) {
         int distance = 0;
         
-        if (direction.isCollinear(fromTo))
+        if (direction.reachable(fromTo))
             distance = Math.max(Math.abs(fromTo.getX()), Math.abs(fromTo.getY()));
         
         return distance;
-    }
-    
-    
-    @Override
-    public boolean isValid(Cell from, Cell to) {
-        return from.getX() == to.getX() || from.getY() == to.getY();
     }
     
     @Override
@@ -44,6 +40,7 @@ public class LinearMove extends Move {
         int sign = direction.sameDirection(fromTo) ? 1 : -1;
         
         System.out.println("Distance: " + distance);
+        System.out.println("sign: " + sign);
         
         if (distance == 0 || distance > maxDistance)
             return false;

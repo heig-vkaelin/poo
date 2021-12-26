@@ -52,6 +52,7 @@ public abstract class Piece {
         }
         return TypeMove.INVALID;
     }
-
-//    public abstract void postUpdate();
+    
+    public void postUpdate() {
+    }
 }

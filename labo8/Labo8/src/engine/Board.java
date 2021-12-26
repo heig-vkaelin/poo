@@ -9,6 +9,7 @@ public class Board {
     public static final int BOARD_SIZE = 8;
     private int turn;
     private Piece[][] pieces;
+    private Piece lastPiecePlayed;
     
     public Board() {
         turn = 0;
@@ -31,10 +32,9 @@ public class Board {
                 pieces[2 + i * 3][line] = new Bishop(new Cell(2 + i * 3, line), color);
             }
             // Pions
-            // TODO: add back si tu veux les pions
-//            for (int i = 0; i < 8; i++) {
-//                pieces[i][(line * 5 / 7) + 1] = new Pawn(new Cell(i, (line * 5 / 7) + 1), color);
-//            }
+            for (int i = 0; i < 8; i++) {
+                pieces[i][(line * 5 / 7) + 1] = new Pawn(new Cell(i, (line * 5 / 7) + 1), color);
+            }
         }
         /*// Queens
         pieces[3][0] = new Queen(new Cell(3, 0), PlayerColor.WHITE);
@@ -74,6 +74,10 @@ public class Board {
             throw new RuntimeException("Coordonnées de la pièce invalides.");
     }
     
+    public Piece getLastPiecePlayed() {
+        return lastPiecePlayed;
+    }
+    
     public Piece getPiece(int x, int y) {
         checkCoordsOnBoard(x, y);
         return pieces[x][y];
@@ -93,8 +97,10 @@ public class Board {
         pieces[x][y] = null;
     }
     
-    public void postUpdate() {
+    public void postUpdate(Piece piece) {
         turn++;
+        lastPiecePlayed = piece;
+        piece.postUpdate();
     }
     
     public PlayerColor currentPlayer() {

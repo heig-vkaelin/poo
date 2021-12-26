@@ -18,4 +18,8 @@ public abstract class FirstMoveSpecificPiece extends Piece {
     public void setMoved() {
         hasMoved = true;
     }
+    
+    public void postUpdate() {
+        setMoved();
+    }
 }

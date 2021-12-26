@@ -1,10 +1,19 @@
 package engine.moves;
 
 import engine.Board;
+import engine.pieces.Piece;
 import engine.utils.Cell;
 
 public abstract class Move {
-    public abstract boolean isValid(Cell from, Cell to);
+    private final Piece piece;
+    
+    public Move(Piece piece) {
+        this.piece = piece;
+    }
     
     public abstract boolean canMove(Board board, Cell from, Cell to);
+    
+    public Piece getPiece() {
+        return piece;
+    }
 }
