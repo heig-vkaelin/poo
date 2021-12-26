@@ -6,34 +6,40 @@ import engine.pieces.*;
 import engine.utils.Cell;
 
 public class Board {
+    public interface PieceListener {
+        void action(Piece piece, Cell cell);
+    }
+    
     public static final int BOARD_SIZE = 8;
     private int turn;
     private Piece[][] pieces;
     private Piece lastPiecePlayed;
     
+    private PieceListener onAddPiece;
+    private PieceListener onRemovePiece;
+    
     public Board() {
         turn = 0;
-        setStartingPositions();
     }
     
-    private void setStartingPositions() {
+    public void fillBoard() {
         pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
         PlayerColor color = PlayerColor.WHITE;
         
         for (int line = 0; line < 9; line += 7, color = PlayerColor.BLACK) {
             // Reine
-            pieces[3][line] = new Queen(new Cell(3, line), color);
+            setPiece(new Queen(new Cell(3, line), color), 3, line);
             // Roi
-            pieces[4][line] = new King(new Cell(4, line), color);
+            setPiece(new King(new Cell(4, line), color), 4, line);
             // Tours, cavaliers et fous
             for (int i = 0; i < 2; i++) {
-                pieces[i * 7][line] = new Rook(new Cell(i * 7, line), color);
-                pieces[1 + i * 5][line] = new Knight(new Cell(1 + i * 5, line), color);
-                pieces[2 + i * 3][line] = new Bishop(new Cell(2 + i * 3, line), color);
+                setPiece(new Rook(new Cell(i * 7, line), color), i * 7, line);
+                setPiece(new Knight(new Cell(1 + i * 5, line), color), 1 + i * 5, line);
+                setPiece(new Bishop(new Cell(2 + i * 3, line), color), 2 + i * 3, line);
             }
             // Pions
             for (int i = 0; i < 8; i++) {
-                pieces[i][(line * 5 / 7) + 1] = new Pawn(new Cell(i, (line * 5 / 7) + 1), color);
+                setPiece(new Pawn(new Cell(i, (line * 5 / 7) + 1), color), i, (line * 5 / 7) + 1);
             }
         }
         /*// Queens
@@ -94,11 +100,24 @@ public class Board {
     public void setPiece(Piece p, int x, int y) {
         checkCoordsOnBoard(x, y);
         pieces[x][y] = p;
+        if (onAddPiece != null)
+            onAddPiece.action(p, new Cell(x, y));
+    }
+    
+    public void setPiece(Piece p, Cell cell) {
+        p.setCell(cell);
+        setPiece(p, cell.getX(), cell.getY());
     }
     
     public void removePiece(int x, int y) {
         checkCoordsOnBoard(x, y);
         pieces[x][y] = null;
+        if (onRemovePiece != null)
+            onRemovePiece.action(null, new Cell(x, y));
+    }
+    
+    public void removePiece(Cell cell) {
+        removePiece(cell.getX(), cell.getY());
     }
     
     public void postUpdate(Piece piece) {
@@ -126,6 +145,30 @@ public class Board {
             return TypeMove.INVALID;
         }
         
-        return p.checkMove(this, to);
+        // Si ce n'est pas le tour du joueur
+        if (p.getColor() != currentPlayer())
+            return TypeMove.INVALID;
+        
+        if (p.checkMove(this, to) && p.applyMove(this, to)) {
+            postUpdate(p);
+            return TypeMove.VALID;
+        }
+        
+        System.out.println("Last invalid");
+        return TypeMove.INVALID;
+    }
+    
+    public void applyMove(Piece p, Cell cell) {
+        removePiece(p.getCell());
+        removePiece(cell);
+        setPiece(p, cell);
+    }
+    
+    public void setAddPieceListener(PieceListener onAddPiece) {
+        this.onAddPiece = onAddPiece;
+    }
+    
+    public void setRemovePieceListener(PieceListener onRemovePiece) {
+        this.onRemovePiece = onRemovePiece;
     }
 }

@@ -3,6 +3,7 @@ package engine.moves;
 import engine.Board;
 import engine.pieces.FirstMoveSpecificPiece;
 import engine.utils.Cell;
+import engine.utils.Direction;
 
 public class OneDirectionMove extends Move {
     private final int maxDistance;
@@ -22,7 +23,8 @@ public class OneDirectionMove extends Move {
     
     @Override
     public boolean canMove(Board board, Cell from, Cell to) {
-        if (oneTimeMove && ((FirstMoveSpecificPiece) getPiece()).hasMoved())
+        if (oneTimeMove && (!(getPiece() instanceof FirstMoveSpecificPiece) ||
+                ((FirstMoveSpecificPiece) getPiece()).hasMoved()))
             return false;
         
         Cell calculatedTo = from.add(boundToDirection.getValue().multiply(maxDistance));

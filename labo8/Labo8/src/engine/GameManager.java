@@ -30,28 +30,7 @@ public class GameManager implements ChessController {
         }
         
         System.out.println("Move OK");
-        
         System.out.println("-----------------------------------------");
-        
-        // Déplace la pièce
-        Piece piece = board.getPiece(from);
-        piece.setCell(to);
-        
-        // Vérifie que le roi du joueur n'est pas en échec à cause du dernier coup
-//        if (todo) {
-//         Cancel le move
-//        return false;
-//        }
-        
-        board.removePiece(toX, toY);
-        board.removePiece(fromX, fromY);
-        board.setPiece(piece, toX, toY);
-        
-        view.removePiece(toX, toY);
-        view.removePiece(fromX, fromY);
-        view.putPiece(piece.getType(), piece.getColor(), to.getX(), to.getY());
-        
-        board.postUpdate(piece);
         
         // TMP
         view.displayMessage("Aux " + (board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs"));
@@ -63,15 +42,17 @@ public class GameManager implements ChessController {
     public void newGame() {
         board = new Board();
         
-        // Afficher toutes les pièces
-        for (int i = 0; i < Board.BOARD_SIZE; ++i) {
-            for (int j = 0; j < Board.BOARD_SIZE; ++j) {
-                Piece piece = board.getPiece(i, j);
-                if (piece == null)
-                    continue;
-                Cell cell = piece.getCell();
+        // Events listeners
+        board.setAddPieceListener((piece, cell) -> {
+            if (view != null)
                 view.putPiece(piece.getType(), piece.getColor(), cell.getX(), cell.getY());
-            }
-        }
+        });
+        
+        board.setRemovePieceListener((piece, cell) -> {
+            if (view != null)
+                view.removePiece(cell.getX(), cell.getY());
+        });
+        
+        board.fillBoard();
     }
 }

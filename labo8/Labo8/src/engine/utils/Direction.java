@@ -1,6 +1,4 @@
-package engine.moves;
-
-import engine.utils.Cell;
+package engine.utils;
 
 public enum Direction {
     UP(0, 1), DOWN(0, -1);

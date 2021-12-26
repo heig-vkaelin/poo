@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
-    private PlayerColor color;
+    private final PlayerColor color;
     private Cell cell;
     protected List<Move> moves;
     
@@ -35,22 +35,35 @@ public abstract class Piece {
         this.cell = cell;
     }
     
-    public TypeMove checkMove(Board board, Cell nextPos) {
-        // Si ce n'est pas le tour du joueur
-        if (color != board.currentPlayer())
-            return TypeMove.INVALID;
-        
+    public boolean checkMove(Board board, Cell nextPos) {
         // Si la case de destination est occupée par une pièce de même couleur
         if (board.getPiece(nextPos) != null && board.getPiece(nextPos).getColor() == color) {
-            return TypeMove.INVALID;
+            return false;
         }
         
         for (Move move : moves) {
-            if (move.canMove(board, cell, nextPos)) {
-                return TypeMove.VALID;
-            }
+            if (move.canMove(board, cell, nextPos))
+                return true;
         }
-        return TypeMove.INVALID;
+        
+        return false;
+    }
+    
+    public boolean applyMove(Board board, Cell to) {
+        Cell oldCell = getCell();
+        Piece eaten = board.getPiece(to);
+        
+        board.applyMove(this, to);
+        
+        // TODO: check mise en échec: cancel le move
+        if (false) {
+            board.applyMove(this, oldCell);
+            if (eaten != null)
+                board.setPiece(eaten, to);
+            return false;
+        }
+        
+        return true;
     }
     
     public void postUpdate() {
