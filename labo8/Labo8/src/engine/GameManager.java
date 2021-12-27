@@ -3,8 +3,7 @@ package engine;
 import chess.ChessController;
 import chess.ChessView;
 import chess.PlayerColor;
-import engine.moves.TypeMove;
-import engine.pieces.Piece;
+import engine.pieces.*;
 import engine.utils.Cell;
 
 public class GameManager implements ChessController {
@@ -50,6 +49,24 @@ public class GameManager implements ChessController {
         board.setRemovePieceListener((piece, cell) -> {
             if (view != null)
                 view.removePiece(cell.getX(), cell.getY());
+        });
+        
+        board.setPromotionListener((piece) -> {
+            Cell cell = piece.getCell();
+            PlayerColor color = piece.getColor();
+            Piece[] choices = {
+                    new Queen(cell, color),
+                    new Knight(cell, color),
+                    new Rook(cell, color),
+                    new Bishop(cell, color)
+            };
+            
+            Piece userChoice;
+            while ((userChoice = this.view.askUser("Promotion",
+                    "Choisir une pièce pour la promotion", choices)) == null) {
+            }
+            board.removePiece(cell);
+            board.setPiece(userChoice, cell);
         });
         
         board.fillBoard();

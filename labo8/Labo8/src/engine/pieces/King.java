@@ -18,4 +18,9 @@ public class King extends FirstMoveSpecificPiece {
     public PieceType getType() {
         return PieceType.KING;
     }
+    
+    @Override
+    public String textValue() {
+        return "Roi";
+    }
 }

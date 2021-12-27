@@ -1,5 +1,6 @@
 package engine.pieces;
 
+import chess.ChessView;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
@@ -10,7 +11,7 @@ import engine.utils.Cell;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Piece {
+public abstract class Piece implements ChessView.UserChoice {
     private final PlayerColor color;
     private Cell cell;
     protected List<Move> moves;
@@ -23,8 +24,15 @@ public abstract class Piece {
     
     public abstract PieceType getType();
     
+    public abstract String textValue();
+    
     public PlayerColor getColor() {
         return color;
+    }
+    
+    @Override
+    public String toString() {
+        return textValue();
     }
     
     public Cell getCell() {

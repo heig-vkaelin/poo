@@ -16,4 +16,9 @@ public class Rook extends FirstMoveSpecificPiece {
     public PieceType getType() {
         return PieceType.ROOK;
     }
+    
+    @Override
+    public String textValue() {
+        return "Tour";
+    }
 }

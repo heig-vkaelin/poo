@@ -18,4 +18,9 @@ public class Queen extends Piece {
     public PieceType getType() {
         return PieceType.QUEEN;
     }
+    
+    @Override
+    public String textValue() {
+        return "Reine";
+    }
 }

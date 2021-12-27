@@ -25,6 +25,11 @@ public class Pawn extends FirstMoveSpecificPiece {
     }
     
     @Override
+    public String textValue() {
+        return "Pion";
+    }
+    
+    @Override
     public boolean checkMove(Board board, Cell nextPos) {
         if (super.checkMove(board, nextPos)) {
             if (Math.abs(nextPos.getY() - getCell().getY()) == 2)

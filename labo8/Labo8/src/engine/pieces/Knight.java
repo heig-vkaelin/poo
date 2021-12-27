@@ -18,4 +18,9 @@ public class Knight extends Piece {
     public PieceType getType() {
         return PieceType.KNIGHT;
     }
+    
+    @Override
+    public String textValue() {
+        return "Cavalier";
+    }
 }

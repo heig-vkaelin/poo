@@ -10,6 +10,10 @@ public class Board {
         void action(Piece piece, Cell cell);
     }
     
+    public interface PromotionListener {
+        void action(Piece piece);
+    }
+    
     public static final int BOARD_SIZE = 8;
     private int turn;
     private Piece[][] pieces;
@@ -17,6 +21,7 @@ public class Board {
     
     private PieceListener onAddPiece;
     private PieceListener onRemovePiece;
+    private PromotionListener onPromotion;
     
     public Board() {
         turn = 0;
@@ -112,9 +117,17 @@ public class Board {
     }
     
     public void postUpdate(Piece piece) {
-        turn++;
         lastPiecePlayed = piece;
         piece.postUpdate();
+        
+        // TODO: move it to piece once Board is available everywhere
+        if (piece instanceof Pawn) {
+            Pawn pawn = (Pawn) piece;
+            if (pawn.canBePromoted()) {
+                this.onPromotion.action(piece);
+            }
+        }
+        turn++;
     }
     
     public PlayerColor currentPlayer() {
@@ -161,5 +174,9 @@ public class Board {
     
     public void setRemovePieceListener(PieceListener onRemovePiece) {
         this.onRemovePiece = onRemovePiece;
+    }
+    
+    public void setPromotionListener(PromotionListener onPromotion) {
+        this.onPromotion = onPromotion;
     }
 }

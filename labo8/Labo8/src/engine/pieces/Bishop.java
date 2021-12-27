@@ -16,4 +16,9 @@ public class Bishop extends Piece {
     public PieceType getType() {
         return PieceType.BISHOP;
     }
+    
+    @Override
+    public String textValue() {
+        return "Fou";
+    }
 }
