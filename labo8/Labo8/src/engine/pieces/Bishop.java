@@ -2,12 +2,13 @@ package engine.pieces;
 
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.Board;
 import engine.moves.LinearMove;
 import engine.utils.Cell;
 
 public class Bishop extends Piece {
-    public Bishop(Cell cell, PlayerColor color) {
-        super(cell, color);
+    public Bishop(Board board, Cell cell, PlayerColor color) {
+        super(board, cell, color);
         moves.add(new LinearMove(this, new Cell(1, 1)));
         moves.add(new LinearMove(this, new Cell(1, -1)));
     }

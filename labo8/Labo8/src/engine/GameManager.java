@@ -55,10 +55,10 @@ public class GameManager implements ChessController {
             Cell cell = piece.getCell();
             PlayerColor color = piece.getColor();
             Piece[] choices = {
-                    new Queen(cell, color),
-                    new Knight(cell, color),
-                    new Rook(cell, color),
-                    new Bishop(cell, color)
+                    new Queen(board, cell, color),
+                    new Knight(board, cell, color),
+                    new Rook(board, cell, color),
+                    new Bishop(board, cell, color)
             };
             
             Piece userChoice;

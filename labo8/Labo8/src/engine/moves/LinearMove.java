@@ -34,7 +34,7 @@ public class LinearMove extends Move {
     }
     
     @Override
-    public boolean canMove(Board board, Cell from, Cell to) {
+    public boolean canMove(Cell from, Cell to) {
         Cell fromTo = to.subtract(from);
         int distance = getDistance(fromTo);
         int sign = direction.sameDirection(fromTo) ? 1 : -1;
@@ -49,7 +49,7 @@ public class LinearMove extends Move {
             for (int i = 1; i < distance; ++i) {
                 Cell position = from.add(direction.multiply(i * sign));
                 // Si une case sur le chemin est occupée
-                if (board.getPiece(position) != null) {
+                if (getBoard().getPiece(position) != null) {
                     return false;
                 }
             }

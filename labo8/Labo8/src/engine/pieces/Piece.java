@@ -5,18 +5,19 @@ import chess.PieceType;
 import chess.PlayerColor;
 import engine.Board;
 import engine.moves.Move;
-import engine.moves.TypeMove;
 import engine.utils.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece implements ChessView.UserChoice {
+    private final Board board;
     private final PlayerColor color;
     private Cell cell;
     protected List<Move> moves;
     
-    public Piece(Cell cell, PlayerColor color) {
+    public Piece(Board board, Cell cell, PlayerColor color) {
+        this.board = board;
         this.cell = cell;
         this.color = color;
         moves = new ArrayList<>();
@@ -25,6 +26,10 @@ public abstract class Piece implements ChessView.UserChoice {
     public abstract PieceType getType();
     
     public abstract String textValue();
+    
+    public Board getBoard() {
+        return board;
+    }
     
     public PlayerColor getColor() {
         return color;
@@ -43,21 +48,21 @@ public abstract class Piece implements ChessView.UserChoice {
         this.cell = cell;
     }
     
-    public boolean checkMove(Board board, Cell nextPos) {
+    public boolean checkMove(Cell nextPos) {
         // Si la case de destination est occupée par une pièce de même couleur
         if (board.getPiece(nextPos) != null && board.getPiece(nextPos).getColor() == color) {
             return false;
         }
         
         for (Move move : moves) {
-            if (move.canMove(board, cell, nextPos))
+            if (move.canMove(cell, nextPos))
                 return true;
         }
         
         return false;
     }
     
-    public boolean applyMove(Board board, Cell to) {
+    public boolean applyMove(Cell to) {
         Cell oldCell = getCell();
         Piece eaten = board.getPiece(to);
         

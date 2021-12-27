@@ -22,14 +22,14 @@ public class OneDirectionMove extends Move {
     }
     
     @Override
-    public boolean canMove(Board board, Cell from, Cell to) {
+    public boolean canMove(Cell from, Cell to) {
         if (oneTimeMove && (!(getPiece() instanceof FirstMoveSpecificPiece) ||
                 ((FirstMoveSpecificPiece) getPiece()).hasMoved()))
             return false;
         
         Cell calculatedTo = from.add(boundToDirection.getValue().multiply(maxDistance));
         
-        return board.getPiece(to) == null &&
+        return getBoard().getPiece(to) == null &&
                 to.equals(calculatedTo);
     }
 }

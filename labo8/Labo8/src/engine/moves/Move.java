@@ -11,9 +11,13 @@ public abstract class Move {
         this.piece = piece;
     }
     
-    public abstract boolean canMove(Board board, Cell from, Cell to);
+    public abstract boolean canMove(Cell from, Cell to);
     
     public Piece getPiece() {
         return piece;
+    }
+    
+    public Board getBoard() {
+        return piece.getBoard();
     }
 }

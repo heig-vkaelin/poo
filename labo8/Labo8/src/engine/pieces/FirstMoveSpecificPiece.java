@@ -1,13 +1,14 @@
 package engine.pieces;
 
 import chess.PlayerColor;
+import engine.Board;
 import engine.utils.Cell;
 
 public abstract class FirstMoveSpecificPiece extends Piece {
     private boolean hasMoved;
     
-    public FirstMoveSpecificPiece(Cell cell, PlayerColor color) {
-        super(cell, color);
+    public FirstMoveSpecificPiece(Board board, Cell cell, PlayerColor color) {
+        super(board, cell, color);
         hasMoved = false;
     }
     

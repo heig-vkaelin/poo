@@ -33,18 +33,18 @@ public class Board {
         
         for (int line = 0; line < 9; line += 7, color = PlayerColor.BLACK) {
             // Reine
-            addPiece(new Queen(new Cell(3, line), color));
+            addPiece(new Queen(this, new Cell(3, line), color));
             // Roi
-            addPiece(new King(new Cell(4, line), color));
+            addPiece(new King(this, new Cell(4, line), color));
             // Tours, cavaliers et fous
             for (int i = 0; i < 2; i++) {
-                addPiece(new Rook(new Cell(i * 7, line), color));
-                addPiece(new Knight(new Cell(1 + i * 5, line), color));
-                addPiece(new Bishop(new Cell(2 + i * 3, line), color));
+                addPiece(new Rook(this, new Cell(i * 7, line), color));
+                addPiece(new Knight(this, new Cell(1 + i * 5, line), color));
+                addPiece(new Bishop(this, new Cell(2 + i * 3, line), color));
             }
             // Pions
             for (int i = 0; i < 8; i++) {
-                addPiece(new Pawn(new Cell(i, (line * 5 / 7) + 1), color));
+                addPiece(new Pawn(this, new Cell(i, (line * 5 / 7) + 1), color));
             }
         }
         /*// Queens
@@ -119,14 +119,6 @@ public class Board {
     public void postUpdate(Piece piece) {
         lastPiecePlayed = piece;
         piece.postUpdate();
-        
-        // TODO: move it to piece once Board is available everywhere
-        if (piece instanceof Pawn) {
-            Pawn pawn = (Pawn) piece;
-            if (pawn.canBePromoted()) {
-                this.onPromotion.action(piece);
-            }
-        }
         turn++;
     }
     
@@ -153,7 +145,7 @@ public class Board {
         if (p.getColor() != currentPlayer())
             return false;
         
-        if (p.checkMove(this, to) && p.applyMove(this, to)) {
+        if (p.checkMove(to) && p.applyMove(to)) {
             postUpdate(p);
             return true;
         }
@@ -178,5 +170,9 @@ public class Board {
     
     public void setPromotionListener(PromotionListener onPromotion) {
         this.onPromotion = onPromotion;
+    }
+    
+    public PromotionListener getOnPromotion() {
+        return onPromotion;
     }
 }
