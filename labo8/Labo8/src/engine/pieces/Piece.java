@@ -68,8 +68,8 @@ public abstract class Piece implements ChessView.UserChoice {
         
         board.applyMove(this, to);
         
-        // TODO: check mise en échec: cancel le move
-        if (false) {
+        // En échec : on annule le move
+        if (board.isCheck(color)) {
             board.applyMove(this, oldCell);
             if (eaten != null)
                 board.setPiece(eaten, to);

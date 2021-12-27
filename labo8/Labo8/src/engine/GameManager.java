@@ -10,6 +10,18 @@ public class GameManager implements ChessController {
     private ChessView view;
     private Board board;
     
+    private void updateDisplayMessage() {
+        if (view == null || board == null)
+            return;
+        
+        StringBuilder msg = new StringBuilder(
+                "Aux " + (board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs")
+        );
+        if (board.isCheck(board.currentPlayer()))
+            msg.append(" CHECK!");
+        view.displayMessage(msg.toString());
+    }
+    
     @Override
     public void start(ChessView view) {
         this.view = view;
@@ -19,19 +31,22 @@ public class GameManager implements ChessController {
     
     @Override
     public boolean move(int fromX, int fromY, int toX, int toY) {
+        if (board == null)
+            return false;
+        
         Cell from = new Cell(fromX, fromY);
         Cell to = new Cell(toX, toY);
         
         if (!board.move(from, to)) {
             System.out.println("Move invalide");
+            updateDisplayMessage();
             return false;
         }
         
         System.out.println("Move OK");
         System.out.println("-----------------------------------------");
         
-        // TMP
-        view.displayMessage("Aux " + (board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs"));
+        updateDisplayMessage();
         
         return true;
     }
@@ -62,13 +77,14 @@ public class GameManager implements ChessController {
             };
             
             Piece userChoice;
-            while ((userChoice = this.view.askUser("Promotion",
+            while ((userChoice = view.askUser("Promotion",
                     "Choisir une pièce pour la promotion", choices)) == null) {
             }
             board.removePiece(cell);
             board.setPiece(userChoice, cell);
         });
         
+        // Setup initial
         board.fillBoard();
     }
 }

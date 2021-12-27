@@ -58,8 +58,8 @@ public class Pawn extends FirstMoveSpecificPiece {
             getBoard().applyMove(this, to);
             getBoard().removePiece(piece.getCell());
             
-            // TODO: check mise en échec: cancel les moves
-            if (false) {
+            // En échec : on annule les moves
+            if (getBoard().isCheck(getColor())) {
                 getBoard().applyMove(this, oldCell);
                 getBoard().setPiece(piece, piece.getCell());
                 return false;
@@ -87,7 +87,7 @@ public class Pawn extends FirstMoveSpecificPiece {
     public boolean enPassant(Cell cell) {
         Piece piece = getBoard().getLastPiecePlayed();
         int lastTurn = getBoard().getTurn() - 1;
-        return piece != null && piece.getClass() == Pawn.class &&
+        return piece != null && piece != this && piece.getClass() == Pawn.class &&
                 ((Pawn) piece).doubleMoveTurn == lastTurn &&
                 piece.getCell().equals(cell);
     }

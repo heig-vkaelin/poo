@@ -1,9 +1,11 @@
 package engine;
 
 import chess.PlayerColor;
-import engine.moves.TypeMove;
 import engine.pieces.*;
 import engine.utils.Cell;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
     public interface PieceListener {
@@ -16,7 +18,8 @@ public class Board {
     
     public static final int BOARD_SIZE = 8;
     private int turn;
-    private Piece[][] pieces;
+    private final Piece[][] pieces;
+    private final List<King> kings;
     private Piece lastPiecePlayed;
     
     private PieceListener onAddPiece;
@@ -25,10 +28,11 @@ public class Board {
     
     public Board() {
         turn = 0;
+        pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
+        kings = new ArrayList<>();
     }
     
     public void fillBoard() {
-        pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
         PlayerColor color = PlayerColor.WHITE;
         
         for (int line = 0; line < 9; line += 7, color = PlayerColor.BLACK) {
@@ -101,6 +105,10 @@ public class Board {
         checkCoordsOnBoard(cell);
         pieces[cell.getX()][cell.getY()] = p;
         p.setCell(cell);
+        
+        if (p instanceof King)
+            kings.add((King) p);
+        
         if (onAddPiece != null)
             onAddPiece.action(p, cell);
     }
@@ -111,9 +119,17 @@ public class Board {
     
     public void removePiece(Cell cell) {
         checkCoordsOnBoard(cell);
+        
+        Piece piece = pieces[cell.getX()][cell.getY()];
         pieces[cell.getX()][cell.getY()] = null;
-        if (onRemovePiece != null)
-            onRemovePiece.action(null, cell);
+        
+        if (piece != null) {
+            if (piece instanceof King)
+                kings.remove((King) piece);
+            
+            if (onRemovePiece != null)
+                onRemovePiece.action(piece, cell);
+        }
     }
     
     public void postUpdate(Piece piece) {
@@ -132,18 +148,12 @@ public class Board {
             p = getPiece(from);
             checkCoordsOnBoard(to);
         } catch (RuntimeException e) {
-            System.out.println("Not valid coords");
             return false;
         }
         
-        if (p == null) {
-            System.out.println("No piece");
+        if (p == null || p.getColor() != currentPlayer()) {
             return false;
         }
-        
-        // Si ce n'est pas le tour du joueur
-        if (p.getColor() != currentPlayer())
-            return false;
         
         if (p.checkMove(to) && p.applyMove(to)) {
             postUpdate(p);
@@ -154,10 +164,27 @@ public class Board {
         return false;
     }
     
-    public void applyMove(Piece p, Cell cell) {
+    public void applyMove(Piece p, Cell to) {
         removePiece(p.getCell());
-        removePiece(cell);
-        setPiece(p, cell);
+        removePiece(to);
+        setPiece(p, to);
+    }
+    
+    private boolean isAttacked(PlayerColor color, Cell cell) {
+        for (Piece[] row : pieces)
+            for (Piece piece : row)
+                if (piece != null && piece.getColor() != color && piece.checkMove(cell))
+                    return true;
+        
+        return false;
+    }
+    
+    public boolean isCheck(PlayerColor color) {
+        King king = kings.stream().filter(k -> k.getColor() == color).findAny().orElse(null);
+        if (king == null)
+            return false;
+        
+        return isAttacked(color, king.getCell());
     }
     
     public void setAddPieceListener(PieceListener onAddPiece) {
