@@ -23,8 +23,7 @@ public class GameManager implements ChessController {
         Cell from = new Cell(fromX, fromY);
         Cell to = new Cell(toX, toY);
         
-        TypeMove move = board.move(from, to);
-        if (move == TypeMove.INVALID) {
+        if (!board.move(from, to)) {
             System.out.println("Move invalide");
             return false;
         }

@@ -28,18 +28,18 @@ public class Board {
         
         for (int line = 0; line < 9; line += 7, color = PlayerColor.BLACK) {
             // Reine
-            setPiece(new Queen(new Cell(3, line), color), 3, line);
+            addPiece(new Queen(new Cell(3, line), color));
             // Roi
-            setPiece(new King(new Cell(4, line), color), 4, line);
+            addPiece(new King(new Cell(4, line), color));
             // Tours, cavaliers et fous
             for (int i = 0; i < 2; i++) {
-                setPiece(new Rook(new Cell(i * 7, line), color), i * 7, line);
-                setPiece(new Knight(new Cell(1 + i * 5, line), color), 1 + i * 5, line);
-                setPiece(new Bishop(new Cell(2 + i * 3, line), color), 2 + i * 3, line);
+                addPiece(new Rook(new Cell(i * 7, line), color));
+                addPiece(new Knight(new Cell(1 + i * 5, line), color));
+                addPiece(new Bishop(new Cell(2 + i * 3, line), color));
             }
             // Pions
             for (int i = 0; i < 8; i++) {
-                setPiece(new Pawn(new Cell(i, (line * 5 / 7) + 1), color), i, (line * 5 / 7) + 1);
+                addPiece(new Pawn(new Cell(i, (line * 5 / 7) + 1), color));
             }
         }
         /*// Queens
@@ -72,11 +72,10 @@ public class Board {
     /**
      * Vérifie que les coordonnées de la pièce sont valides
      *
-     * @param x : ligne de la pièce
-     * @param y : colonne de la pièce
+     * @param cell : case à vérifier
      */
-    public void checkCoordsOnBoard(int x, int y) {
-        if (x >= BOARD_SIZE || x < 0 || y >= BOARD_SIZE || y < 0)
+    public void checkCoordsOnBoard(Cell cell) {
+        if (cell.getX() >= BOARD_SIZE || cell.getX() < 0 || cell.getY() >= BOARD_SIZE || cell.getY() < 0)
             throw new RuntimeException("Coordonnées de la pièce invalides.");
     }
     
@@ -88,36 +87,28 @@ public class Board {
         return lastPiecePlayed;
     }
     
-    public Piece getPiece(int x, int y) {
-        checkCoordsOnBoard(x, y);
-        return pieces[x][y];
-    }
-    
     public Piece getPiece(Cell cell) {
-        return getPiece(cell.getX(), cell.getY());
-    }
-    
-    public void setPiece(Piece p, int x, int y) {
-        checkCoordsOnBoard(x, y);
-        pieces[x][y] = p;
-        if (onAddPiece != null)
-            onAddPiece.action(p, new Cell(x, y));
+        checkCoordsOnBoard(cell);
+        return pieces[cell.getX()][cell.getY()];
     }
     
     public void setPiece(Piece p, Cell cell) {
+        checkCoordsOnBoard(cell);
+        pieces[cell.getX()][cell.getY()] = p;
         p.setCell(cell);
-        setPiece(p, cell.getX(), cell.getY());
+        if (onAddPiece != null)
+            onAddPiece.action(p, cell);
     }
     
-    public void removePiece(int x, int y) {
-        checkCoordsOnBoard(x, y);
-        pieces[x][y] = null;
-        if (onRemovePiece != null)
-            onRemovePiece.action(null, new Cell(x, y));
+    public void addPiece(Piece p) {
+        setPiece(p, p.getCell());
     }
     
     public void removePiece(Cell cell) {
-        removePiece(cell.getX(), cell.getY());
+        checkCoordsOnBoard(cell);
+        pieces[cell.getX()][cell.getY()] = null;
+        if (onRemovePiece != null)
+            onRemovePiece.action(null, cell);
     }
     
     public void postUpdate(Piece piece) {
@@ -130,32 +121,32 @@ public class Board {
         return turn % 2 == 0 ? PlayerColor.WHITE : PlayerColor.BLACK;
     }
     
-    public TypeMove move(Cell from, Cell to) {
+    public boolean move(Cell from, Cell to) {
         Piece p;
         try {
             p = getPiece(from);
-            checkCoordsOnBoard(to.getX(), to.getY());
+            checkCoordsOnBoard(to);
         } catch (RuntimeException e) {
             System.out.println("Not valid coords");
-            return TypeMove.INVALID;
+            return false;
         }
         
         if (p == null) {
             System.out.println("No piece");
-            return TypeMove.INVALID;
+            return false;
         }
         
         // Si ce n'est pas le tour du joueur
         if (p.getColor() != currentPlayer())
-            return TypeMove.INVALID;
+            return false;
         
         if (p.checkMove(this, to) && p.applyMove(this, to)) {
             postUpdate(p);
-            return TypeMove.VALID;
+            return true;
         }
         
         System.out.println("Last invalid");
-        return TypeMove.INVALID;
+        return false;
     }
     
     public void applyMove(Piece p, Cell cell) {
