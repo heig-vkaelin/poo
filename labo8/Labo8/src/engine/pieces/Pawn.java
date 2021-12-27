@@ -29,24 +29,24 @@ public class Pawn extends FirstMoveSpecificPiece {
     }
     
     @Override
-    public boolean checkMove(Cell nextPos) {
-        if (super.checkMove(nextPos)) {
-            if (Math.abs(nextPos.getY() - getCell().getY()) == 2)
+    public boolean checkMove(Cell to) {
+        if (super.checkMove(to)) {
+            if (Math.abs(to.getY() - getCell().getY()) == 2)
                 doubleMoveTurn = getBoard().getTurn();
             return true;
         }
         
-        int deltaX = nextPos.getX() - getCell().getX();
-        int deltaY = nextPos.getY() - getCell().getY();
+        int deltaX = to.getX() - getCell().getX();
+        int deltaY = to.getY() - getCell().getY();
         
         // Manger en diagonale
         if (Math.abs(deltaX) == 1 && deltaY == direction.intValue()) {
-            if (getBoard().getPiece(nextPos) != null)
+            if (getBoard().getPiece(to) != null)
                 return true;
         }
         
         // En passant
-        return enPassant(new Cell(nextPos.getX(), getCell().getY()));
+        return enPassant(new Cell(to.getX(), getCell().getY()));
     }
     
     @Override

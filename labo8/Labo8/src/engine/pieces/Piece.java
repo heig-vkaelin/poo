@@ -48,14 +48,14 @@ public abstract class Piece implements ChessView.UserChoice {
         this.cell = cell;
     }
     
-    public boolean checkMove(Cell nextPos) {
+    public boolean checkMove(Cell to) {
         // Si la case de destination est occupée par une pièce de même couleur
-        if (board.getPiece(nextPos) != null && board.getPiece(nextPos).getColor() == color) {
+        if (board.getPiece(to) != null && board.getPiece(to).getColor() == color) {
             return false;
         }
         
         for (Move move : moves) {
-            if (move.canMove(cell, nextPos))
+            if (move.canMove(cell, to))
                 return true;
         }
         
