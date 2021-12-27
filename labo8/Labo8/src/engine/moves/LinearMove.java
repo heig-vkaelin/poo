@@ -1,6 +1,5 @@
 package engine.moves;
 
-import engine.Board;
 import engine.pieces.Piece;
 import engine.utils.Cell;
 
@@ -49,9 +48,8 @@ public class LinearMove extends Move {
             for (int i = 1; i < distance; ++i) {
                 Cell position = from.add(direction.multiply(i * sign));
                 // Si une case sur le chemin est occupée
-                if (getBoard().getPiece(position) != null) {
+                if (getBoard().getPiece(position) != null)
                     return false;
-                }
             }
         }
         

@@ -1,6 +1,5 @@
 package engine.moves;
 
-import engine.Board;
 import engine.pieces.FirstMoveSpecificPiece;
 import engine.utils.Cell;
 import engine.utils.Direction;
