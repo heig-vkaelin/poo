@@ -170,7 +170,7 @@ public class Board {
         setPiece(p, to);
     }
     
-    private boolean isAttacked(PlayerColor color, Cell cell) {
+    public boolean isAttacked(PlayerColor color, Cell cell) {
         for (Piece[] row : pieces)
             for (Piece piece : row)
                 if (piece != null && piece.getColor() != color && piece.checkMove(cell))
