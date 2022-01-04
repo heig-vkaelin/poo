@@ -8,6 +8,7 @@ import engine.utils.Direction;
 /**
  * Classe représentant un déplacement réduit à une seule direction.
  * Le déplacement peut potentiellement être à usage unique.
+ * La gestion des collisions est également gérée.
  *
  * @author Jonathan Friedli
  * @author Valentin Kaelin
@@ -56,6 +57,13 @@ public class OneDirectionMove extends Move {
         Cell calculatedTo = from.add(
                 boundToDirection.getValue().multiply(getMaxDistance())
         );
+        
+        for (int i = 1; i < getMaxDistance(); ++i) {
+            Cell position = from.add(boundToDirection.getValue().multiply(i));
+            // Si une case sur le chemin est occupée
+            if (getBoard().getPiece(position) != null)
+                return false;
+        }
         
         return getBoard().getPiece(to) == null && to.equals(calculatedTo);
     }
