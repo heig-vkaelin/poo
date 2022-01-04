@@ -43,8 +43,8 @@ public class Board {
             // Tours, cavaliers et fous
             for (int i = 0; i < 2; i++) {
                 addPiece(new Rook(this, new Cell(i * 7, line), color));
-                addPiece(new Knight(this, new Cell(1 + i * 5, line), color));
-                addPiece(new Bishop(this, new Cell(2 + i * 3, line), color));
+//                addPiece(new Knight(this, new Cell(1 + i * 5, line), color));
+//                addPiece(new Bishop(this, new Cell(2 + i * 3, line), color));
             }
             // Pions
             for (int i = 0; i < 8; i++) {
@@ -84,7 +84,8 @@ public class Board {
      * @param cell : case à vérifier
      */
     public void checkCoordsOnBoard(Cell cell) {
-        if (cell.getX() >= BOARD_SIZE || cell.getX() < 0 || cell.getY() >= BOARD_SIZE || cell.getY() < 0)
+        if (cell.getX() >= BOARD_SIZE || cell.getX() < 0 || cell.getY() >= BOARD_SIZE
+                || cell.getY() < 0)
             throw new RuntimeException("Coordonnées de la pièce invalides.");
     }
     
@@ -180,7 +181,11 @@ public class Board {
     }
     
     public boolean isCheck(PlayerColor color) {
-        King king = kings.stream().filter(k -> k.getColor() == color).findAny().orElse(null);
+        King king = kings.stream()
+                .filter(k -> k.getColor() == color)
+                .findAny()
+                .orElse(null);
+        
         if (king == null)
             return false;
         

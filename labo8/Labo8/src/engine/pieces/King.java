@@ -49,7 +49,8 @@ public class King extends FirstMoveSpecificPiece {
         Piece rook = getBoard().getPiece(rookCell);
         Cell rookDestination = getCell().add(direction);
         
-        if (!(rook instanceof Rook) || ((Rook) rook).hasMoved() || !rook.checkMove(rookDestination))
+        if (!(rook instanceof Rook) || ((Rook) rook).hasMoved() ||
+                !rook.checkMove(rookDestination))
             return false;
         
         for (int i = 0; i < 3; i++) {

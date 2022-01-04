@@ -9,14 +9,16 @@ public class OneDirectionMove extends Move {
     private final Direction boundToDirection;
     private final boolean oneTimeMove;
     
-    public OneDirectionMove(FirstMoveSpecificPiece piece, int maxDistance, Direction boundToDirection, boolean oneTimeMove) {
+    public OneDirectionMove(FirstMoveSpecificPiece piece, int maxDistance,
+                            Direction boundToDirection, boolean oneTimeMove) {
         super(piece);
         this.maxDistance = maxDistance;
         this.boundToDirection = boundToDirection;
         this.oneTimeMove = oneTimeMove;
     }
     
-    public OneDirectionMove(FirstMoveSpecificPiece piece, int maxDistance, Direction boundToDirection) {
+    public OneDirectionMove(FirstMoveSpecificPiece piece, int maxDistance,
+                            Direction boundToDirection) {
         this(piece, maxDistance, boundToDirection, false);
     }
     

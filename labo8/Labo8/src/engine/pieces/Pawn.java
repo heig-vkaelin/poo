@@ -81,7 +81,8 @@ public class Pawn extends FirstMoveSpecificPiece {
     
     public boolean canBePromoted() {
         return this.getColor() == PlayerColor.WHITE ?
-                this.getCell().getY() == Board.BOARD_SIZE - 1 : this.getCell().getY() == 0;
+                this.getCell().getY() == Board.BOARD_SIZE - 1 :
+                this.getCell().getY() == 0;
     }
     
     public boolean enPassant(Cell cell) {

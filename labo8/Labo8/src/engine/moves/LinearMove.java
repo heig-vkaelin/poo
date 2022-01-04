@@ -38,8 +38,8 @@ public class LinearMove extends Move {
         int distance = getDistance(fromTo);
         int sign = direction.sameDirection(fromTo) ? 1 : -1;
         
-        System.out.println("Distance: " + distance);
-        System.out.println("sign: " + sign);
+//        System.out.println("Distance: " + distance);
+//        System.out.println("sign: " + sign);
         
         if (distance == 0 || distance > maxDistance)
             return false;
