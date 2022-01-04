@@ -7,6 +7,14 @@ import engine.utils.Cell;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe modélisant un plateau virtuel du jeu d'échecs.
+ * Elle s'occupe notamment de stocker et modifier les positions des différentes
+ * pièces.
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Board {
     public interface PieceListener {
         void action(Piece piece, Cell cell);
@@ -26,12 +34,17 @@ public class Board {
     private PieceListener onRemovePiece;
     private PromotionListener onPromotion;
     
+    /**
+     * Constructeur de base initialisant les différentes structures
+     */
     public Board() {
-        turn = 0;
         pieces = new Piece[BOARD_SIZE][BOARD_SIZE];
         kings = new ArrayList<>();
     }
     
+    /**
+     * Remplit le tableau avec la position habituelle des différentes pièces
+     */
     public void fillBoard() {
         PlayerColor color = PlayerColor.WHITE;
         
@@ -51,7 +64,8 @@ public class Board {
                 addPiece(new Pawn(this, new Cell(i, (line * 5 / 7) + 1), color));
             }
         }
-        /*// Queens
+        /*
+        // Queens
         pieces[3][0] = new Queen(new Cell(3, 0), PlayerColor.WHITE);
         pieces[3][7] = new Queen(new Cell(3, 7), PlayerColor.BLACK);
         
@@ -75,53 +89,84 @@ public class Board {
         for (int i = 0; i < 8; i++) {
             pieces[i][1] = new Pawn(new Cell(i, 1), PlayerColor.WHITE);
             pieces[i][6] = new Pawn(new Cell(i, 6), PlayerColor.BLACK);
-        }*/
+        }
+        */
     }
     
     /**
-     * Vérifie que les coordonnées de la pièce sont valides
+     * Vérifie que les coordonnées de la case sont valides
      *
      * @param cell : case à vérifier
+     * @throws RuntimeException si la case est invalide
      */
     public void checkCoordsOnBoard(Cell cell) {
-        if (cell.getX() >= BOARD_SIZE || cell.getX() < 0 || cell.getY() >= BOARD_SIZE
-                || cell.getY() < 0)
+        if (cell == null || cell.getX() >= BOARD_SIZE || cell.getX() < 0 ||
+                cell.getY() >= BOARD_SIZE || cell.getY() < 0)
             throw new RuntimeException("Coordonnées de la pièce invalides.");
     }
     
+    /**
+     * @return le tour actuel
+     */
     public int getTurn() {
         return turn;
     }
     
+    /**
+     * @return la dernière pièce jouée
+     */
     public Piece getLastPiecePlayed() {
         return lastPiecePlayed;
     }
     
+    /**
+     * @param cell : case souhaitée
+     * @return la pièce à la case souhaitée ou null
+     * @throws RuntimeException si la case est invalide
+     */
     public Piece getPiece(Cell cell) {
         checkCoordsOnBoard(cell);
         return pieces[cell.getX()][cell.getY()];
     }
     
-    public void setPiece(Piece p, Cell cell) {
+    /**
+     * Ajoute la pièce à la case souhaitée
+     *
+     * @param piece : pièce à ajouter
+     * @param cell  : case souhaitée
+     * @throws RuntimeException si la case est invalide
+     */
+    public void setPiece(Piece piece, Cell cell) {
         checkCoordsOnBoard(cell);
-        pieces[cell.getX()][cell.getY()] = p;
-        p.setCell(cell);
         
-        if (p instanceof King)
-            kings.add((King) p);
+        pieces[cell.getX()][cell.getY()] = piece;
+        piece.setCell(cell);
+        
+        if (piece instanceof King)
+            kings.add((King) piece);
         
         if (onAddPiece != null)
-            onAddPiece.action(p, cell);
+            onAddPiece.action(piece, cell);
     }
     
-    public void addPiece(Piece p) {
-        setPiece(p, p.getCell());
+    /**
+     * Petite fonction helper permettant d'ajouter une pièce à sa case actuelle
+     *
+     * @param piece : pièce à ajouter
+     * @throws RuntimeException si la case est invalide
+     */
+    public void addPiece(Piece piece) {
+        setPiece(piece, piece.getCell());
     }
     
+    /**
+     * Supprime une pièce du tableau
+     *
+     * @param cell : case de la pièce à supprimer
+     * @throws RuntimeException si la case est invalide
+     */
     public void removePiece(Cell cell) {
-        checkCoordsOnBoard(cell);
-        
-        Piece piece = pieces[cell.getX()][cell.getY()];
+        Piece piece = getPiece(cell);
         pieces[cell.getX()][cell.getY()] = null;
         
         if (piece != null) {
@@ -133,16 +178,21 @@ public class Board {
         }
     }
     
-    public void postUpdate(Piece piece) {
-        lastPiecePlayed = piece;
-        piece.postUpdate();
-        turn++;
-    }
-    
+    /**
+     * @return le joueur à qui c'est le tour de jouer
+     */
     public PlayerColor currentPlayer() {
         return turn % 2 == 0 ? PlayerColor.WHITE : PlayerColor.BLACK;
     }
     
+    /**
+     * Vérifie que le déplacement d'une pièce peut se faire. Si c'est le cas,
+     * il est réalisé.
+     *
+     * @param from : case de départ
+     * @param to   : case d'arrivée
+     * @return true si le mouvement a pu être fait, false sinon
+     */
     public boolean move(Cell from, Cell to) {
         Piece p;
         try {
@@ -152,25 +202,36 @@ public class Board {
             return false;
         }
         
-        if (p == null || p.getColor() != currentPlayer()) {
+        if (p == null || p.getColor() != currentPlayer())
             return false;
-        }
         
         if (p.checkMove(to) && p.applyMove(to)) {
             postUpdate(p);
             return true;
         }
         
-        System.out.println("Last invalid");
         return false;
     }
     
-    public void applyMove(Piece p, Cell to) {
-        removePiece(p.getCell());
+    /**
+     * Applique le mouvement d'une pièce à une destination
+     *
+     * @param piece : pièce à déplacer
+     * @param to    : case d'arrivée
+     */
+    public void applyMove(Piece piece, Cell to) {
+        removePiece(piece.getCell());
         removePiece(to);
-        setPiece(p, to);
+        setPiece(piece, to);
     }
     
+    /**
+     * Vérifie si une pièce est actuellement menacée/attaquée
+     *
+     * @param color : couleur de la pièce à vérifier
+     * @param cell  : case de la pièce à vérifier
+     * @return true si la pièce est attaquée, false sinon
+     */
     public boolean isAttacked(PlayerColor color, Cell cell) {
         for (Piece[] row : pieces)
             for (Piece piece : row)
@@ -180,6 +241,12 @@ public class Board {
         return false;
     }
     
+    /**
+     * Vérifie si un joueur est actuellement en échec
+     *
+     * @param color : la couleur du joueur
+     * @return true si le joueur est en échec, false sinon
+     */
     public boolean isCheck(PlayerColor color) {
         King king = kings.stream()
                 .filter(k -> k.getColor() == color)
@@ -190,6 +257,17 @@ public class Board {
             return false;
         
         return isAttacked(color, king.getCell());
+    }
+    
+    /**
+     * Applique les changements nécessaires à la fin d'un tour
+     *
+     * @param piece : pièce jouée
+     */
+    public void postUpdate(Piece piece) {
+        lastPiecePlayed = piece;
+        piece.postUpdate();
+        turn++;
     }
     
     public void setAddPieceListener(PieceListener onAddPiece) {

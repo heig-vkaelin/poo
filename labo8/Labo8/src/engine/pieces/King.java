@@ -6,6 +6,12 @@ import engine.Board;
 import engine.moves.LinearMove;
 import engine.utils.Cell;
 
+/**
+ * Classe représentant un roi
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class King extends FirstMoveSpecificPiece {
     public King(Board board, Cell cell, PlayerColor color) {
         super(board, cell, color);
@@ -30,6 +36,11 @@ public class King extends FirstMoveSpecificPiece {
         return super.checkMove(to) || castle(to);
     }
     
+    /**
+     * Vérifie si le déplacement est un roque légal
+     * @param to : case de destination
+     * @return true si le roque a bien été effectué, false sinon
+     */
     private boolean castle(Cell to) {
        /*
             Le petit et le grand roque doivent être fonctionnels. Leur mouvement est initié en bougeant le roi de deux
@@ -65,13 +76,4 @@ public class King extends FirstMoveSpecificPiece {
         
         return true;
     }
-
-//    @Override
-//    public boolean applyMove(Cell to) {
-//
-//        TODO: on devrait pas avoir besoin d'override ici psk on check déjà avant de faire le castle
-//                  s'il nous fout en échec ou pas (sur toutes les cases qu'il passe dont la destination)
-//
-//        return super.applyMove(to);
-//    }
 }

@@ -7,6 +7,12 @@ import engine.utils.Direction;
 import engine.moves.OneDirectionMove;
 import engine.utils.Cell;
 
+/**
+ * Classe représentant un pion
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Pawn extends FirstMoveSpecificPiece {
     private final Direction direction;
     private int doubleMoveTurn;
@@ -31,6 +37,7 @@ public class Pawn extends FirstMoveSpecificPiece {
     @Override
     public boolean checkMove(Cell to) {
         if (super.checkMove(to)) {
+            // On stocke le tour actuel si le pion s'est déplacé de deux cases
             if (Math.abs(to.getY() - getCell().getY()) == 2)
                 doubleMoveTurn = getBoard().getTurn();
             return true;
@@ -54,6 +61,7 @@ public class Pawn extends FirstMoveSpecificPiece {
         Cell oldCell = getCell();
         Piece piece = getBoard().getLastPiecePlayed();
         
+        // Vérification de la mise en échec du en-passant
         if (enPassant(new Cell(to.getX(), oldCell.getY()))) {
             getBoard().applyMove(this, to);
             getBoard().removePiece(piece.getCell());
@@ -74,17 +82,26 @@ public class Pawn extends FirstMoveSpecificPiece {
     public void postUpdate() {
         super.postUpdate();
         
-        if (canBePromoted() && getBoard().getOnPromotion() != null) {
+        // Gestion de la promotion
+        if (canBePromoted() && getBoard().getOnPromotion() != null)
             getBoard().getOnPromotion().action(this);
-        }
     }
     
+    /**
+     * @return true si le pion peut être promu, false sinon
+     */
     public boolean canBePromoted() {
-        return this.getColor() == PlayerColor.WHITE ?
-                this.getCell().getY() == Board.BOARD_SIZE - 1 :
-                this.getCell().getY() == 0;
+        return direction == Direction.UP ?
+                getCell().getY() == Board.BOARD_SIZE - 1 :
+                getCell().getY() == 0;
     }
     
+    /**
+     * Vérifie si le move en-passant peut être réalisé
+     *
+     * @param cell : case de destination
+     * @return true si le move est légal, false sinon
+     */
     public boolean enPassant(Cell cell) {
         Piece piece = getBoard().getLastPiecePlayed();
         int lastTurn = getBoard().getTurn() - 1;

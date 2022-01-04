@@ -6,6 +6,12 @@ import engine.Board;
 import engine.moves.LinearMove;
 import engine.utils.Cell;
 
+/**
+ * Classe représentant un fou
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Bishop extends Piece {
     public Bishop(Board board, Cell cell, PlayerColor color) {
         super(board, cell, color);

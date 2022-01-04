@@ -6,6 +6,12 @@ import engine.Board;
 import engine.moves.LinearMove;
 import engine.utils.Cell;
 
+/**
+ * Classe représentant une tour
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Rook extends FirstMoveSpecificPiece {
     public Rook(Board board, Cell cell, PlayerColor color) {
         super(board, cell, color);

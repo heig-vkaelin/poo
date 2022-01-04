@@ -6,6 +6,12 @@ import engine.Board;
 import engine.moves.LinearMove;
 import engine.utils.Cell;
 
+/**
+ * Classe représentant un cavalier
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class Knight extends Piece {
     public Knight(Board board, Cell cell, PlayerColor color) {
         super(board, cell, color);

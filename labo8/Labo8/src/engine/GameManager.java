@@ -6,10 +6,21 @@ import chess.PlayerColor;
 import engine.pieces.*;
 import engine.utils.Cell;
 
+/**
+ * Classe principale de la gestion du jeu d'échecs.
+ * Elle s'occupe de démarrer le jeu ainsi qu'écouter et répondre aux événements de
+ * la view.
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class GameManager implements ChessController {
     private ChessView view;
     private Board board;
     
+    /**
+     * Met à jour le message de la vue
+     */
     private void updateDisplayMessage() {
         if (view == null || board == null)
             return;
@@ -84,7 +95,7 @@ public class GameManager implements ChessController {
             board.setPiece(userChoice, cell);
         });
         
-        // Setup initial
+        // Setup initial des pièces
         board.fillBoard();
     }
 }
