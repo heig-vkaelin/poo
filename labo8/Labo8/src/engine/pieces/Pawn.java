@@ -105,7 +105,8 @@ public class Pawn extends FirstMoveSpecificPiece {
     public boolean enPassant(Cell cell) {
         Piece piece = getBoard().getLastPiecePlayed();
         int lastTurn = getBoard().getTurn() - 1;
-        return piece != null && piece != this && piece.getClass() == Pawn.class &&
+        return piece != null && piece != this && piece.getColor() != getColor() &&
+                piece.getClass() == Pawn.class &&
                 ((Pawn) piece).doubleMoveTurn == lastTurn &&
                 piece.getCell().equals(cell);
     }
