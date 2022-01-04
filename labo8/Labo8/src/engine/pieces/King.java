@@ -38,6 +38,7 @@ public class King extends FirstMoveSpecificPiece {
     
     /**
      * Vérifie si le déplacement est un roque légal
+     *
      * @param to : case de destination
      * @return true si le roque a bien été effectué, false sinon
      */
@@ -54,8 +55,7 @@ public class King extends FirstMoveSpecificPiece {
             return false;
         
         boolean leftSide = deltaX < 0;
-        int sign = leftSide ? -1 : 1;
-        Cell direction = new Cell(sign, 0);
+        Cell direction = new Cell(leftSide ? -1 : 1, 0);
         Cell rookCell = new Cell(leftSide ? 0 : Board.BOARD_SIZE - 1, getCell().getY());
         Piece rook = getBoard().getPiece(rookCell);
         Cell rookDestination = getCell().add(direction);
@@ -65,7 +65,7 @@ public class King extends FirstMoveSpecificPiece {
             return false;
         
         for (int i = 0; i < 3; i++) {
-            Cell position = getCell().add(direction.multiply(i * sign));
+            Cell position = getCell().add(direction.multiply(i));
             System.out.println("x: " + position.getX() + " y: " + position.getY());
             if (getBoard().isAttacked(getColor(), position))
                 return false;
