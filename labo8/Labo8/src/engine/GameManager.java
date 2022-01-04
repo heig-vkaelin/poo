@@ -96,6 +96,8 @@ public class GameManager implements ChessController {
         });
         
         // Setup initial des pièces
+        //TODO Uncomment this after all the tests
         board.fillBoard();
+        //board.testPawn();
     }
 }
