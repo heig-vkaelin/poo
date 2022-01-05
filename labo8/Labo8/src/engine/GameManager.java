@@ -97,5 +97,6 @@ public class GameManager implements ChessController {
         
         // Setup initial des pièces
         board.fillBoard();
+        updateDisplayMessage();
     }
 }
