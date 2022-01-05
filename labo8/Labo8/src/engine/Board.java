@@ -148,6 +148,19 @@ public class Board {
         addPiece(new Rook(this, new Cell(0, 0), PlayerColor.WHITE));
         addPiece(new Queen(this, new Cell(3, 7), PlayerColor.BLACK));
     }
+
+    /**
+     * Permet de rapidement position des pièces afin de tester le fonctionnement de la mise en échec.
+     */
+    public void testCheck(){
+        addPiece(new King(this, new Cell(3, 5), PlayerColor.BLACK));
+        addPiece(new Rook(this, new Cell(4, 3), PlayerColor.WHITE));
+        addPiece(new Queen(this, new Cell(5, 3), PlayerColor.WHITE));
+        addPiece(new Bishop(this, new Cell(6, 3), PlayerColor.WHITE));
+        addPiece(new Knight(this, new Cell(7, 3), PlayerColor.WHITE));
+        addPiece(new King(this, new Cell(1, 3), PlayerColor.WHITE));
+        addPiece(new Pawn(this, new Cell(2, 3), PlayerColor.WHITE));
+    }
     
     /**
      * Remplit le tableau avec la position habituelle des différentes pièces
