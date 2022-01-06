@@ -13,6 +13,8 @@ import engine.utils.Cell;
  * @author Valentin Kaelin
  */
 public class King extends FirstMoveSpecificPiece {
+    private static final int CASTLE_DISTANCE = 2;
+    
     public King(Board board, Cell cell, PlayerColor color) {
         super(board, cell, color);
         moves.add(new LinearMove(this, new Cell(0, 1), 1));
@@ -43,15 +45,9 @@ public class King extends FirstMoveSpecificPiece {
      * @return true si le roque a bien été effectué, false sinon
      */
     private boolean castle(Cell to) {
-       /*
-            Le petit et le grand roque doivent être fonctionnels. Leur mouvement est initié en bougeant le roi de deux
-            cases vers la droite ou vers la gauche. Ce coup ne peut être effectué si le roi est en échec, s’il a déjà bougé,
-            si la tour concernée a déjà bougé ou si une des cases sur lesquelles le roi passe est en échec.
-        */
-        
         int deltaY = to.getY() - getCell().getY();
         int deltaX = to.getX() - getCell().getX();
-        if (hasMoved() || Math.abs(deltaX) != 2 || deltaY != 0)
+        if (hasMoved() || Math.abs(deltaX) != CASTLE_DISTANCE || deltaY != 0)
             return false;
         
         boolean leftSide = deltaX < 0;
@@ -60,17 +56,20 @@ public class King extends FirstMoveSpecificPiece {
         Piece rook = getBoard().getPiece(rookCell);
         Cell rookDestination = getCell().add(direction);
         
+        // Vérification de la tour et que le chemin est libre
         if (!(rook instanceof Rook) || ((Rook) rook).hasMoved() ||
                 !rook.checkMove(rookDestination))
             return false;
         
-        for (int i = 0; i < 3; i++) {
+        // Vérification que le chemin ne met pas le roi en échec
+        for (int i = 0; i <= CASTLE_DISTANCE; i++) {
             Cell position = getCell().add(direction.multiply(i));
             System.out.println("x: " + position.getX() + " y: " + position.getY());
             if (getBoard().isAttacked(getColor(), position))
                 return false;
         }
         
+        // Roque appliqué
         getBoard().applyMove(rook, rookDestination);
         rook.postUpdate();
         
