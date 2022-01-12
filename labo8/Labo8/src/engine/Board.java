@@ -47,50 +47,25 @@ public class Board {
      */
     public void fillBoard() {
         PlayerColor color = PlayerColor.WHITE;
-        
-        for (int line = 0; line < 9; line += 7, color = PlayerColor.BLACK) {
-            // Reine
+        int line = 0, pawnLine = 1;
+        for (int team = 0; team < 2; team++) {
+            addPiece(new Rook(this, new Cell(0, line), color));
+            addPiece(new Knight(this, new Cell(1, line), color));
+            addPiece(new Bishop(this, new Cell(2, line), color));
             addPiece(new Queen(this, new Cell(3, line), color));
-            // Roi
             addPiece(new King(this, new Cell(4, line), color));
-            // Tours, cavaliers et fous
-            for (int i = 0; i < 2; i++) {
-                addPiece(new Rook(this, new Cell(i * 7, line), color));
-                addPiece(new Knight(this, new Cell(1 + i * 5, line), color));
-                addPiece(new Bishop(this, new Cell(2 + i * 3, line), color));
-            }
-            // Pions
-            for (int i = 0; i < 8; i++) {
-                addPiece(new Pawn(this, new Cell(i, (line * 5 / 7) + 1), color));
-            }
-        }
-        /*
-        // Queens
-        pieces[3][0] = new Queen(new Cell(3, 0), PlayerColor.WHITE);
-        pieces[3][7] = new Queen(new Cell(3, 7), PlayerColor.BLACK);
-        
-        // Kings
-        pieces[4][0] = new King(new Cell(4, 0), PlayerColor.WHITE);
-        pieces[4][7] = new King(new Cell(4, 7), PlayerColor.BLACK);
-        
-        // Toutes les autres pièces spéciales
-        for (int i = 0; i < 2; i++) {
-            pieces[i * 7][0] = new Rook(new Cell(i * 7, 0), PlayerColor.WHITE);
-            pieces[i * 7][7] = new Rook(new Cell(i * 7, 7), PlayerColor.BLACK);
+            addPiece(new Bishop(this, new Cell(5, line), color));
+            addPiece(new Knight(this, new Cell(6, line), color));
+            addPiece(new Rook(this, new Cell(7, line), color));
             
-            pieces[1 + i * 5][0] = new Knight(new Cell(1 + i * 5, 0), PlayerColor.WHITE);
-            pieces[1 + i * 5][7] = new Knight(new Cell(1 + i * 5, 7), PlayerColor.BLACK);
+            // Pawns
+            for (int xPawn = 0; xPawn < BOARD_SIZE; xPawn++)
+                addPiece(new Pawn(this, new Cell(xPawn, pawnLine), color));
             
-            pieces[2 + i * 3][0] = new Bishop(new Cell(2 + i * 3, 0), PlayerColor.WHITE);
-            pieces[2 + i * 3][7] = new Bishop(new Cell(2 + i * 3, 7), PlayerColor.BLACK);
+            color = PlayerColor.BLACK;
+            line = 7;
+            pawnLine = 6;
         }
-        
-        // Pawns
-        for (int i = 0; i < 8; i++) {
-            pieces[i][1] = new Pawn(new Cell(i, 1), PlayerColor.WHITE);
-            pieces[i][6] = new Pawn(new Cell(i, 6), PlayerColor.BLACK);
-        }
-        */
     }
     
     /**
