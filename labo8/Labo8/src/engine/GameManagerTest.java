@@ -1,5 +1,6 @@
 package engine;
 
+import chess.ChessView;
 import chess.PlayerColor;
 import engine.pieces.*;
 import engine.utils.Cell;
@@ -29,16 +30,14 @@ public class GameManagerTest extends GameManager {
     }
     
     @Override
+    public void start(ChessView view) {
+        super.start(view);
+        newGame();
+    }
+    
+    @Override
     public void newGame() {
-        super.newGame();
-        
-        // On vide le plateau
-        for (int i = 0; i < Board.BOARD_SIZE; i++) {
-            for (int j = 0; j < Board.BOARD_SIZE; j++) {
-                getBoard().removePiece(new Cell(i, j));
-            }
-        }
-        
+        getBoard().resetBoard();
         // Applique la situation initiale de test
         fillBoard(type);
     }

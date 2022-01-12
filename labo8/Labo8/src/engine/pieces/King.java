@@ -65,7 +65,6 @@ public class King extends FirstMoveSpecificPiece {
         Cell initialPosition = getCell();
         for (int i = 0; i <= CASTLE_DISTANCE; i++) {
             Cell position = getCell().add(direction.multiply(i));
-            System.out.println("x: " + position.getX() + " y: " + position.getY());
             getBoard().setPiece(this, position);
             
             boolean isAttacked = getBoard().isAttacked(getColor(), position);

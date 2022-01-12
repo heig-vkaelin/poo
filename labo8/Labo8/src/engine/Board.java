@@ -43,12 +43,27 @@ public class Board {
     }
     
     /**
+     * Remet le plateau à son état initial
+     */
+    public void resetBoard() {
+        // On vide le plateau pour éviter de recréer un tableau
+        for (int i = 0; i < BOARD_SIZE; i++)
+            for (int j = 0; j < BOARD_SIZE; j++)
+                removePiece(new Cell(i, j));
+        
+        kings.clear();
+        lastPiecePlayed = null;
+        turn = 0;
+    }
+    
+    /**
      * Remplit le tableau avec la position habituelle des différentes pièces
+     * Commence par les pièces blanches puis les noires
      */
     public void fillBoard() {
         PlayerColor color = PlayerColor.WHITE;
         int line = 0, pawnLine = 1;
-        for (int team = 0; team < 2; team++) {
+        for (int i = 0; i < 2; i++) {
             addPiece(new Rook(this, new Cell(0, line), color));
             addPiece(new Knight(this, new Cell(1, line), color));
             addPiece(new Bishop(this, new Cell(2, line), color));
@@ -245,18 +260,36 @@ public class Board {
         turn++;
     }
     
+    /**
+     * Définit le listener appelé lors de l'ajout d'une pièce
+     *
+     * @param onAddPiece : listener à exécuter
+     */
     public void setAddPieceListener(PieceListener onAddPiece) {
         this.onAddPiece = onAddPiece;
     }
     
+    /**
+     * Définit le listener appelé lors de la suppression d'une pièce
+     *
+     * @param onRemovePiece : listener à exécuter
+     */
     public void setRemovePieceListener(PieceListener onRemovePiece) {
         this.onRemovePiece = onRemovePiece;
     }
     
+    /**
+     * Définit le listener appelé lors de la promotion d'une pièce
+     *
+     * @param onPromotion : listener à exécuter
+     */
     public void setPromotionListener(PromotionListener onPromotion) {
         this.onPromotion = onPromotion;
     }
     
+    /**
+     * @return le listener appelé lors d'une promotion
+     */
     public PromotionListener getOnPromotion() {
         return onPromotion;
     }

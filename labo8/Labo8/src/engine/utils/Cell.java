@@ -1,5 +1,7 @@
 package engine.utils;
 
+import java.util.Objects;
+
 /**
  * Classe représentant une case de l'échiquier
  *
@@ -91,17 +93,9 @@ public class Cell {
         return cell != null && (x < 0 == cell.getX() < 0) && (y < 0 == cell.getY() < 0);
     }
     
-    /**
-     * TODO: utile ou pas ??
-     * Source: https://stackoverflow.com/a/9135980/9188650
-     *
-     * @return l'hashcode de la cellule
-     */
     @Override
     public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
-        return result;
+        return Objects.hash(x, y);
     }
     
     @Override

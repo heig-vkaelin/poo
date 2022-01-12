@@ -40,37 +40,10 @@ public class GameManager implements ChessController {
         view.displayMessage(msg.toString());
     }
     
-    @Override
-    public void start(ChessView view) {
-        this.view = view;
-        view.startView();
-        newGame();
-    }
-    
-    @Override
-    public boolean move(int fromX, int fromY, int toX, int toY) {
-        if (board == null)
-            return false;
-        
-        Cell from = new Cell(fromX, fromY);
-        Cell to = new Cell(toX, toY);
-        
-        if (!board.move(from, to)) {
-            System.out.println("Move invalide");
-            updateDisplayMessage();
-            return false;
-        }
-        
-        System.out.println("Move OK");
-        System.out.println("-----------------------------------------");
-        
-        updateDisplayMessage();
-        
-        return true;
-    }
-    
-    @Override
-    public void newGame() {
+    /**
+     * Initialise le plateau, écoute les différents événements
+     */
+    private void initBoard() {
         board = new Board();
         
         // Events listeners
@@ -101,8 +74,38 @@ public class GameManager implements ChessController {
             board.removePiece(cell);
             board.setPiece(userChoice, cell);
         });
+    }
+    
+    @Override
+    public void start(ChessView view) {
+        this.view = view;
+        view.startView();
+        initBoard();
+        board.fillBoard();
+        updateDisplayMessage();
+    }
+    
+    @Override
+    public boolean move(int fromX, int fromY, int toX, int toY) {
+        if (board == null)
+            return false;
         
-        // Setup initial des pièces
+        Cell from = new Cell(fromX, fromY);
+        Cell to = new Cell(toX, toY);
+        
+        if (!board.move(from, to)) {
+            updateDisplayMessage();
+            return false;
+        }
+        
+        updateDisplayMessage();
+        
+        return true;
+    }
+    
+    @Override
+    public void newGame() {
+        board.resetBoard();
         board.fillBoard();
         updateDisplayMessage();
     }
