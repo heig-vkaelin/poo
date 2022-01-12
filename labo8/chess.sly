@@ -303,6 +303,9 @@
       <method isAbstract="false" isStatic="false" name="sameDirection" returnType="boolean" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="cell" type="Cell"/>
       </method>
+      <method isAbstract="false" isStatic="false" name="getDistance" returnType="int" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="to" type="Cell"/>
+      </method>
       <method isAbstract="false" isStatic="false" name="hashCode" returnType="int" view="DEFAULT" visibility="PUBLIC"/>
       <method isAbstract="false" isStatic="false" name="equals" returnType="boolean" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="obj" type="Object"/>
@@ -423,9 +426,6 @@
       <method is-constructor="true" isAbstract="false" isStatic="false" name="LinearMove" returnType="" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="piece" type="Piece"/>
         <variable const="false" name="direction" type="Cell"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="getDistance" returnType="int" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="fromTo" type="Cell"/>
       </method>
       <method isAbstract="false" isStatic="false" name="canMove" returnType="boolean" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="from" type="Cell"/>
@@ -766,12 +766,12 @@
         </point>
         <point>
           <x>1721</x>
-          <y>446</y>
+          <y>431</y>
         </point>
       </line>
       <labelAssociation>
         <x>1725</x>
-        <y>563</y>
+        <y>555</y>
         <w>68</w>
         <h>17</h>
       </labelAssociation>
@@ -783,7 +783,7 @@
       </roleAssociation>
       <roleAssociation>
         <x>1725</x>
-        <y>450</y>
+        <y>435</y>
         <w>0</w>
         <h>17</h>
       </roleAssociation>
@@ -795,7 +795,7 @@
       </multipliciteAssociation>
       <multipliciteAssociation>
         <x>1707</x>
-        <y>450</y>
+        <y>435</y>
         <w>8</w>
         <h>17</h>
       </multipliciteAssociation>
@@ -969,7 +969,7 @@
           <y>981</y>
         </point>
         <point>
-          <x>1261</x>
+          <x>1271</x>
           <y>931</y>
         </point>
       </line>
@@ -1009,7 +1009,7 @@
           <y>981</y>
         </point>
         <point>
-          <x>1261</x>
+          <x>1271</x>
           <y>931</y>
         </point>
       </line>
@@ -1063,7 +1063,7 @@
         <x>1400</x>
         <y>300</y>
         <w>450</w>
-        <h>145</h>
+        <h>130</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="26391" displayAttributes="true" displayDefault="true" displayMethods="true">
@@ -1103,7 +1103,7 @@
         <x>1610</x>
         <y>670</y>
         <w>220</w>
-        <h>235</h>
+        <h>250</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="25350" displayAttributes="true" displayDefault="true" displayMethods="true">
