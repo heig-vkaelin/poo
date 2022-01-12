@@ -4,6 +4,14 @@ import chess.PlayerColor;
 import engine.pieces.*;
 import engine.utils.Cell;
 
+/**
+ * Classe permettant de tester rapidement diverses situations initiales.
+ * Il est possible de spécifier quelle pièce ou mouvement nous souhaitons tester
+ * grâce au constructeur.
+ *
+ * @author Jonathan Friedli
+ * @author Valentin Kaelin
+ */
 public class GameManagerTest extends GameManager {
     enum Type {
         CHECK, CASTLE, ROOK, BISHOP, KING, KNIGHT, PAWN, QUEEN
@@ -11,6 +19,11 @@ public class GameManagerTest extends GameManager {
     
     private final Type type;
     
+    /**
+     * Crée une instance de test
+     *
+     * @param type : pièce ou mouvement à tester
+     */
     public GameManagerTest(Type type) {
         this.type = type;
     }
@@ -30,7 +43,12 @@ public class GameManagerTest extends GameManager {
         fillBoard(type);
     }
     
-    public void fillBoard(Type type) {
+    /**
+     * Remplit le plateau selon le test choisi
+     *
+     * @param type : pièce ou mouvement à tester
+     */
+    private void fillBoard(Type type) {
         switch (type) {
             case CHECK:
                 testCheck();
@@ -62,12 +80,12 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Met des pions de la couleur voulue tout autour de la position donnée
+     * Ajoute des pions de la couleur souhaitée autour de la position spécifiée
      *
      * @param pos   position que l'on souhaite entourer
      * @param color couleur de pions
      */
-    public void pawnAroundPos(Cell pos, PlayerColor color) {
+    private void pawnAroundPos(Cell pos, PlayerColor color) {
         for (int i = pos.getX() - 1; i < pos.getX() + 2; i++) {
             for (int j = pos.getY() - 1; j < pos.getY() + 2; j++) {
                 if (i == pos.getX() && j == pos.getY()) {
@@ -78,13 +96,11 @@ public class GameManagerTest extends GameManager {
         }
     }
     
-    // Cette fonction permet de tester rapidement si le cavalier peut sauter par dessus des pions de sa couleur
-    // ou de la couleur adverse ainsi que voir qu'il peut sauter par dessus des pions et manger.
-    
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement des Cavaliers
+     * Permet de rapidement position des pièces afin de tester le fonctionnement des
+     * Cavaliers
      */
-    public void testKnight() {
+    private void testKnight() {
         Cell knight1 = new Cell(5, 5);
         Cell knight2 = new Cell(2, 5);
         Cell knight3 = new Cell(5, 2);
@@ -100,9 +116,10 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement des Tours.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement des
+     * Tours.
      */
-    public void testRook() {
+    private void testRook() {
         Cell rookPos1 = new Cell(5, 4);
         Cell rookPos2 = new Cell(2, 4);
         getBoard().addPiece(new Rook(getBoard(), new Cell(0, 0), PlayerColor.WHITE));
@@ -114,9 +131,10 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement des Fous.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement des
+     * Fous.
      */
-    public void testBishop() {
+    private void testBishop() {
         Cell bishopPos1 = new Cell(5, 4);
         Cell bishopPos2 = new Cell(2, 4);
         getBoard().addPiece(new Bishop(getBoard(), bishopPos1, PlayerColor.WHITE));
@@ -126,9 +144,10 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement des Pions.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement des
+     * Pions.
      */
-    public void testPawn() {
+    private void testPawn() {
         for (int i = 0; i < 7; i++) {
             getBoard().addPiece(new Pawn(getBoard(), new Cell(i, 1),
                     PlayerColor.WHITE));
@@ -141,9 +160,10 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement des Reines.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement des
+     * Reines.
      */
-    public void testQueen() {
+    private void testQueen() {
         Cell queenPos = new Cell(5, 4);
         Cell queenPos2 = new Cell(2, 4);
         getBoard().addPiece(new Queen(getBoard(), queenPos, PlayerColor.WHITE));
@@ -153,18 +173,20 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement des Rois.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement des
+     * Rois.
      */
-    public void testKing() {
+    private void testKing() {
         Cell kingPos = new Cell(4, 4);
         getBoard().addPiece(new King(getBoard(), kingPos, PlayerColor.WHITE));
         pawnAroundPos(kingPos, PlayerColor.BLACK);
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement du rock.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement
+     * du roque.
      */
-    public void testCastle() {
+    private void testCastle() {
         getBoard().addPiece(new King(getBoard(), new Cell(4, 0), PlayerColor.WHITE));
         getBoard().addPiece(new Rook(getBoard(), new Cell(7, 0), PlayerColor.WHITE));
         getBoard().addPiece(new Rook(getBoard(), new Cell(0, 0), PlayerColor.WHITE));
@@ -172,9 +194,10 @@ public class GameManagerTest extends GameManager {
     }
     
     /**
-     * Permet de rapidement position des pièces afin de tester le fonctionnement de la mise en échec.
+     * Permet de rapidement position des pièces afin de tester le fonctionnement
+     * de la mise en échec.
      */
-    public void testCheck() {
+    private void testCheck() {
         getBoard().addPiece(new King(getBoard(), new Cell(3, 5), PlayerColor.BLACK));
         getBoard().addPiece(new Rook(getBoard(), new Cell(4, 3), PlayerColor.WHITE));
         getBoard().addPiece(new Queen(getBoard(), new Cell(5, 3), PlayerColor.WHITE));
