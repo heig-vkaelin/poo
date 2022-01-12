@@ -19,6 +19,13 @@ public class GameManager implements ChessController {
     private Board board;
     
     /**
+     * @return le plateau de jeu
+     */
+    protected Board getBoard() {
+        return board;
+    }
+    
+    /**
      * Met à jour le message de la vue
      */
     private void updateDisplayMessage() {

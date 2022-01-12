@@ -13,13 +13,12 @@ import chess.views.gui.GUIView;
  * @author Valentin Kaelin
  */
 public class Main {
-    
     public static void main(String[] args) {
         ChessController controller = new GameManager();
         
         // Choix de la vue : mode GUI ou mode Console
         ChessView view = new GUIView(controller);
-        //ChessView view = new ConsoleView(controller);
+        // ChessView view = new ConsoleView(controller);
         
         controller.start(view);
     }
