@@ -93,6 +93,18 @@ public class Cell {
         return cell != null && (x < 0 == cell.getX() < 0) && (y < 0 == cell.getY() < 0);
     }
     
+    /**
+     * Retourne la distance jusqu'à une case.
+     * Ne vérifie pas si la case est accessible.
+     *
+     * @param to : case d'arrivée
+     * @return la distance entre les deux cases
+     */
+    public int getDistance(Cell to) {
+        Cell fromTo = to.subtract(this);
+        return Math.max(Math.abs(fromTo.getX()), Math.abs(fromTo.getY()));
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(x, y);

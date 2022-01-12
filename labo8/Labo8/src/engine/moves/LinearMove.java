@@ -54,25 +54,11 @@ public class LinearMove extends Move {
         this(piece, direction, Integer.MAX_VALUE, false);
     }
     
-    /**
-     * Retourne la distance entre deux cases
-     *
-     * @param fromTo : case représentant la soustraction du départ à l'arrivée
-     * @return la distance entre les deux cases, ou 0 si la case est inaccessible
-     */
-    private int getDistance(Cell fromTo) {
-        int distance = 0;
-        
-        if (direction.reachable(fromTo))
-            distance = Math.max(Math.abs(fromTo.getX()), Math.abs(fromTo.getY()));
-        
-        return distance;
-    }
     
     @Override
     public boolean canMove(Cell from, Cell to) {
         Cell fromTo = to.subtract(from);
-        int distance = getDistance(fromTo);
+        int distance = direction.reachable(fromTo) ? from.getDistance(to) : 0;
         int sign = direction.sameDirection(fromTo) ? 1 : -1;
         
         if (distance == 0 || distance > getMaxDistance())
