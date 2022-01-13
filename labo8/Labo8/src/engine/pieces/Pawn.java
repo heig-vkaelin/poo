@@ -112,7 +112,7 @@ public class Pawn extends FirstMoveSpecificPiece {
         Piece piece = getBoard().getLastPiecePlayed();
         int lastTurn = getBoard().getTurn() - 1;
         return piece != null && piece != this && piece.getColor() != getColor() &&
-                piece.getClass() == Pawn.class &&
+                piece.getType() == PieceType.PAWN &&
                 ((Pawn) piece).doubleMoveTurn == lastTurn &&
                 piece.getCell().equals(cell);
     }
