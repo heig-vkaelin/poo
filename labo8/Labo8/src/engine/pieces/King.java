@@ -66,7 +66,7 @@ public class King extends FirstMoveSpecificPiece {
         // Vérification que le chemin ne met pas le roi en échec
         Cell initialPosition = getCell();
         for (int i = 0; i <= CASTLE_DISTANCE; i++) {
-            Cell position = getCell().add(direction.multiply(i));
+            Cell position = initialPosition.add(direction.multiply(i));
             getBoard().setPiece(this, position);
             
             boolean isAttacked = getBoard().isAttacked(getColor(), position);
