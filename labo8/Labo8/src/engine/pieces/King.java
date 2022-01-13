@@ -45,6 +45,8 @@ public class King extends FirstMoveSpecificPiece {
      * @return true si le roque a bien été effectué, false sinon
      */
     private boolean castle(Cell to) {
+        if (to == null)
+            return false;
         int deltaY = to.getY() - getCell().getY();
         int deltaX = to.getX() - getCell().getX();
         if (hasMoved() || Math.abs(deltaX) != CASTLE_DISTANCE || deltaY != 0)
@@ -57,8 +59,8 @@ public class King extends FirstMoveSpecificPiece {
         Cell rookDestination = getCell().add(direction);
         
         // Vérification de la tour et que le chemin est libre
-        if (!(rook instanceof Rook) || ((Rook) rook).hasMoved() ||
-                !rook.checkMove(rookDestination))
+        if (rook == null || rook.getType() != PieceType.ROOK ||
+                ((Rook) rook).hasMoved() || !rook.checkMove(rookDestination))
             return false;
         
         // Vérification que le chemin ne met pas le roi en échec

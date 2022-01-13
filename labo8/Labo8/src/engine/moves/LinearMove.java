@@ -57,6 +57,9 @@ public class LinearMove extends Move {
     
     @Override
     public boolean canMove(Cell from, Cell to) {
+        if (from == null || to == null)
+            return false;
+        
         Cell fromTo = to.subtract(from);
         int distance = direction.reachable(fromTo) ? from.getDistance(to) : 0;
         int sign = direction.sameDirection(fromTo) ? 1 : -1;

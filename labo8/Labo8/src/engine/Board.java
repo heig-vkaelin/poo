@@ -1,11 +1,13 @@
 package engine;
 
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.pieces.*;
 import engine.utils.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe modélisant un plateau virtuel du jeu d'échecs.
@@ -73,7 +75,7 @@ public class Board {
             addPiece(new Knight(this, new Cell(6, line), color));
             addPiece(new Rook(this, new Cell(7, line), color));
             
-            // Pawns
+            // Pions
             for (int xPawn = 0; xPawn < BOARD_SIZE; xPawn++)
                 addPiece(new Pawn(this, new Cell(xPawn, pawnLine), color));
             
@@ -127,12 +129,13 @@ public class Board {
      * @throws RuntimeException si la case est invalide
      */
     public void setPiece(Piece piece, Cell cell) {
+        Objects.requireNonNull(piece, "Pièce invalide");
         checkCoordsOnBoard(cell);
         
         pieces[cell.getX()][cell.getY()] = piece;
         piece.setCell(cell);
         
-        if (piece instanceof King)
+        if (piece.getType() == PieceType.KING)
             kings.add((King) piece);
         
         if (onAddPiece != null)
@@ -160,7 +163,7 @@ public class Board {
         pieces[cell.getX()][cell.getY()] = null;
         
         if (piece != null) {
-            if (piece instanceof King)
+            if (piece.getType() == PieceType.KING)
                 kings.remove((King) piece);
             
             if (onRemovePiece != null)
@@ -210,6 +213,7 @@ public class Board {
      * @param to    : case d'arrivée
      */
     public void applyMove(Piece piece, Cell to) {
+        Objects.requireNonNull(piece, "Pièce invalide");
         removePiece(piece.getCell());
         removePiece(to);
         setPiece(piece, to);
@@ -223,6 +227,9 @@ public class Board {
      * @return true si la pièce est attaquée, false sinon
      */
     public boolean isAttacked(PlayerColor color, Cell cell) {
+        Objects.requireNonNull(color, "Couleur invalide");
+        Objects.requireNonNull(cell, "Case invalide");
+        
         for (Piece[] row : pieces)
             for (Piece piece : row)
                 if (piece != null && piece.getColor() != color && piece.checkMove(cell))
@@ -238,6 +245,8 @@ public class Board {
      * @return true si le joueur est en échec, false sinon
      */
     public boolean isCheck(PlayerColor color) {
+        Objects.requireNonNull(color, "Couleur invalide");
+        
         King king = kings.stream()
                 .filter(k -> k.getColor() == color)
                 .findAny()
@@ -255,6 +264,7 @@ public class Board {
      * @param piece : pièce jouée
      */
     public void postUpdate(Piece piece) {
+        Objects.requireNonNull(piece, "Pièce invalide");
         lastPiecePlayed = piece;
         piece.postUpdate();
         turn++;
@@ -266,6 +276,7 @@ public class Board {
      * @param onAddPiece : listener à exécuter
      */
     public void setAddPieceListener(PieceListener onAddPiece) {
+        Objects.requireNonNull(onAddPiece, "Listener invalide");
         this.onAddPiece = onAddPiece;
     }
     
@@ -275,6 +286,7 @@ public class Board {
      * @param onRemovePiece : listener à exécuter
      */
     public void setRemovePieceListener(PieceListener onRemovePiece) {
+        Objects.requireNonNull(onRemovePiece, "Listener invalide");
         this.onRemovePiece = onRemovePiece;
     }
     
@@ -284,6 +296,7 @@ public class Board {
      * @param onPromotion : listener à exécuter
      */
     public void setPromotionListener(PromotionListener onPromotion) {
+        Objects.requireNonNull(onPromotion, "Listener invalide");
         this.onPromotion = onPromotion;
     }
     

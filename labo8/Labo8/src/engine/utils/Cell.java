@@ -99,8 +99,10 @@ public class Cell {
      *
      * @param to : case d'arrivée
      * @return la distance entre les deux cases
+     * @throws RuntimeException si la case d'arrivée est invalide
      */
     public int getDistance(Cell to) {
+        Objects.requireNonNull(to, "Case invalide");
         Cell fromTo = to.subtract(this);
         return Math.max(Math.abs(fromTo.getX()), Math.abs(fromTo.getY()));
     }

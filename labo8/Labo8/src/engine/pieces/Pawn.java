@@ -43,6 +43,9 @@ public class Pawn extends FirstMoveSpecificPiece {
             return true;
         }
         
+        if (to == null)
+            return false;
+        
         int deltaX = to.getX() - getCell().getX();
         int deltaY = to.getY() - getCell().getY();
         
@@ -58,6 +61,9 @@ public class Pawn extends FirstMoveSpecificPiece {
     
     @Override
     public boolean applyMove(Cell to) {
+        if (to == null)
+            return false;
+        
         Cell oldCell = getCell();
         Piece piece = getBoard().getLastPiecePlayed();
         

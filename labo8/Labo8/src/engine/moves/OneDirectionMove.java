@@ -49,6 +49,9 @@ public class OneDirectionMove extends Move {
     
     @Override
     public boolean canMove(Cell from, Cell to) {
+        if (from == null || to == null)
+            return false;
+        
         // Vérification si le déplacement est à usage unique
         if (oneTimeMove && (!(getPiece() instanceof FirstMoveSpecificPiece) ||
                 ((FirstMoveSpecificPiece) getPiece()).hasMoved()))

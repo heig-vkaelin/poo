@@ -6,6 +6,8 @@ import chess.PlayerColor;
 import engine.pieces.*;
 import engine.utils.Cell;
 
+import java.util.Objects;
+
 /**
  * Classe principale de la gestion du jeu d'échecs.
  * Elle s'occupe de démarrer le jeu ainsi qu'écouter et répondre aux événements de
@@ -78,6 +80,7 @@ public class GameManager implements ChessController {
     
     @Override
     public void start(ChessView view) {
+        Objects.requireNonNull(view, "View invalide");
         this.view = view;
         view.startView();
         initBoard();
