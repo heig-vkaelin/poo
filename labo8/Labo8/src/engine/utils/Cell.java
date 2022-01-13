@@ -113,9 +113,10 @@ public class Cell {
     }
     
     @Override
-    public boolean equals(Object obj) {
-        return getClass() == obj.getClass() &&
-                this.x == ((Cell) obj).x &&
-                this.y == ((Cell) obj).y;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return x == cell.x && y == cell.y;
     }
 }
