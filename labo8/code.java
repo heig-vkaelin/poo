@@ -876,10 +876,11 @@ public class Cell {
     }
     
     @Override
-    public boolean equals(Object obj) {
-        return getClass() == obj.getClass() &&
-                this.x == ((Cell) obj).x &&
-                this.y == ((Cell) obj).y;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return x == cell.x && y == cell.y;
     }
 }
 
@@ -1268,7 +1269,7 @@ public class King extends FirstMoveSpecificPiece {
         // Vérification que le chemin ne met pas le roi en échec
         Cell initialPosition = getCell();
         for (int i = 0; i <= CASTLE_DISTANCE; i++) {
-            Cell position = getCell().add(direction.multiply(i));
+            Cell position = initialPosition.add(direction.multiply(i));
             getBoard().setPiece(this, position);
             
             boolean isAttacked = getBoard().isAttacked(getColor(), position);
@@ -1466,7 +1467,7 @@ public class Pawn extends FirstMoveSpecificPiece {
         Piece piece = getBoard().getLastPiecePlayed();
         int lastTurn = getBoard().getTurn() - 1;
         return piece != null && piece != this && piece.getColor() != getColor() &&
-                piece.getClass() == Pawn.class &&
+               piece.getType() == PieceType.PAWN &&
                 ((Pawn) piece).doubleMoveTurn == lastTurn &&
                 piece.getCell().equals(cell);
     }
