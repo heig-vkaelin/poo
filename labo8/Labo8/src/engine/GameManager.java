@@ -96,14 +96,10 @@ public class GameManager implements ChessController {
         Cell from = new Cell(fromX, fromY);
         Cell to = new Cell(toX, toY);
         
-        if (!board.move(from, to)) {
-            updateDisplayMessage();
-            return false;
-        }
-        
+        boolean canMove = board.move(from, to);
         updateDisplayMessage();
         
-        return true;
+        return canMove;
     }
     
     @Override
