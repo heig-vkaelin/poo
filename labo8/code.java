@@ -510,7 +510,7 @@ public class Board {
      * @param cell : case à vérifier
      * @throws RuntimeException si la case est invalide
      */
-    public void checkCoordsOnBoard(Cell cell) {
+    private void checkCoordsOnBoard(Cell cell) {
         if (cell == null || cell.getX() >= BOARD_SIZE || cell.getX() < 0 ||
                 cell.getY() >= BOARD_SIZE || cell.getY() < 0)
             throw new RuntimeException("Coordonnées de la pièce invalides.");
@@ -709,7 +709,7 @@ public class Board {
      *
      * @param piece : pièce jouée
      */
-    public void postUpdate(Piece piece) {
+    private void postUpdate(Piece piece) {
         Objects.requireNonNull(piece, "Pièce invalide");
         lastPiecePlayed = piece;
         piece.postUpdate();
