@@ -4,6 +4,7 @@ import ExObjectList.*;
 import ExPoulailler.*;
 import ExRace.Race;
 import ExSeasonEnum.Season;
+import Revisions.MagiciensOiseaux;
 
 public class Main {
     
@@ -13,7 +14,8 @@ public class Main {
 //        exChat();
 //        exSeasonEnum();
 //        exPoulailler();
-        exRace();
+//        exRace();
+        MagiciensOiseaux.main(args);
     }
     
     public static void exClassArray() {
