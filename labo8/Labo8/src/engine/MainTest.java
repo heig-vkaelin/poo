@@ -15,7 +15,7 @@ import chess.views.gui.GUIView;
 public class MainTest {
     public static void main(String[] args) {
         // Choix du test à lancer
-        GameManagerTest.Type type = GameManagerTest.Type.QUEEN;
+        GameManagerTest.Type type = GameManagerTest.Type.CHECK;
         ChessController controller = new GameManagerTest(type);
         
         ChessView view = new GUIView(controller);

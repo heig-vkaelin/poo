@@ -259,6 +259,38 @@ public class Board {
     }
     
     /**
+     * Vérifie si un roi déjà en échec et échec et mat ou non
+     *
+     * @param color : couleur du roi en échec
+     * @return true si le roi est échec et mat, false sinon
+     */
+    public boolean isCheckMate(PlayerColor color) {
+        // Boucle sur toutes les cases
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                Cell destination = new Cell(i, j);
+                Piece eaten = getPiece(destination);
+                // Vérifie qu'une pièce alliée peut bouger
+                for (Piece[] row : pieces) {
+                    for (Piece piece : row) {
+                        if (piece == null || piece.getColor() != color)
+                            continue;
+                        Cell oldPos = piece.getCell();
+                        if (piece.checkMove(destination) && piece.applyMove(destination)) {
+                            // On annule le déplacement qui a bien été effectué
+                            applyMove(piece, oldPos);
+                            if (eaten != null)
+                                applyMove(eaten, destination);
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    /**
      * Applique les changements nécessaires à la fin d'un tour
      *
      * @param piece : pièce jouée

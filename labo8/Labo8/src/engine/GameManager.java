@@ -33,12 +33,21 @@ public class GameManager implements ChessController {
     private void updateDisplayMessage() {
         if (view == null || board == null)
             return;
+    
+        String color = board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs";
+        StringBuilder msg = new StringBuilder("Aux " + color);
         
-        StringBuilder msg = new StringBuilder(
-                "Aux " + (board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs")
-        );
-        if (board.isCheck(board.currentPlayer()))
-            msg.append(" CHECK!");
+        if (board.isCheck(board.currentPlayer())) {
+            if (board.isCheckMate(board.currentPlayer())) {
+                msg.setLength(0);
+                String winner = board.currentPlayer() == PlayerColor.WHITE ?
+                        "noirs" : "blancs";
+                msg.append("CHECKMATE! Les ").append(winner).append(" ont gagnés!");
+            } else {
+                msg.append(" CHECK!");
+            }
+        }
+        
         view.displayMessage(msg.toString());
     }
     
