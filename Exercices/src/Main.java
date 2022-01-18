@@ -5,6 +5,7 @@ import ExPoulailler.*;
 import ExRace.Race;
 import ExSeasonEnum.Season;
 import Revisions.MagiciensOiseaux;
+import Revisions.PigeonsVoyageurs;
 
 public class Main {
     
@@ -15,7 +16,8 @@ public class Main {
 //        exSeasonEnum();
 //        exPoulailler();
 //        exRace();
-        MagiciensOiseaux.main(args);
+//        MagiciensOiseaux.main(args);
+        PigeonsVoyageurs.main(args);
     }
     
     public static void exClassArray() {
