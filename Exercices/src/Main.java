@@ -4,9 +4,7 @@ import ExObjectList.*;
 import ExPoulailler.*;
 import ExRace.Race;
 import ExSeasonEnum.Season;
-import Revisions.MagiciensOiseaux;
-import Revisions.PigeonsVoyageurs;
-import Revisions.Planetes;
+import Revisions.*;
 
 public class Main {
     
@@ -19,7 +17,9 @@ public class Main {
 //        exRace();
 //        MagiciensOiseaux.main(args);
 //        PigeonsVoyageurs.main(args);
-        Planetes.main(args);
+//        Planetes.main(args);
+//        Booleens.main(args);
+        Fantomes.main(args);
     }
     
     public static void exClassArray() {
