@@ -92,15 +92,50 @@ public class GameManager implements ChessController {
     private void updateDisplayMessage() {
         if (view == null || board == null)
             return;
+    
+        String color = board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs";
+        StringBuilder msg = new StringBuilder("Aux " + color);
         
-        StringBuilder msg = new StringBuilder(
-                "Aux " + (board.currentPlayer() == PlayerColor.WHITE ? "blancs" : "noirs")
-        );
-        if (board.isCheck(board.currentPlayer()))
-            msg.append(" CHECK!");
+        if (board.isCheck(board.currentPlayer())) {
+            if (board.isCheckMate(board.currentPlayer())) {
+                msg.setLength(0);
+                String winner = board.currentPlayer() == PlayerColor.WHITE ?
+                        "noirs" : "blancs";
+                msg.append("CHECKMATE! Les ").append(winner).append(" ont gagnés!");
+            } else {
+                msg.append(" CHECK!");
+            }
+        }
+        
         view.displayMessage(msg.toString());
     }
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     /**
      * Initialise le plateau, écoute les différents événements
      */
@@ -192,7 +227,7 @@ import engine.utils.Cell;
  */
 public class GameManagerTest extends GameManager {
     enum Type {
-        CHECK, CASTLE, ROOK, BISHOP, KING, KNIGHT, PAWN, QUEEN
+        CHECK, CHECKMATE, CASTLE, ROOK, BISHOP, KING, KNIGHT, PAWN, QUEEN
     }
     
     private final Type type;
@@ -219,6 +254,26 @@ public class GameManagerTest extends GameManager {
         fillBoard(type);
     }
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     /**
      * Remplit le plateau selon le test choisi
      *
@@ -228,6 +283,9 @@ public class GameManagerTest extends GameManager {
         switch (type) {
             case CHECK:
                 testCheck();
+                break;
+            case CHECKMATE:
+                testCheckMate();
                 break;
             case CASTLE:
                 testCastle();
@@ -272,6 +330,17 @@ public class GameManagerTest extends GameManager {
         }
     }
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
     /**
@@ -394,7 +463,23 @@ public class GameManagerTest extends GameManager {
     }
 }
 
+	/**
+     * Permet de rapidement position des pièces afin de tester le fonctionnement
+     * de l'echec et mat.
+     */
+    private void testCheckMate(){
+        getBoard().addPiece(new King(getBoard(), new Cell(0, 3), PlayerColor.BLACK));
+        getBoard().addPiece(new King(getBoard(), new Cell(2, 3), PlayerColor.WHITE));
+        getBoard().addPiece(new Queen(getBoard(), new Cell(3, 5), PlayerColor.WHITE));
+
+    }
+
 // ----------------------------------------------------------------------------------------------
+
+
+
+
+
 
 package engine;
 
@@ -406,11 +491,6 @@ import engine.utils.Cell;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-
-
-
-
 
 /**
  * Classe modélisant un plateau virtuel du jeu d'échecs.
@@ -461,17 +541,6 @@ public class Board {
         turn = 0;
     }
     
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -707,6 +776,38 @@ public class Board {
         
         return isAttacked(color, king.getCell());
     }
+	
+	/**
+     * Vérifie si un roi déjà en échec et échec et mat ou non
+     *
+     * @param color : couleur du roi en échec
+     * @return true si le roi est échec et mat, false sinon
+     */
+    public boolean isCheckMate(PlayerColor color) {
+        // Boucle sur toutes les cases
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                Cell destination = new Cell(i, j);
+                Piece eaten = getPiece(destination);
+                // Vérifie qu'une pièce alliée peut bouger
+                for (Piece[] row : pieces) {
+                    for (Piece piece : row) {
+                        if (piece == null || piece.getColor() != color)
+                            continue;
+                        Cell oldPos = piece.getCell();
+                        if (piece.checkMove(destination) && piece.applyMove(destination)) {
+                            // On annule le déplacement qui a bien été effectué
+                            applyMove(piece, oldPos);
+                            if (eaten != null)
+                                applyMove(eaten, destination);
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
     
     /**
      * Applique les changements nécessaires à la fin d'un tour
@@ -720,6 +821,11 @@ public class Board {
         turn++;
     }
     
+	
+	
+	
+	
+	
     /**
      * Définit le listener appelé lors de l'ajout d'une pièce
      *
@@ -856,6 +962,8 @@ public class Cell {
         return cell != null && (x < 0 == cell.getX() < 0) && (y < 0 == cell.getY() < 0);
     }
     
+	
+	
     /**
      * Retourne la distance jusqu'à une case.
      * Ne vérifie pas si la case est accessible.
@@ -885,15 +993,6 @@ public class Cell {
 }
 
 // ----------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
 
 
 package engine.utils;
@@ -931,6 +1030,9 @@ public enum Direction {
 
 // ----------------------------------------------------------------------------------------------
 
+
+
+
 package engine.pieces;
 
 import chess.ChessView;
@@ -955,16 +1057,7 @@ public abstract class Piece implements ChessView.UserChoice {
     private final PlayerColor color;
     private Cell cell;
     protected List<Move> moves;
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
     /**
      * Crée une nouvelle pièce
      *
@@ -1007,6 +1100,8 @@ public abstract class Piece implements ChessView.UserChoice {
         return color;
     }
     
+	
+	
     @Override
     public String toString() {
         return textValue();
@@ -1086,22 +1181,6 @@ public abstract class Piece implements ChessView.UserChoice {
 }
 
 // ----------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 package engine.pieces;
 
@@ -1230,17 +1309,6 @@ public class King extends FirstMoveSpecificPiece {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
     /**
      * Vérifie si le déplacement est un roque légal
      *
@@ -1289,28 +1357,26 @@ public class King extends FirstMoveSpecificPiece {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 package engine.pieces;
 
@@ -1379,6 +1445,8 @@ public class Pawn extends FirstMoveSpecificPiece {
         return PieceType.PAWN;
     }
     
+	
+	
     @Override
     public String textValue() {
         return "Pion";
@@ -1404,7 +1472,6 @@ public class Pawn extends FirstMoveSpecificPiece {
             if (getBoard().getPiece(to) != null)
                 return true;
         }
-        
         // En passant
         return enPassant(new Cell(to.getX(), getCell().getY()));
     }
@@ -1443,6 +1510,7 @@ public class Pawn extends FirstMoveSpecificPiece {
             getBoard().getOnPromotion().action(this);
     }
     
+	
 	
 	
 	

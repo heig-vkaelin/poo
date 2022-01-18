@@ -15,7 +15,7 @@ import engine.utils.Cell;
  */
 public class GameManagerTest extends GameManager {
     enum Type {
-        CHECK, CASTLE, ROOK, BISHOP, KING, KNIGHT, PAWN, QUEEN
+        CHECK, CHECKMATE, CASTLE, ROOK, BISHOP, KING, KNIGHT, PAWN, QUEEN
     }
     
     private final Type type;
@@ -51,6 +51,9 @@ public class GameManagerTest extends GameManager {
         switch (type) {
             case CHECK:
                 testCheck();
+                break;
+            case CHECKMATE:
+                testCheckMate();
                 break;
             case CASTLE:
                 testCastle();
@@ -206,5 +209,16 @@ public class GameManagerTest extends GameManager {
                 PlayerColor.WHITE));
         getBoard().addPiece(new King(getBoard(), new Cell(1, 3), PlayerColor.WHITE));
         getBoard().addPiece(new Pawn(getBoard(), new Cell(2, 3), PlayerColor.WHITE));
+    }
+
+    /**
+     * Permet de rapidement position des pièces afin de tester le fonctionnement
+     * de l'echec et mat.
+     */
+    private void testCheckMate(){
+        getBoard().addPiece(new King(getBoard(), new Cell(0, 3), PlayerColor.BLACK));
+        getBoard().addPiece(new King(getBoard(), new Cell(2, 3), PlayerColor.WHITE));
+        getBoard().addPiece(new Queen(getBoard(), new Cell(3, 5), PlayerColor.WHITE));
+
     }
 }

@@ -212,6 +212,7 @@
     </entity>
     <entity entityType="ENUM" id="48799" name="Type">
       <EnumValue>CHECK</EnumValue>
+      <EnumValue>CHECKMATE</EnumValue>
       <EnumValue>CASTLE</EnumValue>
       <EnumValue>ROOK</EnumValue>
       <EnumValue>BISHOP</EnumValue>
@@ -351,6 +352,9 @@
         <variable const="false" name="cell" type="Cell"/>
       </method>
       <method isAbstract="false" isStatic="false" name="isCheck" returnType="boolean" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="color" type="PlayerColor"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="isCheckMate" returnType="boolean" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="color" type="PlayerColor"/>
       </method>
       <method isAbstract="false" isStatic="false" name="postUpdate" returnType="void" view="DEFAULT" visibility="PRIVATE">
@@ -516,6 +520,7 @@
       <method isAbstract="false" isStatic="false" name="testKing" returnType="void" view="DEFAULT" visibility="PRIVATE"/>
       <method isAbstract="false" isStatic="false" name="testCastle" returnType="void" view="DEFAULT" visibility="PRIVATE"/>
       <method isAbstract="false" isStatic="false" name="testCheck" returnType="void" view="DEFAULT" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="testCheckMate" returnType="void" view="DEFAULT" visibility="PRIVATE"/>
     </entity>
   </diagramElements>
   <umlView grid="10" name="Main view" open="true">
@@ -623,12 +628,12 @@
         </point>
         <point>
           <x>511</x>
-          <y>906</y>
+          <y>921</y>
         </point>
       </line>
       <labelAssociation>
         <x>460</x>
-        <y>1056</y>
+        <y>1063</y>
         <w>47</w>
         <h>16</h>
       </labelAssociation>
@@ -640,7 +645,7 @@
       </roleAssociation>
       <roleAssociation>
         <x>515</x>
-        <y>910</y>
+        <y>925</y>
         <w>0</w>
         <h>16</h>
       </roleAssociation>
@@ -652,7 +657,7 @@
       </multipliciteAssociation>
       <multipliciteAssociation>
         <x>497</x>
-        <y>910</y>
+        <y>925</y>
         <w>8</w>
         <h>16</h>
       </multipliciteAssociation>
@@ -1213,7 +1218,7 @@
         </point>
         <point>
           <x>111</x>
-          <y>1011</y>
+          <y>1026</y>
         </point>
       </line>
     </relationView>
@@ -1222,7 +1227,7 @@
         <x>30</x>
         <y>760</y>
         <w>360</w>
-        <h>250</h>
+        <h>265</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="25344" displayAttributes="true" displayDefault="true" displayMethods="true">
@@ -1294,7 +1299,7 @@
         <x>490</x>
         <y>520</y>
         <w>380</w>
-        <h>385</h>
+        <h>400</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="25746" displayAttributes="true" displayDefault="true" displayMethods="true">
@@ -1350,7 +1355,7 @@
         <x>30</x>
         <y>1090</y>
         <w>150</w>
-        <h>179</h>
+        <h>194</h>
       </geometry>
     </componentView>
     <componentView color="-2079" componentID="54810" displayAttributes="true" displayDefault="true" displayMethods="true">
