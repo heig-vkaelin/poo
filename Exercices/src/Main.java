@@ -16,10 +16,11 @@ public class Main {
 //        exPoulailler();
 //        exRace();
 //        MagiciensOiseaux.main(args);
+        BattleStarGalactica.main(args);
 //        PigeonsVoyageurs.main(args);
 //        Planetes.main(args);
 //        Booleens.main(args);
-        Fantomes.main(args);
+//        Fantomes.main(args);
     }
     
     public static void exClassArray() {
