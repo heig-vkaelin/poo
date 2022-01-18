@@ -31,19 +31,19 @@ class Pigeonnier {
     
     Oiseau obtenirPigeon(Pigeonnier destination, String msg) {
         return new Oiseau("Pigeon#" + ++counter) {
-            boolean home = true;
+            private boolean delivered = false;
             
             @Override
             public void voler() {
-                home = !home;
                 super.voler();
-                String msgVol = home ? "arrive à la maison" : "dit: " + msg;
+                delivered = !delivered;
+                String msgVol = delivered ? "dit: " + msg : "arrive à la maison";
                 System.out.println(" " + nom() + " " + msgVol);
             }
             
             @Override
             public String toString() {
-                String position = home ? Pigeonnier.this.nom : destination.nom;
+                String position = delivered ? destination.nom : Pigeonnier.this.nom;
                 return super.toString() + " se trouve à " + position;
             }
         };
@@ -52,13 +52,12 @@ class Pigeonnier {
 
 public class PigeonsVoyageurs {
     public static void main(String[] args) {
-        Pigeonnier
-                lausanne = new Pigeonnier("Lausanne"),
-                geneve = new Pigeonnier("Genève"),
-                yverdon = new Pigeonnier("Yverdon");
-        Oiseau
-                o1 = yverdon.obtenirPigeon(lausanne, "Bonjour Lausanne!"),
-                o2 = geneve.obtenirPigeon(yverdon, "Bonjour Yverdon!");
+        Pigeonnier lausanne = new Pigeonnier("Lausanne");
+        Pigeonnier geneve = new Pigeonnier("Genève");
+        Pigeonnier yverdon = new Pigeonnier("Yverdon");
+        
+        Oiseau o1 = yverdon.obtenirPigeon(lausanne, "Bonjour Lausanne!");
+        Oiseau o2 = geneve.obtenirPigeon(yverdon, "Bonjour Yverdon!");
         
         System.out.println("-- 1: 01: " + o1);
         System.out.println("-- 2: 01.voler()");
