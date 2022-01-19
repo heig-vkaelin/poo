@@ -5,6 +5,7 @@ import ExPoulailler.*;
 import ExRace.Race;
 import ExSeasonEnum.Season;
 import Revisions.*;
+import TE2.TE;
 
 public class Main {
     
@@ -17,10 +18,12 @@ public class Main {
 //        exRace();
 //        MagiciensOiseaux.main(args);
 //        BattleStarGalactica.main(args);
-        PigeonsVoyageurs.main(args);
+//        PigeonsVoyageurs.main(args);
 //        Planetes.main(args);
 //        Booleens.main(args);
 //        Fantomes.main(args);
+    
+        TE.main(args);
     }
     
     public static void exClassArray() {
