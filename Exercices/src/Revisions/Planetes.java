@@ -6,9 +6,10 @@ class Element {
     private final String nom;
     private final int id;
     private static int counter = 0;
-    public static Element
+    public static final Element
             fer = new Element("fer"),
-            carbone = new Element("carbone"), mercure = new Element("mercure");
+            carbone = new Element("carbone"),
+            mercure = new Element("mercure");
     
     private Element(String nom) {
         this.nom = nom;
