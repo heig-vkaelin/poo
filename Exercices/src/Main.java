@@ -6,6 +6,7 @@ import ExRace.Race;
 import ExSeasonEnum.Season;
 import Revisions.*;
 import TE2.TE;
+import Revisions.Examen.*;
 
 public class Main {
     
@@ -22,8 +23,11 @@ public class Main {
 //        Planetes.main(args);
 //        Booleens.main(args);
 //        Fantomes.main(args);
-    
-        TE.main(args);
+
+//        TE.main(args);
+//        Oiseau.main(args);
+//        Champignons.main(args);
+        Detecteur.main(args);
     }
     
     public static void exClassArray() {
